@@ -190,7 +190,7 @@ public class TransferActivity extends BasicActivity {
                     break;
                 case 222:
                     if (!StringUtils.isEmpty(signedTransactionData)) {
-
+                        //测试sec交易的最后一步
                         test(signedTransactionData);
 //
 //                        dolastStemp(signedTransactionData);
@@ -846,7 +846,6 @@ public class TransferActivity extends BasicActivity {
      * @param gasPrice
      * @param gasLimit
      * @param amount
-     * @throws Exception
      */
     public void signContractTransaction(String contractAddress, String to, BigInteger nonce, BigInteger gasPrice, BigInteger gasLimit, double amount) throws Exception {
         BigDecimal realValue = BigDecimal.valueOf(amount * Math.pow(10.0, 18));
