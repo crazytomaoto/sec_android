@@ -908,7 +908,7 @@ public class TransferActivity extends BasicActivity {
             @Override
             public void run() {
                 Message sss = new Message();
-                sss.what = 23232;
+//                sss.what = 23232;
                 EthSendTransaction rr = null;
 //                rr = web3j.ethSendRawTransaction(signedTransactionData).send();
 
