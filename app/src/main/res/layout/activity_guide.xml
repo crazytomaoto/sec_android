@@ -23,7 +23,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="66px"
-                android:text="我的钱包"
+                android:text="CEC钱包"
                 android:textColor="#FFBD9253"
                 android:textSize="@dimen/dimen_48px" />
 
