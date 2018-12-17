@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/drawerLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clipToPadding="true"
+    android:fitsSystemWindows="true">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:fitsSystemWindows="true">
+
+        <TextView
+            android:id="@+id/qianbao"
+            android:layout_width="wrap_content"
+            android:layout_height="96px"
+            android:layout_marginLeft="@dimen/dimen_48px"
+            android:layout_marginTop="34px"
+            android:text="CEC钱包"
+            android:textColor="#FFBD9253"
+            android:textSize="68px" />
+
+        <TextView
+            android:id="@+id/t2"
+            android:layout_width="wrap_content"
+            android:layout_height="44px"
+            android:layout_below="@id/qianbao"
+            android:layout_marginLeft="@dimen/dimen_48px"
+            android:text="最简单安全的智能数字钱包"
+            android:textColor="#FFC3C3C3"
+            android:textSize="32px" />
+
+        <com.flyco.roundview.RoundRelativeLayout
+            android:id="@+id/rl_create"
+            android:layout_width="622px"
+            android:layout_height="420px"
+            android:layout_below="@id/t2"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="50px"
+            app:rv_cornerRadius="14px"
+            app:rv_strokeColor="@color/text_yellow"
+            app:rv_strokeWidth="2px">
+
+            <LinearLayout
+                android:id="@+id/ll_create"
+                android:layout_width="wrap_content"
+                android:layout_height="74px"
+                android:layout_marginLeft="28px"
+                android:layout_marginTop="46px"
+                android:gravity="bottom"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="创建"
+                    android:textColor="#FF686868"
+                    android:textSize="52px" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="钱包"
+                    android:textColor="#FF686868"
+                    android:textSize="40px" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="300px"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/ll_create"
+                android:layout_marginLeft="28px"
+                android:layout_marginTop="@dimen/px10"
+                android:text="@string/create_tishi"
+                android:textColor="#FFBBBABA"
+                android:textSize="28px" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="19px"
+                android:background="@drawable/pic_create" />
+        </com.flyco.roundview.RoundRelativeLayout>
+
+        <com.flyco.roundview.RoundRelativeLayout
+            android:id="@+id/rl_import"
+            android:layout_width="622px"
+            android:layout_height="420px"
+            android:layout_below="@id/rl_create"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="50px"
+            app:rv_cornerRadius="14px"
+            app:rv_strokeColor="@color/text_yellow"
+            app:rv_strokeWidth="2px">
+
+            <LinearLayout
+                android:id="@+id/ll_import"
+                android:layout_width="wrap_content"
+                android:layout_height="74px"
+                android:layout_marginLeft="28px"
+                android:layout_marginTop="46px"
+                android:gravity="bottom"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="导入"
+                    android:textColor="#FF686868"
+                    android:textSize="52px" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="钱包"
+                    android:textColor="#FF686868"
+                    android:textSize="40px" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="300px"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/ll_import"
+                android:layout_marginLeft="28px"
+                android:layout_marginTop="@dimen/px10"
+                android:text="@string/create_tishi2"
+                android:textColor="#FFBBBABA"
+                android:textSize="28px" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="19px"
+                android:background="@drawable/pic_import" />
+        </com.flyco.roundview.RoundRelativeLayout>
+    </RelativeLayout>
+</android.support.v4.widget.DrawerLayout>

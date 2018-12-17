@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:rv="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/drawerLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clipToPadding="true"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:fitsSystemWindows="true"
+        android:orientation="vertical">
+
+        <include layout="@layout/inclued_head_back" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2px"
+            android:background="@color/view_color" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scrollbars="none">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingLeft="@dimen/dimen_48px"
+                android:paddingRight="@dimen/dimen_48px"
+                android:paddingTop="42px">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:text="什么助记词？"
+                    android:textColor="#ff575757"
+                    android:textSize="@dimen/dimen_40px" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/px10"
+                    android:text="助记词的重要性！"
+                    android:textColor="#ffaf8444"
+                    android:textSize="28px" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/px20"
+                    android:lineSpacingMultiplier="1.3"
+                    android:text="    助记词是明文私钥的另一种表现形式,最早是由BIP39提案提出,其目的是为了帮助用户记忆复杂的私钥(64位的哈希值)。"
+                    android:textSize="28px" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:lineSpacingMultiplier="1.3"
+                    android:text="    助记词一般由12、15、18、21个单词构成,这些单词都取自一个固定词库,其生成顺序也是按照一定算法而来,所以用户没必要担心随便输入12个单词就会生成一个地址。虽然助记词和Keystore都可以作为私钥的另一种表现形式,但与Keystore不同的是,助记词是未经加密的私钥,没有任何安全性可言,任何人得到了你的助记词,可以不费吹灰之力的夺走你的资产。"
+                    android:textSize="28px" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dimen_20px"
+                    android:lineSpacingMultiplier="1.3"
+                    android:text="所以在用户在备份助记词之后, 一定要注意三点:"
+                    android:textColor="#ffaf8444"
+                    android:textSize="28px" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/px10"
+                    android:lineSpacingMultiplier="1.3"
+                    android:text="1. 尽可能采用物理介质备份,例如用笔抄在纸上等,尽可能不要采用截屏或者拍照之后放在联网的设备里,以防被黑客窃取。"
+                    android:textColor="#ff575757"
+                    android:textSize="28px" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:lineSpacingMultiplier="1.3"
+                    android:text="2. 多次验证备份的助记词是否正确,一旦抄错一两个单词,那么将对后续找回正确的助记词带来巨大的困难;"
+                    android:textColor="#ff575757"
+                    android:textSize="28px" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="3. 将备份后的助记词妥善保管, 做好防盗防丢措施。"
+                    android:textColor="#ff575757"
+                    android:textSize="28px" />
+
+                <com.flyco.roundview.RoundLinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/px50"
+                    android:layout_marginTop="30px"
+                    android:gravity="left"
+                    android:orientation="vertical"
+                    android:padding="@dimen/px10"
+                    rv:rv_backgroundColor="#F4EDE5"
+                    rv:rv_cornerRadius="6px">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="小贴士: "
+                        android:textColor="#FF575757"
+                        android:textSize="30px" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="用户可以使用备份的助记词, 重新导入CEC钱包 , 用新的密码生成一个新的Keystore, 用这种方法来修改钱包密码。"
+                        android:textColor="#FF575757"
+                        android:textSize="30px" />
+                </com.flyco.roundview.RoundLinearLayout>
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+
+
+</android.support.v4.widget.DrawerLayout>

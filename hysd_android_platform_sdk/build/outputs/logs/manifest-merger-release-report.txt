@@ -1,0 +1,87 @@
+-- Merging decision tree log ---
+manifest
+ADDED from D:\tzzb\myproject\cec\hysd_android_platform_sdk\src\main\AndroidManifest.xml:2:1-32:12
+INJECTED from D:\tzzb\myproject\cec\hysd_android_platform_sdk\src\main\AndroidManifest.xml:2:1-32:12
+INJECTED from D:\tzzb\myproject\cec\hysd_android_platform_sdk\src\main\AndroidManifest.xml:2:1-32:12
+INJECTED from D:\tzzb\myproject\cec\hysd_android_platform_sdk\src\main\AndroidManifest.xml:2:1-32:12
+INJECTED from D:\tzzb\myproject\cec\hysd_android_platform_sdk\src\main\AndroidManifest.xml:2:1-32:12
+INJECTED from D:\tzzb\myproject\cec\hysd_android_platform_sdk\src\main\AndroidManifest.xml:2:1-32:12
+INJECTED from D:\tzzb\myproject\cec\hysd_android_platform_sdk\src\main\AndroidManifest.xml:2:1-32:12
+	package
+		ADDED from D:\tzzb\myproject\cec\hysd_android_platform_sdk\src\main\AndroidManifest.xml:3:5-39
+		INJECTED from D:\tzzb\myproject\cec\hysd_android_platform_sdk\src\main\AndroidManifest.xml
+		INJECTED from D:\tzzb\myproject\cec\hysd_android_platform_sdk\src\main\AndroidManifest.xml
+	android:versionName
+		ADDED from D:\tzzb\myproject\cec\hysd_android_platform_sdk\src\main\AndroidManifest.xml:5:5-30
+		INJECTED from D:\tzzb\myproject\cec\hysd_android_platform_sdk\src\main\AndroidManifest.xml
+		INJECTED from D:\tzzb\myproject\cec\hysd_android_platform_sdk\src\main\AndroidManifest.xml
+	xmlns:android
+		ADDED from D:\tzzb\myproject\cec\hysd_android_platform_sdk\src\main\AndroidManifest.xml:2:11-69
+	android:versionCode
+		ADDED from D:\tzzb\myproject\cec\hysd_android_platform_sdk\src\main\AndroidManifest.xml:4:5-28
+		INJECTED from D:\tzzb\myproject\cec\hysd_android_platform_sdk\src\main\AndroidManifest.xml
+		INJECTED from D:\tzzb\myproject\cec\hysd_android_platform_sdk\src\main\AndroidManifest.xml
+uses-sdk
+ADDED from D:\tzzb\myproject\cec\hysd_android_platform_sdk\src\main\AndroidManifest.xml:7:5-9:41
+INJECTED from D:\tzzb\myproject\cec\hysd_android_platform_sdk\src\main\AndroidManifest.xml:7:5-9:41
+INJECTED from D:\tzzb\myproject\cec\hysd_android_platform_sdk\src\main\AndroidManifest.xml:7:5-9:41
+INJECTED from D:\tzzb\myproject\cec\hysd_android_platform_sdk\src\main\AndroidManifest.xml:7:5-9:41
+INJECTED from D:\tzzb\myproject\cec\hysd_android_platform_sdk\src\main\AndroidManifest.xml:7:5-9:41
+	android:targetSdkVersion
+		ADDED from D:\tzzb\myproject\cec\hysd_android_platform_sdk\src\main\AndroidManifest.xml:9:9-38
+		INJECTED from D:\tzzb\myproject\cec\hysd_android_platform_sdk\src\main\AndroidManifest.xml
+		INJECTED from D:\tzzb\myproject\cec\hysd_android_platform_sdk\src\main\AndroidManifest.xml
+	android:minSdkVersion
+		ADDED from D:\tzzb\myproject\cec\hysd_android_platform_sdk\src\main\AndroidManifest.xml:8:9-34
+		INJECTED from D:\tzzb\myproject\cec\hysd_android_platform_sdk\src\main\AndroidManifest.xml
+		INJECTED from D:\tzzb\myproject\cec\hysd_android_platform_sdk\src\main\AndroidManifest.xml
+application
+ADDED from D:\tzzb\myproject\cec\hysd_android_platform_sdk\src\main\AndroidManifest.xml:11:5-15:19
+	android:allowBackup
+		ADDED from D:\tzzb\myproject\cec\hysd_android_platform_sdk\src\main\AndroidManifest.xml:11:18-44
+uses-library#android.test.runner
+ADDED from D:\tzzb\myproject\cec\hysd_android_platform_sdk\src\main\AndroidManifest.xml:14:9-60
+	android:name
+		ADDED from D:\tzzb\myproject\cec\hysd_android_platform_sdk\src\main\AndroidManifest.xml:14:23-57
+instrumentation
+ADDED from D:\tzzb\myproject\cec\hysd_android_platform_sdk\src\main\AndroidManifest.xml:18:5-20:60
+	android:targetPackage
+		ADDED from D:\tzzb\myproject\cec\hysd_android_platform_sdk\src\main\AndroidManifest.xml:20:9-57
+	android:name
+		ADDED from D:\tzzb\myproject\cec\hysd_android_platform_sdk\src\main\AndroidManifest.xml:19:9-62
+uses-permission#android.permission.SYSTEM_ALERT_WINDOW
+ADDED from D:\tzzb\myproject\cec\hysd_android_platform_sdk\src\main\AndroidManifest.xml:22:5-78
+	android:name
+		ADDED from D:\tzzb\myproject\cec\hysd_android_platform_sdk\src\main\AndroidManifest.xml:22:22-75
+uses-permission#android.permission.INTERNET
+ADDED from D:\tzzb\myproject\cec\hysd_android_platform_sdk\src\main\AndroidManifest.xml:23:5-67
+	android:name
+		ADDED from D:\tzzb\myproject\cec\hysd_android_platform_sdk\src\main\AndroidManifest.xml:23:22-64
+uses-permission#android.permission.CALL_PHONE
+ADDED from D:\tzzb\myproject\cec\hysd_android_platform_sdk\src\main\AndroidManifest.xml:24:5-69
+	android:name
+		ADDED from D:\tzzb\myproject\cec\hysd_android_platform_sdk\src\main\AndroidManifest.xml:24:22-66
+uses-permission#android.permission.READ_PHONE_STATE
+ADDED from D:\tzzb\myproject\cec\hysd_android_platform_sdk\src\main\AndroidManifest.xml:25:5-75
+	android:name
+		ADDED from D:\tzzb\myproject\cec\hysd_android_platform_sdk\src\main\AndroidManifest.xml:25:22-72
+uses-permission#android.permission.ACCESS_NETWORK_STATE
+ADDED from D:\tzzb\myproject\cec\hysd_android_platform_sdk\src\main\AndroidManifest.xml:26:5-79
+	android:name
+		ADDED from D:\tzzb\myproject\cec\hysd_android_platform_sdk\src\main\AndroidManifest.xml:26:22-76
+uses-permission#android.permission.ACCESS_WIFI_STATE
+ADDED from D:\tzzb\myproject\cec\hysd_android_platform_sdk\src\main\AndroidManifest.xml:27:5-76
+	android:name
+		ADDED from D:\tzzb\myproject\cec\hysd_android_platform_sdk\src\main\AndroidManifest.xml:27:22-73
+uses-permission#android.permission.ACCESS_COARSE_LOCATION
+ADDED from D:\tzzb\myproject\cec\hysd_android_platform_sdk\src\main\AndroidManifest.xml:28:5-81
+	android:name
+		ADDED from D:\tzzb\myproject\cec\hysd_android_platform_sdk\src\main\AndroidManifest.xml:28:22-78
+uses-permission#android.permission.ACCESS_FINE_LOCATION
+ADDED from D:\tzzb\myproject\cec\hysd_android_platform_sdk\src\main\AndroidManifest.xml:29:5-79
+	android:name
+		ADDED from D:\tzzb\myproject\cec\hysd_android_platform_sdk\src\main\AndroidManifest.xml:29:22-76
+uses-permission#android.permission.WRITE_EXTERNAL_STORAGE
+ADDED from D:\tzzb\myproject\cec\hysd_android_platform_sdk\src\main\AndroidManifest.xml:30:5-81
+	android:name
+		ADDED from D:\tzzb\myproject\cec\hysd_android_platform_sdk\src\main\AndroidManifest.xml:30:22-78

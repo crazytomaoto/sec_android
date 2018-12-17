@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@drawable/cb_agree_yes" android:state_checked="true" android:state_enabled="true"></item>
+    <!--默认的背景-->
+    <item android:drawable="@drawable/cb_agree_no"></item>
+</selector>

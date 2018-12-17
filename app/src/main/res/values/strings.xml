@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">SEC钱包</string>
+    <string name="loading">正在加载&#8230;</string>
+    <string name="delete_chinese1">0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ</string>
+    <string name="pass_hint">8-30位字符，必须包含数字，英文字母以及特殊字符至少2种</string>
+    <string name="zhujici_tishi">备份钱包：导出「助记词」并抄写到安全的地方，千万不要保存到网络上。然后尝试转入，转出小额资产开始使用。</string>
+    <string name="zhujici_dialog_tips">如果有人获取你的助记词将直接获取你的资产！请抄下助记词并放在安全的地方。</string>
+    <string name="out_keystore_tips">请确保四周无人及无任何摄像头！勿用截图或拍照的方式保存Keystore文件或对应二维码。</string>
+    <string name="scan_error">扫描出错</string>
+    <string name="net_work_err">当前网络不可用</string>
+    <string name="delete_chinese2">abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ</string>
+    <string name="delete_chinese3">0123456789</string>
+    <string name="patters_all">^(?![0-9]+$)(?![a-zA-Z]+$)(?![\\W]+$)[a-zA-Z0-9\\W]{8,30}$</string>
+    <string name="privateKkey3">          用户的钱包地址由公钥经过keccak256计算，截取后40位+0x得到的。私钥的样式为64位16进制的哈希值字符串。</string>
+    <string name="privateKkey4">例如:56f759ece75f0ab1b783893cbe390288978d4d4ff24dd233245b4285fcc31cf6</string>
+    <string name="keysytoreTest">{"version"3,"id":"b7467fcb-3c8b-41bebccf-73d43a08c1b7","address":"540f18196da5a533fa36577a81de55f0a2f4e751","Crypto"{"ciphertext":"78ed11b8b6bf29b00f52b42b8542df0e4a6ac078e626af7edcf885c3b68154a4","cipherparams"{"iv":"4516579601d96695fe30ace985a9066f"},"cipher":"aes-128ctr","kdf":"scrypt","kdfparams"{"dklen"32,"salt":"6276cfda7d40872352c801db5871e5a3368a8d0994cea39ed936760db78d1cdc", "n":1024,"r":8,"p":1},"mac":"d889a5dc609c3f312a41394c c47 640676d2612501a6f8c837ed5559815 8336db"}} </string>
+    <string name="create_tishi">创建一个新的ETH钱包,\n支持所有ERC-20资产</string>
+    <string name="create_tishi2"> 导入已有的ETH钱包，\n支持所有ERC-20资产</string>
+    <string name="insert_man_name">请输入联系人姓名</string>
+    <string name="insert_man_address">请输入或粘贴联系人钱包地址</string>
+    <string name="insert_man_phone">请输入联系人手机号码</string>
+    <string name="insert_man_email">请输入联系人邮箱</string>
+</resources>

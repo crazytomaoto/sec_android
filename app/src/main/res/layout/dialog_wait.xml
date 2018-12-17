@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:paddingBottom="50px"
+    android:paddingLeft="75px"
+    android:paddingRight="75px"
+    android:paddingTop="50px">
+
+    <!--<ProgressBar-->
+    <!--android:id="@+id/waiting_pb"-->
+    <!--android:layout_width="50px"-->
+    <!--android:layout_height="50px"-->
+    <!--android:layout_centerInParent="true"-->
+    <!--android:indeterminateDrawable="@drawable/default_ptr_rotate"-->
+    <!--android:indeterminateDuration="800" />-->
+    <ProgressBar
+        android:id="@+id/waiting_pb"
+        android:layout_width="50px"
+        android:layout_height="50px"
+        android:layout_centerInParent="true"
+        android:indeterminateDuration="800" />
+
+    <TextView
+        android:id="@+id/waiting_tv"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@id/waiting_pb"
+        android:textSize="15sp"
+        android:visibility="gone" />
+
+</RelativeLayout>

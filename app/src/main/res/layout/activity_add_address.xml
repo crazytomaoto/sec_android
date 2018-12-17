@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/drawerLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clipToPadding="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:paddingTop="@dimen/dimen_60px"
+        android:fitsSystemWindows="true"
+        android:orientation="vertical">
+
+        <include layout="@layout/inclued_head_back" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="8px"
+            android:background="@color/view_color" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="118px"
+            android:paddingLeft="@dimen/dimen_48px"
+            android:paddingRight="@dimen/dimen_48px">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="44px"
+                android:layout_marginTop="22px"
+                android:text="姓名"
+                android:textColor="@color/text_yellow" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_alignParentBottom="true"
+                android:background="@color/view_color" />
+
+            <EditText
+                android:id="@+id/ed_name"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen_40px"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="@dimen/px5"
+                android:background="@null"
+                android:gravity="center_vertical|bottom"
+                android:maxLength="12"
+                android:scrollbars="none"
+                android:singleLine="true"
+                android:textColor="@color/text_black"
+                android:textColorHint="#FFBBBABA"
+                android:textSize="28px" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:background="@drawable/icon_avater" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="118px"
+            android:paddingLeft="@dimen/dimen_48px">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="44px"
+                android:layout_marginTop="22px"
+                android:text="联系人钱包地址"
+                android:textColor="@color/text_yellow" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_alignParentBottom="true"
+                android:background="@color/view_color" />
+
+            <EditText
+                android:id="@+id/ed_address"
+                android:layout_width="540px"
+                android:layout_height="@dimen/dimen_40px"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="@dimen/px5"
+                android:background="@null"
+                android:gravity="center_vertical|bottom"
+                android:maxLength="42"
+                android:scrollbars="none"
+                android:singleLine="true"
+                android:textColor="@color/text_black"
+                android:textColorHint="#FFBBBABA"
+                android:textSize="28px" />
+
+            <ImageView
+                android:id="@+id/iv_scan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginBottom="@dimen/px10"
+                android:layout_marginRight="66px"
+                android:background="@drawable/icon_scan_golden" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="118px"
+            android:paddingLeft="@dimen/dimen_48px">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="44px"
+                android:layout_marginTop="22px"
+                android:text="手机号码"
+                android:textColor="#FF686868" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_alignParentBottom="true"
+                android:background="@color/view_color" />
+
+            <EditText
+                android:id="@+id/ed_phone"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen_40px"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="@dimen/px5"
+                android:background="@null"
+                android:gravity="center_vertical|bottom"
+                android:inputType="phone"
+                android:maxLength="13"
+                android:scrollbars="none"
+                android:singleLine="true"
+                android:textColor="@color/text_black"
+                android:textColorHint="#FFBBBABA"
+                android:textSize="28px" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="118px"
+            android:paddingLeft="@dimen/dimen_48px">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="44px"
+                android:layout_marginTop="22px"
+                android:text="邮箱"
+                android:textColor="#FF686868" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_alignParentBottom="true"
+                android:background="@color/view_color" />
+
+            <EditText
+                android:id="@+id/ed_email"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen_40px"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="@dimen/px5"
+                android:background="@null"
+                android:gravity="center_vertical|bottom"
+                android:hint="请输入联系人邮箱"
+                android:inputType="textEmailAddress"
+                android:scrollbars="none"
+                android:singleLine="true"
+                android:textColor="@color/text_black"
+                android:textColorHint="#FFBBBABA"
+                android:textSize="28px" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="118px"
+            android:paddingLeft="@dimen/dimen_48px">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="44px"
+                android:layout_marginTop="22px"
+                android:text="备注"
+                android:textColor="#FF686868" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_alignParentBottom="true"
+                android:background="@color/view_color" />
+
+            <EditText
+                android:id="@+id/ed_remark"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen_40px"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="@dimen/px5"
+                android:background="@null"
+                android:gravity="center_vertical|bottom"
+                android:hint="选填"
+                android:inputType="textEmailAddress"
+                android:maxLength="30"
+                android:scrollbars="none"
+                android:singleLine="true"
+                android:textColor="@color/text_black"
+                android:textColorHint="#FFBBBABA"
+                android:textSize="28px" />
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/tv_save"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_margin="@dimen/dimen_48px"
+                android:gravity="center"
+                android:textColor="@color/white" />
+        </RelativeLayout>
+    </LinearLayout>
+</android.support.v4.widget.DrawerLayout>

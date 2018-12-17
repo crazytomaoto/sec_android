@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawerLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clipToPadding="true"
+    android:fitsSystemWindows="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:fitsSystemWindows="true"
+        android:orientation="vertical">
+
+        <include layout="@layout/inclued_head_back" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen_120px"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/dimen_24px"
+                android:paddingRight="@dimen/dimen_24px">
+
+                <EditText
+                    android:id="@+id/ed_toadress"
+                    android:layout_width="0px"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@color/white"
+                    android:digits="@string/delete_chinese1"
+                    android:ellipsize="middle"
+                    android:gravity="center_vertical|bottom"
+                    android:hint="收款人钱包地址"
+                    android:maxLines="1"
+                    android:paddingBottom="@dimen/px30"
+                    android:singleLine="true"
+                    android:textColor="@color/text_black"
+                    android:textColorHint="#FFB0AFAF"
+                    android:textSize="32px"
+                    tools:ignore="EllipsizeMaxLines" />
+
+                <ImageView
+                    android:id="@+id/iv_contanct"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/px10"
+                    android:background="@drawable/icon_contanct" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_marginLeft="@dimen/dimen_24px"
+                android:layout_marginRight="@dimen/dimen_24px"
+                android:background="@color/line_color" />
+
+
+            <EditText
+                android:id="@+id/ed_senMoney"
+                android:layout_width="match_parent"
+                android:layout_height="120px"
+                android:background="@color/white"
+                android:ellipsize="middle"
+                android:gravity="center_vertical|bottom"
+                android:hint="转账金额"
+                android:inputType="numberDecimal"
+                android:paddingBottom="@dimen/dimen_30px"
+                android:paddingLeft="@dimen/dimen_24px"
+                android:paddingRight="@dimen/dimen_24px"
+                android:scrollbars="none"
+                android:textColor="@color/text_black"
+                android:textColorHint="#FFB0AFAF"
+                android:textSize="30px" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_marginLeft="@dimen/dimen_24px"
+                android:layout_marginRight="@dimen/dimen_24px"
+                android:background="@color/line_color" />
+
+            <EditText
+                android:id="@+id/ed_remark"
+                android:layout_width="match_parent"
+                android:layout_height="120px"
+                android:background="@null"
+                android:ellipsize="middle"
+                android:gravity="center_vertical|bottom"
+                android:hint="备注"
+                android:paddingBottom="@dimen/dimen_30px"
+                android:paddingLeft="@dimen/dimen_24px"
+                android:paddingRight="@dimen/dimen_24px"
+                android:scrollbars="none"
+                android:textColor="@color/text_black"
+                android:textColorHint="#FFB0AFAF"
+                android:textSize="30px" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_marginLeft="@dimen/dimen_24px"
+                android:layout_marginRight="@dimen/dimen_24px"
+                android:background="@color/line_color" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="200px"
+                android:layout_marginTop="@dimen/dimen_30px"
+                android:paddingLeft="@dimen/dimen_24px"
+                android:paddingRight="@dimen/dimen_24px">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="矿工费用"
+                    android:textColor="#FFB0AFAF"
+                    android:textSize="30px" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:text="慢"
+                    android:textColor="#FFB0AFAF"
+                    android:textSize="@dimen/dimen_30px" />
+
+                <ImageView
+                    android:id="@+id/iv_gas"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:background="@drawable/icon_what" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentRight="true"
+                    android:text="快"
+                    android:textColor="#FFB0AFAF"
+                    android:textSize="@dimen/dimen_30px" />
+
+                <TextView
+                    android:id="@+id/tv_gas"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    android:textColor="#FFB0AFAF"
+                    android:textSize="@dimen/dimen_30px" />
+
+
+                <SeekBar
+                    android:id="@+id/seekbar"
+                    android:layout_width="fill_parent"
+                    android:layout_height="@dimen/dimen_60px"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/px50"
+                    android:layout_marginRight="@dimen/px50"
+                    android:focusable="true"
+                    android:maxHeight="10px"
+                    android:minHeight="6px"
+                    android:progress="50"
+                    android:progressDrawable="@drawable/po_seekbar"
+                    android:splitTrack="false"
+                    android:thumb="@drawable/circle_yellow" />
+
+            </RelativeLayout>
+
+            <Button
+                android:id="@+id/btn_next"
+                android:layout_width="match_parent"
+                android:layout_height="106px"
+                android:layout_gravity="center"
+                android:layout_marginLeft="@dimen/dimen_24px"
+                android:layout_marginRight="@dimen/dimen_24px"
+                android:layout_marginTop="180px"
+                android:background="@drawable/btn_golden"
+                android:baselineAligned="false"
+                android:text="下一步"
+                android:textColor="@color/white"
+                android:textSize="@dimen/dimen_30px" />
+        </LinearLayout>
+
+    </LinearLayout>
+</android.support.v4.widget.DrawerLayout>

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/drawerLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clipToPadding="true"
+    android:fitsSystemWindows="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:fitsSystemWindows="true"
+        android:orientation="vertical">
+
+        <include layout="@layout/inclued_head_back" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/px50"
+            android:text="抄写下你的钱包助记词"
+            android:textColor="#B2A688"
+            android:textSize="@dimen/dimen_36px" />
+
+        <TextView
+            android:layout_width="640px"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/dimen_40px"
+            android:text="助记词用于回复钱包或重置钱包密码，将它精准的抄写到纸上，并存放在只有你知道的安全的地方。"
+            android:textColor="#B2B2B2"
+            android:textSize="32px" />
+
+        <TextView
+            android:id="@+id/tv_my_mnemonics"
+            android:layout_width="654px"
+            android:layout_height="242px"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/dimen_40px"
+            android:background="@drawable/bg_gray_radius12"
+            android:paddingLeft="@dimen/px10"
+            android:paddingRight="@dimen/px10"
+            android:paddingTop="@dimen/px20"
+            android:textColor="#4A4A4A"
+            android:textSize="32px" />
+
+        <Button
+            android:id="@+id/btn_next"
+            android:layout_width="360px"
+            android:layout_height="106px"
+            android:layout_gravity="center"
+            android:layout_marginTop="180px"
+            android:background="@drawable/btn_golden"
+            android:baselineAligned="false"
+            android:text="下一步"
+            android:textColor="@color/white"
+            android:textSize="@dimen/dimen_30px" />
+    </LinearLayout>
+</android.support.v4.widget.DrawerLayout>

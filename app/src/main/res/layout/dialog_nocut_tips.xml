@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="640px"
+    android:layout_height="450px"
+    android:background="@drawable/bg_white_radius12"
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dimen_30px"
+        android:background="@drawable/icon_no_cut" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dimen_20px"
+        android:text="请勿截图"
+        android:textColor="#FF4A4A4A"
+        android:textSize="@dimen/dimen_36px" />
+
+    <TextView
+        android:id="@+id/tv_tips"
+        android:layout_width="588px"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/px30"
+        android:textColor="#FFB2B2B2"
+        android:textSize="28px" />
+
+    <Button
+        android:id="@+id/btn_know"
+        android:layout_width="314px"
+        android:layout_height="88px"
+        android:layout_gravity="center"
+        android:layout_marginTop="30px"
+        android:background="@drawable/btn_golden"
+        android:text="下一步"
+        android:textColor="@color/white"
+        android:textSize="@dimen/dimen_30px" />
+</LinearLayout>

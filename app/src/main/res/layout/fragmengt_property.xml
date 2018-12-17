@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical">
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_60px"
+        android:background="@color/white" />
+
+    <include layout="@layout/include_head_right_pic" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.hualianzb.sec.views.AutoRecyclerViewPager
+            android:id="@+id/vp_ad"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="34px"
+            android:clipToPadding="false"
+            android:paddingLeft="36px"
+            android:paddingRight="41px"
+            app:rvp_singlePageFling="true"
+            app:rvp_triggerOffset="0.1" />
+
+        <LinearLayout
+            android:id="@+id/custom_space"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/vp_ad"
+            android:layout_marginBottom="20px"
+            android:gravity="center"
+            android:orientation="horizontal"></LinearLayout>
+
+        <ImageView
+            android:id="@+id/iv_no_net"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/icon_no_net"
+            android:visibility="gone" />
+    </RelativeLayout>
+
+    <com.yydcdut.sdlv.SlideAndDragListView
+        android:id="@+id/lv_property"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/gray_background"
+        android:divider="@null"
+        android:listSelector="@drawable/list_selector"
+        android:paddingBottom="@dimen/dimen_150px"
+        android:scrollbars="none"></com.yydcdut.sdlv.SlideAndDragListView>
+</LinearLayout>

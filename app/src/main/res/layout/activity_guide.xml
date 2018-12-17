@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/drawerLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clipToPadding="true">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:fitsSystemWindows="true"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/ll_center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="66px"
+                android:text="CEC钱包"
+                android:textColor="#FFBD9253"
+                android:textSize="@dimen/dimen_48px" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="44px"
+                android:text="您的专属钱包"
+                android:textColor="#C4C4C4"
+                android:textSize="32px" />
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/iv_avater"
+            android:layout_width="200px"
+            android:layout_height="200px"
+            android:layout_above="@+id/ll_center"
+            android:layout_centerInParent="true"
+            android:layout_marginBottom="@dimen/dimen_100px" />
+    </RelativeLayout>
+</android.support.v4.widget.DrawerLayout>
