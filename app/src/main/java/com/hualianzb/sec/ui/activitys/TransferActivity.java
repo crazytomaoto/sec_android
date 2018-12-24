@@ -78,6 +78,7 @@ import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -140,6 +141,8 @@ public class TransferActivity extends BasicActivity {
     private double myBalance;
     private String token;
     private Map<String, String> tranRemark;
+
+
     //任务
     TimerTask task1 = new TimerTask() {
         public void run() {
@@ -165,14 +168,18 @@ public class TransferActivity extends BasicActivity {
         public void handleMessage(Message msg) {
             switch (msg.what) {
                 case 444:
-                    if (null != credentials) {
-                        task1.cancel();
-                        byte[] signMessage = TransactionEncoder.signMessage(rawTransaction, credentials);
-                        signedTransactionData = Numeric.toHexString(signMessage);
-                        Message msg2 = new Message();
-                        msg2.what = 222;
-                        handler.sendMessage(msg2);
-                    }
+                    task1.cancel();
+                    test2();
+
+
+//                    if (null != credentials) {
+//                        task1.cancel();
+//                        byte[] signMessage = TransactionEncoder.signMessage(rawTransaction, credentials);
+//                        signedTransactionData = Numeric.toHexString(signMessage);
+//                        Message msg2 = new Message();
+//                        msg2.what = 222;
+//                        handler.sendMessage(msg2);
+//                    }
                     break;
                 case 555:
                     credentials = Credentials.create(ecKeyPair);
@@ -441,22 +448,23 @@ public class TransferActivity extends BasicActivity {
             return;
         }
 
-        if (title.equals("ETH") || title.equals("eth")) {
-            if (Double.parseDouble(tokenValue) <= 0) {
-                showCheckDialog(this, "没有足够的ETH");
-                return;
-            }
-            if (Double.parseDouble(tokenValue) <= Double.parseDouble(strSendMoney)) {
-                showCheckDialog(this, "没有足够的ETH");
-                return;
-            }
-            String fee = save8num(now + "");
-            double feeDouble = Double.parseDouble(fee);
-            if (Double.parseDouble(tokenValue) < (Double.parseDouble(strSendMoney) + feeDouble)) {
-                showCheckDialog(this, "没有足够的ETH");
-                return;
-            }
-        } else if (title.equals("SEC") || title.equals("sec")) {
+//        if (title.equals("ETH") || title.equals("eth")) {
+//            if (Double.parseDouble(tokenValue) <= 0) {
+//                showCheckDialog(this, "没有足够的ETH");
+//                return;
+//            }
+//            if (Double.parseDouble(tokenValue) <= Double.parseDouble(strSendMoney)) {
+//                showCheckDialog(this, "没有足够的ETH");
+//                return;
+//            }
+//            String fee = save8num(now + "");
+//            double feeDouble = Double.parseDouble(fee);
+//            if (Double.parseDouble(tokenValue) < (Double.parseDouble(strSendMoney) + feeDouble)) {
+//                showCheckDialog(this, "没有足够的ETH");
+//                return;
+//            }
+//        } else
+        if (title.equals("SEC") || title.equals("sec")) {
             if (Double.parseDouble(tokenValue) <= 0) {
                 showCheckDialog(this, "没有足够的SEC");
                 return;
@@ -481,10 +489,10 @@ public class TransferActivity extends BasicActivity {
                 return;
             }
             myBalance = PlatformConfig.getDouble(Constant.SpConstant.MYBANLANCE);
-            if (myBalance <= 0) {
-                showCheckDialog(this, "没有足够的ETH");
-                return;
-            }
+//            if (myBalance <= 0) {
+//                showCheckDialog(this, "没有足够的ETH");
+//                return;
+//            }
         }
         showTradeDetailDialog(TransferActivity.this);
     }
@@ -536,19 +544,15 @@ public class TransferActivity extends BasicActivity {
 //                            tranETH();
 //                                    break;
 //                                case "SEC":
-//                            tranSEC();
+                            secFront();
 //                                    break;
 //
 //                            }
 //                            if (title.equals("ETH") || title.equals("eth")) {
 //                                tranETH();
 //                            } else {
-                            tranToken();//ETH币种转token
+//                            tranToken();//ETH币种转token
 //                            }
-                        } catch (ExecutionException e) {
-                            e.printStackTrace();
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
@@ -654,7 +658,7 @@ public class TransferActivity extends BasicActivity {
         tv_money_kind.setText(title);
         tv_sure.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View view) {
                 showPasssDialog(TransferActivity.this);
                 dialog.dismiss();
             }
@@ -691,6 +695,37 @@ public class TransferActivity extends BasicActivity {
         );//单位10的18次方
     }
 
+
+    private void secFront() {
+        hud2.show();
+        EthGetTransactionCount ethGetTransactionCount = null;
+        try {
+            ethGetTransactionCount = MyWeb3jUtil.getWeb3jInstance().ethGetTransactionCount(
+                    rememberEth.getAddress()
+                    , DefaultBlockParameterName.LATEST).sendAsync().get();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+        BigInteger nonce = ethGetTransactionCount.getTransactionCount();
+        double amount = Double.parseDouble(edSenMoney.getText().toString().trim());
+        BigDecimal money = new BigDecimal(amount);
+
+//        String mmp = NumberFormat.getInstance().format(now * Math.pow(10, 9) * 20);
+//        mmp = mmp.replaceAll(",", "");
+//        BigInteger gasPrice = BigInteger.valueOf(Long.parseLong(mmp));
+        BigInteger gasPrice = BigInteger.valueOf(0);
+        BigInteger secGasLimit = BigInteger.valueOf(0);
+        signedEthTransactionData(
+                edToadress.getText().toString().trim(),
+                nonce,
+                gasPrice,
+                secGasLimit,
+                money);
+    }
+
+
     private void tranSEC() throws Exception {
         hud2.show();
         List<SECSendRawBean.ParamsBean> list = new ArrayList<>();
@@ -699,10 +734,11 @@ public class TransferActivity extends BasicActivity {
         paramsBean.setTo(myGetAdress);
         paramsBean.setGas("0");
         paramsBean.setGasPrice("0");
-        paramsBean.setData("0");
-        paramsBean.setValue("0.01");
+//        paramsBean.setData("0");
+        paramsBean.setValue(edSenMoney.getText().toString().trim());
 
         list.add(paramsBean);
+
 
         SECSendRawBean bean = new SECSendRawBean();
         bean.setId(1);
@@ -716,22 +752,22 @@ public class TransferActivity extends BasicActivity {
         params.setBodyContent(json);
 
 
-        Web3j web3j = Web3jFactory.build(new HttpService(RequestHost.secTestUrl));
-        TransactionManager manager = new TransactionManager(web3j, address) {
-            @Override
-            public EthSendTransaction sendTransaction(BigInteger gasPrice, BigInteger gasLimit, String to, String data, BigInteger value) throws IOException {
-                return null;
-            }
-        };
-        BigDecimal realValue = BigDecimal.valueOf(Double.parseDouble(edSenMoney.getText().toString()) * Math.pow(10.0, 18));
-        Function function = new Function(
-                "transfer",
-                Arrays.asList(new Address(edToadress.getText().toString()),
-                        new Uint256(realValue.toBigInteger())), Collections.emptyList());
-
-
-        String data = FunctionEncoder.encode(function);
-        EthSendTransaction sendTransaction = manager.sendTransaction(gas, myLimit, edToadress.getText().toString(), signedTransactionData, BigInteger.valueOf(Long.parseLong("0")));
+//        Web3j web3j = Web3jFactory.build(new HttpService(RequestHost.secTestUrl));
+//        TransactionManager manager = new TransactionManager(web3j, address) {
+//            @Override
+//            public EthSendTransaction sendTransaction(BigInteger gasPrice, BigInteger gasLimit, String to, String data, BigInteger value) throws IOException {
+//                return null;
+//            }
+//        };
+//        BigDecimal realValue = BigDecimal.valueOf(Double.parseDouble(edSenMoney.getText().toString()) * Math.pow(10.0, 18));
+//        Function function = new Function(
+//                "transfer",
+//                Arrays.asList(new Address(edToadress.getText().toString()),
+//                        new Uint256(realValue.toBigInteger())), Collections.emptyList());
+//
+//
+//        String data = FunctionEncoder.encode(function);
+//        EthSendTransaction sendTransaction = manager.sendTransaction(gas, myLimit, edToadress.getText().toString(), signedTransactionData, BigInteger.valueOf(Long.parseLong("0")));
 //
 //        new Thread(new Runnable() {
 //            @Override
@@ -789,24 +825,6 @@ public class TransferActivity extends BasicActivity {
 //            }
 //        }).start();
 
-
-        hud2.show();
-        EthGetTransactionCount ethGetTransactionCount = MyWeb3jUtil.getWeb3jInstance().ethGetTransactionCount(
-                rememberEth.getAddress()
-                , DefaultBlockParameterName.LATEST).sendAsync().get();
-        BigInteger nonce = ethGetTransactionCount.getTransactionCount();
-        double amount = Double.parseDouble(edSenMoney.getText().toString().trim());
-        BigDecimal money = new BigDecimal(amount);
-
-        String mmp = NumberFormat.getInstance().format(now * Math.pow(10, 9) * 20);
-        mmp = mmp.replaceAll(",", "");
-        BigInteger gasPrice = BigInteger.valueOf(Long.parseLong(mmp));
-        signedEthTransactionData(
-                edToadress.getText().toString().trim(),
-                nonce,
-                gasPrice,
-                myLimit,
-                money);
     }
 
     private void tranETH() throws Exception {
@@ -958,12 +976,129 @@ public class TransferActivity extends BasicActivity {
 
     }
 
-    private void getData() {
+    /**
+     * 得到 r s v 三个参数
+     */
+    private void test2() {
+        Sign.SignatureData signatureData = getData();
+//        byte[] rr = signatureData.getR();
+//        byte[] ss = signatureData.getS();
+//        byte vv = signatureData.getV();
+
+//        String r = Numeric.toHexString(rr).substring(2);//去掉0x
+//        String s = Numeric.toHexString(ss).substring(2);//去掉0x
+//        String vString = String.valueOf(vv);
+//        int v = Integer.parseInt(vString);
+
+        SECSendRawBean.ParamsBean.DataBean dataBean = new SECSendRawBean.ParamsBean.DataBean();
+//        dataBean.setR(r);
+//        dataBean.setS(s);
+//        dataBean.setV(v);
+
+        hud2.show();
+        List<SECSendRawBean.ParamsBean> list = new ArrayList<>();
+        SECSendRawBean.ParamsBean paramsBean = new SECSendRawBean.ParamsBean();
+//        paramsBean.setFrom(address.substring(2));
+//        paramsBean.setTo(myGetAdress.substring(2));
+//        paramsBean.setGas("0");
+//        paramsBean.setGasPrice("0");
+//        paramsBean.setData(dataBean);
+//        paramsBean.setValue(edSenMoney.getText().toString().trim());
+//        paramsBean.setGasLimit("0");
+//        paramsBean.setInputData(edRemark.getText().toString().trim() == null ? "" : edRemark.getText().toString().trim());
+//        paramsBean.setTimestamp(new Date().getTime());
+
+        paramsBean.setTimestamp(new Date().getTime());
+        paramsBean.setValue("110.5235");
+        paramsBean.setGasLimit("0");
+        paramsBean.setGas("0");
+        paramsBean.setGasPrice("0");
+        paramsBean.setInputData("Sec test transaction");
+
+        dataBean.setV(28);
+        dataBean.setR("f17c29dd068953a474675a65f59c75c6189c426d1c60f43570cc7220ca3616c3");
+        dataBean.setS("54f9ff243b903b7419dd566f277eedadf6aa55161f5d5e42005af29b14577902");
+        paramsBean.setData(dataBean);
+        paramsBean.setFrom("fa9461cc20fbb1b0937aa07ec6afc5e660fe2afd");
+        paramsBean.setTo("8df9628de741b3d42c6f4a29ed4572b0f05fe8b4");
+
+        list.add(paramsBean);
+
+        SECSendRawBean bean = new SECSendRawBean();
+        bean.setId(1);
+        bean.setJsonrpc("2.0");
+        bean.setMethod("sec_sendRawTransaction");
+        bean.setParams(list);
+        String json = JSON.toJSONString(bean);
+        RequestParams params = new RequestParams(RequestHost.secTestUrl);
+        params.setAsJsonContent(true);
+        params.setBodyContent(json);
+        Log.e("web", "request:params+\n" + json);
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                x.http().post(params, new Callback.CommonCallback<String>() {
+                    @Override
+                    public void onSuccess(String result) {
+                        Log.e("web3", "sec_sendRawTransaction-result+\n" + result);
+                        if (!StringUtils.isEmpty(result)) {
+                            SECTransResponseBean transResponseBean = JsonUtil.parseJson(result, SECTransResponseBean.class);
+                            if (null != transResponseBean) {
+                                SECTransResponseBean.ResultBean resultBean = transResponseBean.getResult();
+                                if (null != resultBean) {
+                                    String statrus = resultBean.getStatus();//  1 成功 0 不成功，打印info
+                                    String info = resultBean.getInfo();
+                                    String txHash = resultBean.getTxHash();
+                                    Log.e("seb3", "trade----" + statrus + "---info---" + info + "----" + "--txHash---" + txHash);
+                                    if (!StringUtils.isEmpty(statrus) && statrus.equals("1")) {
+                                        if (!StringUtils.isEmpty(txHash) && txHash.contains("0x") && txHash.length() >= 64) {
+                                            ToastUtil.show(TransferActivity.this, "转账完成");
+                                            String myRemark = edRemark.getText().toString().trim();
+                                            if (!StringUtils.isEmpty(myRemark)) {
+                                                if (null == tranRemark) {
+                                                    tranRemark = new HashMap<>();
+                                                }
+                                                tranRemark.put(txHash, myRemark);
+                                                PlatformConfig.putMap(Constant.SpConstant.TRANSREMARKS, tranRemark);
+                                            }
+                                        } else {
+                                            ToastUtil.show(TransferActivity.this, "转账失败");
+                                        }
+                                    } else {
+                                        ToastUtil.show(TransferActivity.this, "转账失败");
+                                    }
+                                }
+                                hud2.dismiss();
+                                dialog.dismiss();
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable ex, boolean isOnCallback) {
+                        Log.e("web3", ex.toString());
+                    }
+
+                    @Override
+                    public void onCancelled(CancelledException cex) {
+                    }
+
+                    @Override
+                    public void onFinished() {
+                        Log.e("web3", "onFinished");
+                    }
+                });
+            }
+        }).start();
+
+
+    }
+
+    //为了得到Sign.SignatureData
+    private Sign.SignatureData getData() {
         byte[] encodedTransaction = TransactionEncoder.encode(rawTransaction);
         Sign.SignatureData signatureData = Sign.signMessage(
                 encodedTransaction, credentials.getEcKeyPair());
-        byte[] r = signatureData.getR();
-        byte[] s = signatureData.getS();
-        byte v = signatureData.getV();
+        return signatureData;
     }
 }

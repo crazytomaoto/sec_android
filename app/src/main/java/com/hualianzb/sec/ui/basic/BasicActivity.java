@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 
+import com.gyf.barlibrary.ImmersionBar;
 import com.hualianzb.sec.R;
 import com.hualianzb.sec.application.SECApplication;
 import com.hualianzb.sec.commons.interfaces.GlobalMessageType;
@@ -46,6 +47,10 @@ public abstract class BasicActivity extends BaseActivity implements View.OnClick
         }
 //        initTipView();
 //        EventBus.getDefault().register(this);
+        //初始化沉浸式
+        if (isImmersionBarEnabled()) {
+            initImmersionBar();
+        }
         initLogics();
         MessageCenter.getInstance().addHandler(getHandler());
     }
@@ -53,6 +58,21 @@ public abstract class BasicActivity extends BaseActivity implements View.OnClick
     @Subscribe
     public void onEvent(String event) {
 
+    }
+
+    protected void initImmersionBar() {
+        //在BaseActivity里初始化
+        ImmersionBar.with(this).navigationBarColor(R.color.colorPrimary).statusBarDarkFont(true).init();
+    }
+
+    /**
+     * 是否可以使用沉浸式
+     * Is immersion bar enabled boolean.
+     *
+     * @return the boolean
+     */
+    protected boolean isImmersionBarEnabled() {
+        return true;
     }
 
     private void initTipView() {
@@ -141,6 +161,9 @@ public abstract class BasicActivity extends BaseActivity implements View.OnClick
     protected void onDestroy() {
         // 移除回收的handler
         MessageCenter.getInstance().removeHandler(getHandler());
+        if (isImmersionBarEnabled()) {
+            ImmersionBar.with(this).destroy();
+        }
         super.onDestroy();
     }
 

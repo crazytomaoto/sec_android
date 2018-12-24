@@ -1,9 +1,5 @@
 package com.hualianzb.sec.secUtil;
 
-import com.hualianzb.sec.models.UserModule;
-
-import org.bitcoinj.wallet.WalletFiles;
-
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Date;
@@ -74,6 +70,7 @@ public class SecUtil {
      */
     public static byte[] hasha256(final String data) {
         // 是否是有效字符串
+
         if (data != null && data.length() > 0) {
             try {                // SHA 加密开始				// 创建加密对象 并傳入加密類型
                 MessageDigest messageDigest = MessageDigest.getInstance(strType);
@@ -89,10 +86,13 @@ public class SecUtil {
         }
     }
 
-//    public static String generatePrivateKey() {
+    //    public static String generatePrivateKey() {
 //        String privKey = WalletFiles.randomBytes(32).toString("hex");
 //
 //        return privKey
 //
 //    }
+    private void dsad() {
+//        SecP256K1Point secP256K1Point = new SecP256K1Point();
+    }
 }
