@@ -1,8 +1,12 @@
 package com.hualianzb.sec.ui.activitys;
 
 import android.app.Dialog;
-import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -10,45 +14,46 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.githang.statusbar.StatusBarCompat;
+import com.gyf.barlibrary.ImmersionBar;
 import com.hualianzb.sec.R;
 import com.hualianzb.sec.application.SECApplication;
 import com.hualianzb.sec.commons.constants.Constant;
-import com.hualianzb.sec.interfaces.IOutPrivatekey;
-import com.hualianzb.sec.models.RememberEth;
+import com.hualianzb.sec.models.RememberSEC;
 import com.hualianzb.sec.ui.basic.BasicActivity;
-import com.hualianzb.sec.utils.DeviceUtil;
+import com.hualianzb.sec.ui.fragments.ExportKeystoreAttentionDialogFragment;
+import com.hualianzb.sec.ui.fragments.ExportKeystoreDialogFragment;
+import com.hualianzb.sec.ui.fragments.ExportPrivatekeyDialogFragment;
+import com.hualianzb.sec.ui.fragments.QrCodeDialogFragment;
 import com.hualianzb.sec.utils.DialogUtil;
-import com.hualianzb.sec.utils.ImageUtils;
-import com.hualianzb.sec.utils.StateBarUtil;
 import com.hualianzb.sec.utils.StringUtils;
-import com.hualianzb.sec.utils.ToastUtil;
 import com.hualianzb.sec.utils.UiHelper;
+import com.hualianzb.sec.utils.Util;
 import com.hysd.android.platform_huanuo.base.config.PlatformConfig;
 
+import java.util.HashMap;
 import java.util.Map;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class MakeMoneyActicity extends BasicActivity {
-    @BindView(R.id.tv_title)
+public class MakeMoneyActicity extends BasicActivity implements QrCodeDialogFragment.InfacnCopy
+        , ExportKeystoreAttentionDialogFragment.ExportAttenion, ExportKeystoreDialogFragment.ExportLinster
+        , ExportPrivatekeyDialogFragment.ExporPrivateKeytLinster {
+    @BindView(R.id.tv_wallet_name)
     TextView tvTitle;
     @BindView(R.id.iv_back_top)
     ImageView ivBackTop;
     @BindView(R.id.tv_right)
     TextView tvRight;
-    @BindView(R.id.rl_title)
-    RelativeLayout rlTitle;
-    @BindView(R.id.iv_avater)
-    ImageView ivAvater;
-    @BindView(R.id.tv_eth)
-    TextView tvEth;
-    @BindView(R.id.tv_eth_all)
-    TextView tvEthAll;
+    @BindView(R.id.tv_sec)
+    TextView tvSec;
+    @BindView(R.id.tv_address)
+    TextView tvAddress;
     @BindView(R.id.iv_qr_code)
-    ImageView ivQrCode;
+    TextView ivQrCode;
     @BindView(R.id.ed_wname)
     EditText edWname;
     @BindView(R.id.ll_changepass)
@@ -59,20 +64,24 @@ public class MakeMoneyActicity extends BasicActivity {
     LinearLayout llOutKeystore;
     @BindView(R.id.btn_delete)
     TextView btn_delete;
-    @BindView(R.id.ll_tip)
-    LinearLayout llTip;
     @BindView(R.id.iv_issee)
     ImageView ivIssee;
     @BindView(R.id.ed_pass)
     EditText edPass;
     @BindView(R.id.btn_backups)
     TextView btnBackups;
+    @BindView(R.id.tv_name_error)
+    TextView tvNameError;
+    @BindView(R.id.re_prompt)
+    RelativeLayout rePrompt;
     private boolean canSee = false;
-    private Map<String, RememberEth> map;
+    private Map<String, RememberSEC> map;
     private String address, checkedAddress;
     private String money;
-    private RememberEth bean, checkedReme;
-    private StateBarUtil stateBarUtil;
+    private RememberSEC bean, checkedReme;
+    private boolean isWallteNameOk;
+    private String walletName;
+    private Dialog dialogTips;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -80,9 +89,8 @@ public class MakeMoneyActicity extends BasicActivity {
         setContentView(R.layout.activity_make_money);
         ButterKnife.bind(this);
         SECApplication.getInstance().addActivity(this);
-//        stateBarUtil = new StateBarUtil(this);
-//        stateBarUtil.setHalfTransparent();
-        StatusBarCompat.setTranslucent(getWindow(), true);
+        ImmersionBar.with(this).statusBarColor(R.color.gray_background).init();
+        dialogTips = DialogUtil.showLoadingDialog(MakeMoneyActicity.this, "Saved");
     }
 
     @Override
@@ -105,24 +113,27 @@ public class MakeMoneyActicity extends BasicActivity {
     }
 
     private void initView() {
-//        money = PlatformConfig.getDouble(Constant.SpConstant.MYBANLANCE) + "";
-        tvEth.setText(money + "Ether");
+        if (money.contains(".")) {
+            money = money.replace(".", "A");//点的话split无法返回String[]，所以替换
+            String[] moneys = money.split("A");
+            if (moneys[1].length() > 8) {
+                money = moneys[0] + "." + moneys[1].substring(0, 8);
+            } else {
+                money = moneys[0] + "." + moneys[1];
+            }
+        }
+        tvSec.setText(money + "SEC");
         map = PlatformConfig.getMap(Constant.SpConstant.WALLET);
         bean = map.get(address);
         tvTitle.setText(bean.getWalletName());
-        tvTitle.setTextColor(getResources().getColor(R.color.white));
-        tvRight.setTextColor(getResources().getColor(R.color.white));
-        tvEthAll.setText(bean.getAddress());
-        if (StringUtils.isEmpty(bean.getTips())) {
-            llTip.setVisibility(View.GONE);
-        } else {
-            llTip.setVisibility(View.VISIBLE);
-        }
+        tvTitle.setTextColor(getResources().getColor(R.color.text_black));
+//        tvRight.setTextColor(getResources().getColor(R.color.white));
+        tvAddress.setText(bean.getAddress());
         checkCanSee();
         edPass.setHint(bean.getTips());
-        ivAvater.setImageResource(ImageUtils.getWalletImage(bean.getWalletincon()));
-        ivBackTop.setImageResource(R.drawable.icon_back_white);
+        ivBackTop.setImageResource(R.drawable.icon_back);
         edWname.setHint(bean.getWalletName());
+
         if (bean.isBackup() == true) {
             btnBackups.setVisibility(View.GONE);
         } else {
@@ -134,52 +145,53 @@ public class MakeMoneyActicity extends BasicActivity {
                 }
             }
         }
+        if (StringUtils.isEmpty(bean.getTips())) {
+            rePrompt.setVisibility(View.GONE);
+        } else {
+            rePrompt.setVisibility(View.VISIBLE);
+        }
     }
 
     @OnClick({R.id.tv_right, R.id.iv_issee, R.id.iv_qr_code, R.id.ll_changepass, R.id.ll_out_privatekey, R.id.ll_out_keystore, R.id.btn_backups, R.id.btn_delete})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.tv_right:
-                String name = edWname.getText().toString().trim();
-                if (!StringUtils.isEmpty(name)) {
-
-                    if (map != null && map.values().size() > 0) {
-                        boolean isRe = false;
-                        for (RememberEth reme : map.values()) {
-                            if (reme.getWalletName().equals(name)) {
-                                isRe = true;
-                                break;
-                            }
-                        }
-                        if (isRe) {
-                            ToastUtil.show(this, "钱包名称重复");
-                            return;
-                        }
-                    }
-                    bean.setWalletName(name);
-                    map.put(bean.getAddress(), bean);
-                    PlatformConfig.putMap(Constant.SpConstant.WALLET, map);
-                    ToastUtil.show(this, "修改成功");
-                    map = PlatformConfig.getMap(Constant.SpConstant.WALLET);
-                    tvTitle.setText(name);
-                } else {
-                    ToastUtil.show(this, "钱包名称为空");
+                dialogTips.show();
+                map = PlatformConfig.getMap(Constant.SpConstant.WALLET);
+                if (map == null || map.values().size() == 0) {
+                    map = new HashMap<>();
                 }
+                bean.setWalletName(walletName);
+                map.put(bean.getAddress(), bean);
+                PlatformConfig.putMap(Constant.SpConstant.WALLET, map);
+                tvTitle.setText(walletName);
+
+                new Timer().schedule(new TimerTask() {
+                    @Override
+                    public void run() {
+                        dialogTips.dismiss();
+                    }
+                }, 3000);
                 break;
             case R.id.iv_qr_code:
-                UiHelper.startMakeCodeActivity(this, address);
+                QrCodeDialogFragment qrCodeDialogFragment = new QrCodeDialogFragment();
+                Bundle bundle = new Bundle();
+                bundle.putString("address", address);
+                qrCodeDialogFragment.setArguments(bundle);//数据传递到fragment中
+                FragmentManager fragmentManager = getSupportFragmentManager();
+                qrCodeDialogFragment.show(fragmentManager, QrCodeDialogFragment.class.getSimpleName());
                 break;
             case R.id.ll_changepass:
                 UiHelper.startChangePassActy(this, address);
                 break;
             case R.id.ll_out_privatekey:
-                showmyDialog(this, bean.getPass(), bean.getPrivateKey(), 1);
+                UiHelper.startCheckPassActivity(this, bean.getPass(), 002);
                 break;
             case R.id.ll_out_keystore:
-                showmyDialog(this, bean.getPass(), bean.getPrivateKey(), 2);
+                UiHelper.startCheckPassActivity(this, bean.getPass(), 003);
                 break;
             case R.id.btn_delete:
-                showmyDialog(this, bean.getPass(), 2);
+                UiHelper.startCheckPassActivity(this, bean.getPass(), 005);
                 break;
             case R.id.iv_issee:
                 if (canSee) {
@@ -190,7 +202,7 @@ public class MakeMoneyActicity extends BasicActivity {
                 checkCanSee();
                 break;
             case R.id.btn_backups:
-                showmyDialog(this, bean.getPass(), 1);
+                UiHelper.startCheckPassActivity(this, bean.getPass(), 004);
                 break;
         }
     }
@@ -204,7 +216,7 @@ public class MakeMoneyActicity extends BasicActivity {
             finish();
         } else {
             boolean hasSelect = false;
-            for (RememberEth rememberEth : map.values()) {
+            for (RememberSEC rememberEth : map.values()) {
                 if (rememberEth.isNow() == true) {
                     hasSelect = true;
                     checkedReme = rememberEth;
@@ -215,7 +227,7 @@ public class MakeMoneyActicity extends BasicActivity {
             if (hasSelect) {
                 finish();
             } else {
-                for (RememberEth rememberEth : map.values()) {
+                for (RememberSEC rememberEth : map.values()) {
                     rememberEth.setNow(true);
                     map.put(rememberEth.getAddress(), rememberEth);
                     PlatformConfig.setValue(Constant.SpConstant.NOWADDRESS, rememberEth.getAddress());//记住当前选中钱包的地址
@@ -227,151 +239,187 @@ public class MakeMoneyActicity extends BasicActivity {
         }
     }
 
-    private void showmyDialog(Context context, String pass, int from) {// 1 备注助记词  2 删除钱包
-        final Dialog dialog = new Dialog(context, R.style.dialog);
-        dialog.setContentView(R.layout.dialog_bankup_mnemonics);
-        dialog.setCanceledOnTouchOutside(false);
-        dialog.setCancelable(true);
-        TextView yes = dialog.findViewById(R.id.tv__ok);
-        final EditText ed_pass = dialog.findViewById(R.id.ed_pass);
-        TextView cancel = dialog.findViewById(R.id.tv_cancel);
-        yes.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String myPass = ed_pass.getText().toString().trim();
-                if (StringUtils.isEmpty(myPass)) {
-                    ToastUtil.show(MakeMoneyActicity.this, "密码为空");
-                } else {
-                    if (!myPass.equals(pass)) {
-                        ToastUtil.show(MakeMoneyActicity.this, "密码不正确");
-                    } else {
-                        if (from == 1) {
-                            UiHelper.startBackupMnemonicsActy2(context, myPass, address);
-                        }
-                        if (from == 2) {
-                            IntentMove();
-                        }
-                        dialog.dismiss();
+    //检测钱包名称的合法性
+    private void checkWalletName(String walletName) {
+        if (map == null || map.isEmpty() || map.values().size() == 0) {
+            if (StringUtils.isEmpty(walletName)) {//名称为空
+                isWallteNameOk = false;
+                tvNameError.setVisibility(View.VISIBLE);
+                tvNameError.setText(getString(R.string.wallet_name_null));
+                return;
+            } else {
+                isWallteNameOk = true;
+                tvNameError.setVisibility(View.GONE);
+                return;
+            }
+        } else {
+            if (StringUtils.isEmpty(walletName)) {//名称为空
+                isWallteNameOk = false;
+                tvNameError.setText(getString(R.string.wallet_name_null));
+                tvNameError.setVisibility(View.VISIBLE);
+                return;
+            } else {
+                boolean hasRe = false;//是否有重名的
+                for (RememberSEC rememberEth : map.values()) {
+                    if (walletName.equals(rememberEth.getWalletName())) {
+                        hasRe = true;
+                        break;
                     }
                 }
-            }
-        });
-
-        ed_pass.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (hasFocus) {
-                    MakeMoneyActicity.this.showSoftInputFromWindow(ed_pass);
+                if (hasRe) {//有重名的
+                    isWallteNameOk = false;
+                    tvNameError.setText(getString(R.string.wallet_exists));
+                    tvNameError.setVisibility(View.VISIBLE);
+                    return;
+                } else {
+                    isWallteNameOk = true;
+                    tvNameError.setVisibility(View.GONE);
+                    return;
                 }
+
             }
-        });
-        cancel.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                dialog.dismiss();
-            }
-        });
-        dialog.show();
+        }
+    }
+
+    private void setClickeble() {
+        if (isWallteNameOk) {
+            tvRight.setEnabled(true);
+        } else {
+            tvRight.setEnabled(false);
+        }
     }
 
     private void checkCanSee() {
         if (canSee) {
             //如果选中，显示密码提示
-//            edPass.setTransformationMethod(PasswordTransformationMethod.getInstance());
             edPass.setText(bean.getTips());
             ivIssee.setImageResource(R.drawable.icon_eye_open);
         } else {
             //否则隐藏密码
-//            edPass.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
             edPass.setText("******");
             ivIssee.setImageResource(R.drawable.icon_eye_close);
         }
     }
 
-    private void showmyDialog(Context context, String pass, String privatekey, int whereUse) {
-        final Dialog dialog = new Dialog(context, R.style.dialog);
-        dialog.setContentView(R.layout.dialog_bankup_mnemonics);
-        dialog.setCanceledOnTouchOutside(false);
-        dialog.setCancelable(true);
-        TextView yes = dialog.findViewById(R.id.tv__ok);
-        final EditText ed_pass = dialog.findViewById(R.id.ed_pass);
-        TextView cancel = dialog.findViewById(R.id.tv_cancel);
-        yes.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String myPass = ed_pass.getText().toString().trim();
-                if (StringUtils.isEmpty(myPass)) {
-                    ToastUtil.show(MakeMoneyActicity.this, "密码为空");
-                } else {
-                    if (!myPass.equals(pass)) {
-                        ToastUtil.show(MakeMoneyActicity.this, "密码不正确");
-                    } else {
-                        if (whereUse == 1) {
-                            showAnotherDialog(privatekey);
-                        }
-                        if (whereUse == 2) {
-                            UiHelper.startOutKeyStoreAcy(MakeMoneyActicity.this, address);
-                        }
-                        dialog.dismiss();
-                    }
-                }
-            }
-        });
-        ed_pass.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (hasFocus) {
-                    MakeMoneyActicity.this.showSoftInputFromWindow(ed_pass);
-                }
-            }
-        });
-        cancel.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                dialog.dismiss();
-            }
-        });
-        dialog.show();
-    }
-
-    private void showAnotherDialog(String privatekey) {
-        DialogUtil.showIdIdentifyDialog(this, privatekey, new IOutPrivatekey() {
-            @Override
-            public void cancelDialog(View v, Dialog d) {
-                d.dismiss();
-            }
-
-            @Override
-            public void copy(View v, Dialog d) {
-                DeviceUtil.copy(MakeMoneyActicity.this, privatekey);
-                ToastUtil.show(MakeMoneyActicity.this, "已复制到剪切板");
-                d.dismiss();
-            }
-        });
-    }
-
-    public static class UserBean {
-        private String id;
-        private String birthday;
-
-        public String getId() {
-            return id;
-        }
-
-        public void setId(String id) {
-            this.id = id;
-        }
-
-        public String getBirthday() {
-            return birthday;
-        }
-
-        public void setBirthday(String birthday) {
-            this.birthday = birthday;
-        }
+    public ImmersionBar getActivityImmersionBar() {
+        return ImmersionBar.with(this);
     }
 
     @Override
     public void onResume() {
         super.onResume();
         initView();
+        initData();
+    }
+
+    private void initData() {
+        edWname.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                walletName = s.toString().trim();
+                checkWalletName(walletName);
+                setClickeble();
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+    }
+
+    //传过来的地址，在宿主Activity中操作
+    @Override
+    public void copy(String str) {
+        Util.copy(this, address);
+    }
+
+    @Override
+    public void goIt() {
+        ExportKeystoreDialogFragment exportKeystoreDialogFragment = new ExportKeystoreDialogFragment();
+        Bundle bundle = new Bundle();
+        bundle.putString("address", address);
+        exportKeystoreDialogFragment.setArguments(bundle);//数据传递到fragment中
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        exportKeystoreDialogFragment.show(fragmentManager, ExportKeystoreDialogFragment.class.getSimpleName());
+    }
+
+    //复制keystore
+    @Override
+    public void copyKeyStore(String str) {
+        if ("1".equals(str)) {
+            Util.copy(this, bean.getWalletFile());
+        }
+    }
+
+    //复制私钥
+    @Override
+    public void copyPrivatekey(String str) {
+        if ("1".equals(str)) {
+            Util.copy(this, bean.getPrivateKey());
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        switch (requestCode) {
+            case 002://私钥
+                if (resultCode == 1) {
+                    if (null != data) {
+                        boolean isCheckedPass = data.getExtras().getBoolean("isCheckedPass");
+                        if (isCheckedPass) {
+                            ExportPrivatekeyDialogFragment privatekeyDialogFragment = new ExportPrivatekeyDialogFragment();
+                            Bundle bundle = new Bundle();
+                            bundle.putString("address", address);
+                            privatekeyDialogFragment.setArguments(bundle);//数据传递到fragment中
+                            FragmentManager fragmentManager = getSupportFragmentManager();
+                            privatekeyDialogFragment.show(fragmentManager, ExportPrivatekeyDialogFragment.class.getSimpleName());
+                        }
+                    }
+                }
+                break;
+            case 003://keyStore
+                if (resultCode == 1) {
+                    if (null != data) {
+                        boolean isCheckedPass = data.getExtras().getBoolean("isCheckedPass");
+                        if (isCheckedPass) {
+                            ExportKeystoreAttentionDialogFragment exportAttentionDialogFragment = new ExportKeystoreAttentionDialogFragment();
+                            FragmentManager fragmentManager = getSupportFragmentManager();
+                            exportAttentionDialogFragment.show(fragmentManager, ExportKeystoreAttentionDialogFragment.class.getSimpleName());
+                        }
+                    }
+                }
+                break;
+            case 004://助记词
+                if (resultCode == 1) {
+                    if (null != data) {
+                        boolean isCheckedPass = data.getExtras().getBoolean("isCheckedPass");
+                        if (isCheckedPass) {
+                            UiHelper.startBackupMnemonicsActy2(MakeMoneyActicity.this, address);
+                        }
+                    }
+                }
+                break;
+            case 005://删除钱包
+                if (resultCode == 1) {
+                    if (null != data) {
+                        boolean isCheckedPass = data.getExtras().getBoolean("isCheckedPass");
+                        if (isCheckedPass) {
+                            IntentMove();
+                        }
+                    }
+                }
+                break;
+            default:
+                break;
+        }
+
     }
 }

@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_dialog_white"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:paddingTop="@dimen/dimen_80px"
+    android:paddingBottom="@dimen/dimen_80px">
+
+    <ImageView
+        android:layout_width="@dimen/dimen_40px"
+        android:layout_height="@dimen/dimen_40px"
+        android:layout_gravity="center_horizontal"
+        android:background="@color/selected_blue" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/px50"
+        android:gravity="center"
+        android:text="Are you sure"
+        android:textColor="@color/selected_blue"
+        android:textSize="@dimen/dimen_26px" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/dimen_20px"
+        android:gravity="center"
+        android:text="The older of the phrases"
+        android:textColor="@color/text_gray02"
+        android:textSize="@dimen/dimen_30px" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/dimen_10px"
+        android:gravity="center"
+        android:text="you backed up is verified correctly,"
+        android:textColor="@color/text_gray02"
+        android:textSize="@dimen/dimen_30px" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/dimen_10px"
+        android:gravity="center"
+        android:text="whether the phrases is"
+        android:textColor="@color/text_gray02"
+        android:textSize="@dimen/dimen_30px" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/dimen_10px"
+        android:gravity="center"
+        android:text="removed for the SEC "
+        android:textColor="@color/text_gray02"
+        android:textSize="@dimen/dimen_30px" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/px50"
+        android:orientation="horizontal">
+
+
+        <RelativeLayout
+            android:layout_width="0px"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/tv_cancel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/px50"
+                android:layout_marginRight="@dimen/dimen_30px"
+                android:gravity="center"
+                android:padding="@dimen/dimen_10px"
+                android:text="Cancel"
+                android:textColor="@color/text_gray02"
+                android:textSize="@dimen/dimen_40px"
+                android:textStyle="bold" />
+        </RelativeLayout>
+
+        <View
+            android:layout_width="2px"
+            android:layout_height="200px"
+            android:background="@color/text_black_home"></View>
+
+        <RelativeLayout
+            android:layout_width="0px"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/tv_ok"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginLeft="@dimen/dimen_30px"
+                android:layout_marginTop="@dimen/px50"
+                android:gravity="center"
+                android:padding="@dimen/dimen_10px"
+                android:text="Sure"
+                android:textColor="@color/selected_blue"
+                android:textSize="@dimen/dimen_40px" />
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

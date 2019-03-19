@@ -68,6 +68,7 @@ public class SECSendRawBean implements Serializable {
          * gas : 0x76c0
          * gasPrice : 0x9184e72a000
          * value : 0x9184e72a
+         * contractAddress:""
          * inputData:"sec test input"
          * data : {"v":28,"r":"f17c29dd068953a474675a65f59c75c6189c426d1c60f43570cc7220ca3616c3","s":"54f9ff243b903b7419dd566f277eedadf6aa55161f5d5e42005af29b14577902"}
          */
@@ -80,7 +81,16 @@ public class SECSendRawBean implements Serializable {
         private String gasPrice;
         private String value;
         private String inputData;
+//        private String contractAddress;
         private DataBean data;
+
+//        public String getContractAddress() {
+//            return contractAddress;
+//        }
+//
+//        public void setContractAddress(String contractAddress) {
+//            this.contractAddress = contractAddress;
+//        }
 
         public String getInputData() {
             return inputData;

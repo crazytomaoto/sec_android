@@ -11,9 +11,6 @@ public interface GlobalMessageType {
          * 用户Token过期
          */
         int USER_TOKEN_EXPIRE = BASE + 1;
-        int GETPICTURE = BASE + 2;//获取图片
-
-        int REMOVELIST = BASE + 163;//适配器中要清除本条数据
     }
 
     interface MainRequest {
@@ -23,11 +20,12 @@ public interface GlobalMessageType {
         int SECTOKEN = BASE + 3;//
         int INTTOKEN = BASE + 4;//
         int GETTOKEN = BASE + 5;// token值
+        int GETTOKEN_LAST = BASE + 6;//token值
         int CECTOKEN_LAST = BASE + 11;//                              +++ ece token值 +++
         int ETHTOKEN_LAST = BASE + 12;//
         int SECTOKEN_LAST = BASE + 13;//
         int INTTOKEN_LAST = BASE + 14;//
-        int GETTOKEN_LAST = BASE + 6;//token值
+        int CHECKUPDATE = BASE + 15;//
     }
 
     interface RequestCode {
@@ -42,6 +40,8 @@ public interface GlobalMessageType {
         int BASE = 0x12000000;
         int NOTIFYBOOKLIST = BASE + 1;//地址簿改变后通知列表刷新
         int NONET = BASE + 2;//没网
+        int CANCELORERROR = BASE + 3;//取消或者出错
+        int ContainMessage = BASE + 4;//携带信息
     }
 
 }

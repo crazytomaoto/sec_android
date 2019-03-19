@@ -8,26 +8,37 @@
         android:id="@+id/ll_item"
         android:layout_width="match_parent"
         android:layout_height="136px"
-        android:background="@drawable/btn_normal_golden"
+        android:layout_marginLeft="@dimen/dimen_50px"
+        android:layout_marginRight="@dimen/dimen_50px"
+        android:background="@drawable/bg_btn_can_green"
         android:gravity="center_vertical"
         android:orientation="horizontal"
         android:paddingLeft="@dimen/dimen_30px"
-        android:paddingRight="@dimen/dimen_30px">
+        android:paddingRight="@dimen/px50">
 
         <ImageView
             android:id="@+id/iv_logo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:scaleType="centerCrop" />
+            android:scaleType="centerCrop"
+            android:src="@drawable/icon_wallet_gray" />
 
         <TextView
             android:id="@+id/tv_name"
-            android:layout_width="wrap_content"
+            android:layout_width="0px"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="15px"
-            android:text="钱包名称"
+            android:layout_marginLeft="@dimen/dimen_30px"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
             android:textColor="@drawable/textcolor_black_white"
-            android:textSize="32px" />
+            android:textSize="@dimen/dimen_32px"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/iv_checked"
+            android:layout_width="@dimen/dimen_60px"
+            android:layout_height="@dimen/dimen_60px"
+            android:src="@drawable/icon_cb_yes" />
     </LinearLayout>
 
 </LinearLayout>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<com.lijiankun24.shadowlayout.ShadowLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center_horizontal"
+    android:layout_marginBottom="@dimen/dimen_40px"
+    android:orientation="vertical"
+    app:shadowColor="#14000000"
+    app:shadowDx="0dp"
+    app:shadowDy="20dp"
+    app:shadowRadius="6dp"
+    app:shadowSide="bottom">
+
+    <LinearLayout
+        android:layout_width="800px"
+        android:layout_height="280px"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:background="@drawable/shape_loading"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:textSize="@dimen/dimen_40px"></TextView>
+    </LinearLayout>
+</com.lijiankun24.shadowlayout.ShadowLayout>

@@ -19,7 +19,7 @@
                 <item android:state_enabled="false">
                     <color android:color="@android:color/transparent" />
                 </item>
-                <item android:drawable="@drawable/circle_yellow" />
+                <item android:drawable="@drawable/home_banner_green" />
             </selector>
         </scale>
     </item>

@@ -2,255 +2,192 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/gray_background"
+    android:clipToPadding="true"
     android:fitsSystemWindows="true"
     android:orientation="vertical">
 
-    <!--<ScrollView-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="match_parent"-->
-    <!--android:scrollbars="none">-->
-
-    <!--<LinearLayout-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:orientation="vertical">-->
-
-    <!--<RelativeLayout-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="400px"-->
-    <!--android:background="@drawable/bg_shadow_my">-->
-
-    <!--<TextView-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_alignParentTop="true"-->
-    <!--android:layout_centerHorizontal="true"-->
-    <!--android:layout_marginTop="20px"-->
-    <!--android:text="我"-->
-    <!--android:textColor="@color/white"-->
-    <!--android:textSize="@dimen/dimen_40px" />-->
-
-    <!--<LinearLayout-->
-    <!--android:id="@+id/ll_manage"-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_centerVertical="true"-->
-    <!--android:layout_marginLeft="@dimen/dimen_80px"-->
-    <!--android:gravity="center_horizontal"-->
-    <!--android:orientation="vertical">-->
-
-    <!--<ImageView-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:src="@drawable/icon_charge" />-->
-
-    <!--<TextView-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_marginTop="@dimen/dimen_10px"-->
-    <!--android:text="管理钱包"-->
-    <!--android:textColor="@color/white"-->
-    <!--android:textSize="@dimen/dimen_30px" />-->
-    <!--</LinearLayout>-->
-
-    <!--<LinearLayout-->
-    <!--android:id="@+id/ll_transaction_record"-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_alignParentRight="true"-->
-    <!--android:layout_centerVertical="true"-->
-    <!--android:layout_marginRight="@dimen/dimen_80px"-->
-    <!--android:gravity="center_horizontal"-->
-    <!--android:orientation="vertical">-->
-
-    <!--<ImageView-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:src="@drawable/icon_trade_history" />-->
-
-
-    <!--<TextView-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_marginTop="@dimen/dimen_10px"-->
-    <!--android:text="交易记录"-->
-    <!--android:textColor="@color/white"-->
-    <!--android:textSize="@dimen/dimen_30px" />-->
-    <!--</LinearLayout>-->
-    <!--</RelativeLayout>-->
-
-
-    <!--<TextView-->
-    <!--android:id="@+id/tv_addressbook"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:paddingBottom="@dimen/px10"-->
-    <!--android:paddingLeft="@dimen/dimen_24px"-->
-    <!--android:paddingTop="32px"-->
-    <!--android:text="地址簿"-->
-    <!--android:textColor="#AF8444" />-->
-
-    <!--<View-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="2px"-->
-    <!--android:layout_marginLeft="@dimen/dimen_24px"-->
-    <!--android:layout_marginRight="@dimen/dimen_24px"-->
-    <!--android:background="@color/view_color" />-->
-
-    <!--<LinearLayout-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:orientation="horizontal"-->
-    <!--android:paddingBottom="@dimen/px10"-->
-    <!--android:paddingLeft="@dimen/dimen_24px"-->
-    <!--android:paddingRight="@dimen/dimen_24px"-->
-    <!--android:paddingTop="32px">-->
-
-    <!--<TextView-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:text="版本更新"-->
-    <!--android:textColor="#AF8444" />-->
-
-    <!--<TextView-->
-    <!--android:id="@+id/tv_version"-->
-    <!--android:layout_width="0px"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_weight="1"-->
-    <!--android:gravity="right"-->
-    <!--android:text="v1.0"-->
-    <!--android:textColor="#AF8444" />-->
-    <!--</LinearLayout>-->
-
-    <!--<View-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="2px"-->
-    <!--android:layout_marginLeft="@dimen/dimen_24px"-->
-    <!--android:layout_marginRight="@dimen/dimen_24px"-->
-    <!--android:background="@color/view_color" />-->
-    <!--&lt;!&ndash;<com.hualianzb.cec.views.AutoListView&ndash;&gt;-->
-    <!--&lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;-->
-    <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
-    <!--&lt;!&ndash;android:divider="@null"&ndash;&gt;-->
-    <!--&lt;!&ndash;android:scrollbars="none"></com.hualianzb.cec.views.AutoListView>&ndash;&gt;-->
-
-    <!--</LinearLayout>-->
-    <!--</ScrollView>-->
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="400px"
-        android:background="@drawable/bg_my"
-        android:fitsSystemWindows="true">
-
-        <TextView
-            android:id="@+id/tvmy"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="70px"
-            android:text="我"
-            android:textColor="@color/white"
-            android:textSize="@dimen/dimen_40px" />
-
-        <LinearLayout
-            android:id="@+id/ll_manage"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/dimen_80px"
-            android:layout_below="@id/tvmy"
-            android:layout_marginTop="@dimen/dimen_60px"
-            android:gravity="center_horizontal"
-            android:orientation="vertical">
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/icon_charge" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dimen_10px"
-                android:text="管理钱包"
-                android:textColor="@color/white"
-                android:textSize="@dimen/dimen_30px" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/ll_transaction_record"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="@dimen/dimen_80px"
-            android:layout_below="@id/tvmy"
-            android:layout_marginTop="@dimen/dimen_60px"
-            android:gravity="center_horizontal"
-            android:orientation="vertical">
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/icon_trade_history" />
-
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dimen_10px"
-                android:text="交易记录"
-                android:textColor="@color/white"
-                android:textSize="@dimen/dimen_30px" />
-        </LinearLayout>
-    </RelativeLayout>
-
-
     <TextView
-        android:id="@+id/tv_addressbook"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingBottom="@dimen/px10"
-        android:paddingLeft="@dimen/dimen_24px"
-        android:paddingTop="32px"
-        android:text="地址簿"
-        android:textColor="#AF8444" />
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="2px"
-        android:layout_marginLeft="@dimen/dimen_24px"
-        android:layout_marginRight="@dimen/dimen_24px"
-        android:background="@color/view_color" />
+        android:layout_height="0px"
+        android:layout_weight="1"
+        android:background="@drawable/pic_tip_bg"
+        android:fitsSystemWindows="true"
+        android:paddingLeft="@dimen/dimen_50px"
+        android:paddingTop="@dimen/dimen_50px"
+        android:text="My Wallet"
+        android:textSize="@dimen/dimen_55px"
+        android:textStyle="bold" />
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:paddingBottom="@dimen/px10"
-        android:paddingLeft="@dimen/dimen_24px"
-        android:paddingRight="@dimen/dimen_24px"
-        android:paddingTop="32px">
+        android:layout_height="0px"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0px"
+            android:layout_weight="4"
+            android:background="@color/white">
+
+            <LinearLayout
+                android:layout_width="0px"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:id="@+id/ll_manage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_normal_white_gray_20"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:padding="@dimen/px30">
+
+                    <ImageView
+                        android:layout_width="200px"
+                        android:layout_height="200px"
+                        android:scaleType="centerInside"
+                        android:src="@drawable/icon_manage_wt" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dimen_40px"
+                        android:text="Manage Wallet"
+                        android:textColor="@color/text_color"
+                        android:textSize="@dimen/dimen_35px"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="2px"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/dimen_30px"
+                android:layout_marginBottom="@dimen/dimen_30px"
+                android:background="@color/line_color" />
+
+            <LinearLayout
+                android:layout_width="0px"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:id="@+id/ll_transaction_record"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_normal_white_gray_20"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:padding="@dimen/px30">
+
+                    <ImageView
+                        android:layout_width="200px"
+                        android:layout_height="200px"
+                        android:scaleType="centerInside"
+                        android:src="@drawable/icon_trans_record" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dimen_40px"
+                        android:text="Transaction Record"
+                        android:textColor="@color/text_color"
+                        android:textSize="@dimen/dimen_35px"
+                        android:textStyle="bold" />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="版本更新"
-            android:textColor="#AF8444" />
-
-        <TextView
-            android:id="@+id/tv_version"
-            android:layout_width="0px"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="right"
-            android:text="v1.0"
-            android:textColor="#AF8444" />
+            android:layout_width="match_parent"
+            android:layout_height="0px"
+            android:layout_weight="1" />
     </LinearLayout>
 
-    <View
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="2px"
-        android:layout_marginLeft="@dimen/dimen_24px"
-        android:layout_marginRight="@dimen/dimen_24px"
-        android:background="@color/view_color" />
+        android:layout_height="0px"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/ll_addressbook"
+            android:layout_width="match_parent"
+            android:layout_height="144px"
+            android:layout_marginLeft="@dimen/dimen_50px"
+            android:layout_marginRight="@dimen/dimen_50px"
+            android:background="@drawable/bg_white_gray_15"
+            android:gravity="center_vertical"
+            android:paddingLeft="@dimen/dimen_80px">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:scaleType="centerInside"
+                android:src="@drawable/icon_book" />
+
+            <TextView
+                android:layout_width="0px"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dimen_70px"
+                android:layout_weight="1"
+                android:text="Address Book"
+                android:textColor="@color/text_black"
+                android:textSize="@dimen/dimen_30px" />
+
+            <ImageView
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="@dimen/dimen_80px"
+                android:background="@drawable/icon_arrow_right" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/ll_check_update"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_normal_gray_white_20"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:padding="@dimen/dimen_30px">
+
+                <TextView
+                    android:id="@+id/tv_version"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="16px"
+                    android:text="V1.0.1"
+                    android:textColor="@color/text_gray02"
+                    android:textSize="33px" />
+
+                <TextView
+                    android:id="@+id/tv_update"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16px"
+                    android:text="New Version Update"
+                    android:textColor="@color/text_gray02"
+                    android:textSize="33px" />
+            </LinearLayout>
+
+        </LinearLayout>
+    </LinearLayout>
+
 </LinearLayout>

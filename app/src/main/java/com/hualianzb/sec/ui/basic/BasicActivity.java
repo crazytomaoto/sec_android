@@ -1,24 +1,20 @@
 package com.hualianzb.sec.ui.basic;
 
-import android.content.Context;
-import android.graphics.PixelFormat;
+import android.app.Dialog;
+import android.content.IntentFilter;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.WindowManager;
 
 import com.gyf.barlibrary.ImmersionBar;
-import com.hualianzb.sec.R;
 import com.hualianzb.sec.application.SECApplication;
 import com.hualianzb.sec.commons.interfaces.GlobalMessageType;
+import com.hualianzb.sec.utils.NetBroadcastReceiver;
 import com.hualianzb.sec.ui.base.BaseActivity;
+import com.hualianzb.sec.utils.DialogUtil;
 import com.hysd.android.platform_huanuo.base.manager.MessageCenter;
-
-import org.greenrobot.eventbus.Subscribe;
 
 import java.util.Set;
 
@@ -26,15 +22,16 @@ import java.util.Set;
 /**
  * Created by wty on 2018/4/2.
  */
-public abstract class BasicActivity extends BaseActivity implements View.OnClickListener {
+public abstract class BasicActivity extends BaseActivity implements View.OnClickListener, NetBroadcastReceiver.NetChangeListener {
 
     private Handler mHandler;
-    //    private DialogLogoutView myDialog;
-//    protected StatusUIManager statusUIManager;
-    View mTipView;
-    WindowManager mWindowManager;
-    WindowManager.LayoutParams mLayoutParams;
+    public static NetBroadcastReceiver.NetChangeListener listener;
+    private NetBroadcastReceiver netBroadcastReceiver;
+    private Dialog noNet;
 
+    /**
+     * 网络类型
+     */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,24 +42,53 @@ public abstract class BasicActivity extends BaseActivity implements View.OnClick
         } else {
             getIntentForBundle();
         }
-//        initTipView();
-//        EventBus.getDefault().register(this);
         //初始化沉浸式
         if (isImmersionBarEnabled()) {
             initImmersionBar();
         }
         initLogics();
         MessageCenter.getInstance().addHandler(getHandler());
+        listener = this;
+        //Android 7.0以上需要动态注册
+        //实例化IntentFilter对象
+        IntentFilter filter = new IntentFilter();
+        filter.addAction(ConnectivityManager.CONNECTIVITY_ACTION);
+        netBroadcastReceiver = new NetBroadcastReceiver();
+        //注册广播接收
+        registerReceiver(netBroadcastReceiver, filter);
+        noNet = DialogUtil.showNoNetDialog(this);
     }
 
-    @Subscribe
-    public void onEvent(String event) {
+    public void onChangeListener(int status) {
+        if (status == -1) {
+            show();
+        } else {
+            dismissDialog();
+        }
+    }
 
+    public void show() {
+        if (null == noNet) {
+            noNet = DialogUtil.showNoNetDialog(this);
+            if (!noNet.isShowing()) {
+                noNet.show();
+            }
+        } else {
+            if (!noNet.isShowing()) {
+                noNet.show();
+            }
+        }
+    }
+
+    public void dismissDialog() {
+        if (null != noNet && noNet.isShowing()) {
+            noNet.dismiss();
+        }
     }
 
     protected void initImmersionBar() {
         //在BaseActivity里初始化
-        ImmersionBar.with(this).navigationBarColor(R.color.colorPrimary).statusBarDarkFont(true).init();
+        ImmersionBar.with(this).statusBarDarkFont(true).init();
     }
 
     /**
@@ -73,22 +99,6 @@ public abstract class BasicActivity extends BaseActivity implements View.OnClick
      */
     protected boolean isImmersionBarEnabled() {
         return true;
-    }
-
-    private void initTipView() {
-        LayoutInflater inflater = getLayoutInflater();
-        mTipView = inflater.inflate(R.layout.layout_network_tip, null); //提示View布局
-        mWindowManager = (WindowManager) this.getSystemService(Context.WINDOW_SERVICE);
-        mLayoutParams = new WindowManager.LayoutParams(
-                ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT,
-                WindowManager.LayoutParams.TYPE_APPLICATION,
-                WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE
-                        | WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
-                PixelFormat.TRANSLUCENT);
-        //使用非CENTER时，可以通过设置XY的值来改变View的位置
-        mLayoutParams.gravity = Gravity.TOP;
-        mLayoutParams.x = 0;
-        mLayoutParams.y = 0;
     }
 
     /**
@@ -129,7 +139,7 @@ public abstract class BasicActivity extends BaseActivity implements View.OnClick
 //            myDialog = new DialogLogoutView(this, itemsOnClick);
 //            myDialog.setContent("您的账号已在别的设备上登录，若不是本人操作，请及时检查账号密码是否泄露！");
 //            myDialog.setDialogCallback(dialogcallback);
-//            myDialog.show();
+//            myDialog.show()
         }
     }
 
@@ -165,6 +175,7 @@ public abstract class BasicActivity extends BaseActivity implements View.OnClick
             ImmersionBar.with(this).destroy();
         }
         super.onDestroy();
+        unregisterReceiver(netBroadcastReceiver);
     }
 
 
@@ -196,84 +207,6 @@ public abstract class BasicActivity extends BaseActivity implements View.OnClick
         }
     };
 
-//
-//    public void initStatusUI(View contentView) {
-//        try {
-//            statusUIManager = new StatusUIManager();
-//
-//            statusUIManager.addStatusProvider(
-//                    new DefaultStatusProvider.DefaultLoadingStatusView(
-//                            this,
-//                            DefaultStatus.STATUS_LOADING,
-//                            contentView,
-//                            new StatusProvider.OnStatusViewCreateCallback() {
-//                                @Override
-//                                public void onCreate(int status, View statusView) {
-//
-//                                }
-//                            }));
-//
-//            statusUIManager.addStatusProvider(
-//                    new DefaultStatusProvider.DefaultEmptyStatusView(this,
-//                            DefaultStatus.STATUS_EMPTY,
-//                            contentView,
-//                            new StatusProvider.OnStatusViewCreateCallback() {
-//                                @Override
-//                                public void onCreate(int status, View statusView) {
-//
-//                                }
-//                            }));
-//
-//            statusUIManager.addStatusProvider(
-//                    new DefaultStatusProvider.DefaultServerErrorStatusView(
-//                            this,
-//                            DefaultStatus.STATUS_SERVER_ERROR,
-//                            contentView,
-//                            new StatusProvider.OnStatusViewCreateCallback() {
-//                                @Override
-//                                public void onCreate(int status, View statusView) {
-//
-//                                }
-//                            }));
-//
-//            statusUIManager.addStatusProvider(
-//                    new DefaultStatusProvider.DefaultLogicFailStatusView(this,
-//                            DefaultStatus.STATUS_LOGIC_FAIL,
-//                            contentView,
-//                            new StatusProvider.OnStatusViewCreateCallback() {
-//                                @Override
-//                                public void onCreate(int status, View statusView) {
-//
-//                                }
-//                            }));
-//
-//            statusUIManager.addStatusProvider(
-//                    new DefaultStatusProvider.DefaultNetOffStatusView(
-//                            this,
-//                            DefaultStatus.STATUS_NETOFF,
-//                            contentView,
-//                            new StatusProvider.OnStatusViewCreateCallback() {
-//                                @Override
-//                                public void onCreate(int status, View statusView) {
-//
-//                                }
-//                            }));
-//
-//            statusUIManager.addStatusProvider(
-//                    new DefaultStatusProvider.DefaultLocalErrorStatusView(
-//                            this,
-//                            DefaultStatus.STATUS_lOCAL_ERROR,
-//                            contentView,
-//                            new StatusProvider.OnStatusViewCreateCallback() {
-//                                @Override
-//                                public void onCreate(int status, View statusView) {
-//
-//                                }
-//                            }));
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//    }
 
     /**
      * 需要和getIntentForBundle一起使用
@@ -332,8 +265,4 @@ public abstract class BasicActivity extends BaseActivity implements View.OnClick
         getIntentForSavedInstanceState(savedInstanceState);
     }
 
-    @Override
-    protected void doSomeUI(boolean netMobile) {
-        super.doSomeUI(netMobile);
-    }
 }

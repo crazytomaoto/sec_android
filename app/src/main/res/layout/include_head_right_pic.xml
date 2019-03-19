@@ -12,8 +12,8 @@
 
         android:id="@+id/rl_title"
         android:layout_width="match_parent"
-        android:background="@color/white"
-        android:layout_height="@dimen/title_height">
+        android:layout_height="@dimen/title_height"
+        android:background="@color/white">
 
         <TextView
             android:id="@+id/tv_title"
@@ -24,7 +24,8 @@
             android:ellipsize="end"
             android:maxLength="12"
             android:text="标题"
-            android:textColor="@color/text_black" />
+            android:textColor="@color/text_black"
+            android:visibility="gone" />
 
         <ImageView
             android:id="@+id/iv_back_top"
@@ -35,12 +36,13 @@
 
         <ImageView
             android:id="@+id/iv_rig_top"
-            android:layout_width="@dimen/title_height"
-            android:layout_height="@dimen/title_height"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:gravity="center_vertical"
-            android:padding="20px"
+            android:padding="10px"
+            android:layout_marginRight="@dimen/dimen_50px"
             android:visibility="visible" />
     </RelativeLayout>
 

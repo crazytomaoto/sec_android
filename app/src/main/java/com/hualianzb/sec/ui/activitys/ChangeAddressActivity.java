@@ -13,18 +13,20 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.zxing.activity.CaptureActivity;
+import com.gyf.barlibrary.ImmersionBar;
 import com.hualianzb.sec.R;
 import com.hualianzb.sec.application.SECApplication;
 import com.hualianzb.sec.commons.constants.Constant;
 import com.hualianzb.sec.models.AddressBookBean;
 import com.hualianzb.sec.ui.basic.BasicActivity;
-import com.hualianzb.sec.utils.StateBarUtil;
 import com.hualianzb.sec.utils.StringUtils;
 import com.hualianzb.sec.utils.TimeUtil;
 import com.hualianzb.sec.utils.ToastUtil;
@@ -45,8 +47,6 @@ import static com.hualianzb.sec.utils.DialogUtil.showToastDialog;
  * describe:编辑地址
  */
 public class ChangeAddressActivity extends BasicActivity {
-    @BindView(R.id.tv_title)
-    TextView tvTitle;
     @BindView(R.id.iv_back_top)
     ImageView ivBackTop;
     @BindView(R.id.ed_name)
@@ -63,10 +63,16 @@ public class ChangeAddressActivity extends BasicActivity {
     EditText edRemark;
     @BindView(R.id.tv_save)
     TextView tvSave;
+    @BindView(R.id.tv_right)
+    TextView tvRight;
     private List<AddressBookBean> list;
     private AddressBookBean addressBookBean;
-    private StateBarUtil stateBarUtil;
     private int bookIndex;
+    private String name,
+            phone,
+            mail,
+            remark,
+            address;
 
     @Override
     protected void getIntentForBundle() {
@@ -91,15 +97,15 @@ public class ChangeAddressActivity extends BasicActivity {
         setContentView(R.layout.activity_add_address);
         ButterKnife.bind(this);
         SECApplication.getInstance().addActivity(this);
-        stateBarUtil = new StateBarUtil(this);
-        stateBarUtil.changeStatusBarTextColor(true);
         initView();
     }
 
     private void initView() {
+        ImmersionBar.with(this).statusBarColor(R.color.white).init();
+        tvRight.setVisibility(View.GONE);
         list = PlatformConfig.getList(this, Constant.SpConstant.ADDRESSBOOK);
-        tvTitle.setText("编辑地址");
-        tvSave.setBackgroundResource(R.drawable.btn_save_change);
+        ivBackTop.setImageDrawable(getResources().getDrawable(R.drawable.icon_close_black));
+        tvSave.setText("Save");
         edAddress.setEnabled(false);
         ivScan.setEnabled(false);
         ivScan.setVisibility(View.GONE);
@@ -108,7 +114,7 @@ public class ChangeAddressActivity extends BasicActivity {
     private void setData() {
         addressBookBean = list.get(bookIndex);
         edName.setHint(addressBookBean.getName());
-        edAddress.setHint(addressBookBean.getAddress().substring(0,11) + "…");
+        edAddress.setHint(addressBookBean.getAddress().substring(0, 11) + "…");
         if (!StringUtils.isEmpty(addressBookBean.getPhone())) {
             edPhone.setHint(addressBookBean.getPhone());
         }
@@ -118,6 +124,36 @@ public class ChangeAddressActivity extends BasicActivity {
         if (!StringUtils.isEmpty(addressBookBean.getRemarks())) {
             edRemark.setHint(addressBookBean.getRemarks());
         }
+        edName.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                name = s.toString().trim();
+                if (!StringUtils.isEmpty(name)) {
+                    for (int i = 0; i < list.size(); i++) {
+                        if (name.equals(list.get(i).getName())) {
+                            tvSave.setEnabled(false);
+                            tvSave.setBackgroundResource(R.drawable.bg_btn_cannot);
+                        } else {
+                            tvSave.setEnabled(true);
+                            tvSave.setBackgroundResource(R.drawable.bg_btn);
+                        }
+                    }
+                } else {
+                    tvSave.setEnabled(false);
+                    tvSave.setBackgroundResource(R.drawable.bg_btn_cannot);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
     }
 
     @Override
@@ -130,15 +166,11 @@ public class ChangeAddressActivity extends BasicActivity {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.tv_save:
-                String name = edName.getText().toString().trim();
-                String phone = edPhone.getText().toString().trim();
-                String mail = edEmail.getText().toString().trim();
-                String remark = edRemark.getText().toString().trim();
-                String address = addressBookBean.getAddress();
-                if (StringUtils.isEmpty(name)) {
-                    showToastDialog(this, "姓名不能为空");
-                    return;
-                }
+                name = edName.getText().toString().trim();
+                phone = edPhone.getText().toString().trim();
+                mail = edEmail.getText().toString().trim();
+                remark = edRemark.getText().toString().trim();
+                address = addressBookBean.getAddress();
                 boolean isExit = false;
                 int oldIndex = list.indexOf(addressBookBean);
                 for (int i = 0; i < list.size(); i++) {
@@ -216,13 +248,8 @@ public class ChangeAddressActivity extends BasicActivity {
                     edAddress.setText(myGetAdress);
                 }
             } else {
-                ToastUtil.show(this, "扫描失败");
+                ToastUtil.show(this, R.string.scan_error);
             }
         }
-    }
-
-    @Override
-    protected void doSomeUI(boolean netMobile) {
-        super.doSomeUI(netMobile);
     }
 }

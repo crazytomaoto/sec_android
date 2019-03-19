@@ -21,7 +21,7 @@
             android:gravity="center"
             android:paddingBottom="@dimen/px10"
             android:paddingTop="@dimen/px30"
-            android:textColor="@color/text_yellow" />
+            android:textColor="@color/text_selected_green" />
     </LinearLayout>
 
 </LinearLayout>

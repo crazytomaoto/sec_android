@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ll_title"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/rl_title"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_80px"
+        android:layout_marginTop="@dimen/dimen_30px"
+        android:background="@color/white"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/dimen_50px"
+        android:paddingRight="@dimen/dimen_50px">
+
+        <TextView
+            android:id="@+id/tv_title"
+            style="@style/title_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:ellipsize="end"
+            android:maxLength="12"
+            android:text="标题"
+            android:textColor="@color/text_black"
+            android:visibility="gone" />
+
+        <ImageView
+            android:id="@+id/iv_back_top"
+            style="@style/back_btn"
+            android:clickable="true"
+            android:onClick="back"
+            android:src="@drawable/back_selector" />
+
+        <TextView
+            android:id="@+id/tv_right"
+            style="@style/rightButtonStyle"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_gravity="right" />
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/tv_theme"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/px50"
+        android:layout_marginTop="96px"
+        android:gravity="left|center_vertical"
+        android:textColor="@color/text_color"
+        android:textSize="@dimen/dimen_55px"
+        android:textStyle="bold" />
+
+</LinearLayout>
+
+

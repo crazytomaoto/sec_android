@@ -11,7 +11,6 @@ import android.widget.TextView;
 
 import com.hualianzb.sec.R;
 import com.hualianzb.sec.models.TokenBean;
-import com.hysd.android.platform_huanuo.utils.NumberUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -57,45 +56,32 @@ public class AdapterWallet extends BaseAdapter {
             holder.tv_kind = convertView.findViewById(R.id.tv_kind);
             holder.tv_money = convertView.findViewById(R.id.tv_money);
             holder.tv_cn_property = convertView.findViewById(R.id.tv_cn_property);
-            holder.line = convertView.findViewById(R.id.line);
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
-
-//        if (position == list.size() - 1) {
-//            holder.line.setVisibility(View.GONE);
-//        }
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            holder.iv_avater.setImageDrawable(context.getDrawable(R.drawable.wallet_avater));
-        } else {
-            holder.iv_avater.setImageResource(R.drawable.wallet_avater);
-        }
         TokenBean tokenBean = list.get(position);
         holder.tv_kind.setText(tokenBean.getName());
-        holder.tv_money.setText(NumberUtils.round(Double.parseDouble(tokenBean.getToken()), 8) + "");
-        switch (tokenBean.getName()) {
-            case "CEC":
-                holder.iv_avater.setImageResource(R.drawable.icon_cec);
-                break;
-            case "ETH":
-                holder.iv_avater.setImageResource(R.drawable.icon_eth);
-                break;
-            case "SEC":
-                holder.iv_avater.setImageResource(R.drawable.icon_sec);
-                break;
-            case "INT":
-                holder.iv_avater.setImageResource(R.drawable.icon_int);
-                break;
-
+        String momeyStr = tokenBean.getToken();
+        double money = Double.parseDouble(momeyStr);
+        if (money == 0) {
+            holder.tv_money.setText("0");
+        } else if (money > 0) {
+            if (momeyStr.length() > 10) {
+                holder.tv_money.setText(momeyStr.substring(0,10));
+            } else {
+                holder.tv_money.setText(momeyStr);
+            }
+        } else {
+            holder.tv_money.setText(momeyStr);
         }
+        holder.iv_avater.setImageResource(R.drawable.icon_sec);
         return convertView;
     }
 
     class ViewHolder {
         ImageView iv_avater;
         TextView tv_kind, tv_money, tv_cn_property;
-        View line;
     }
 }
 

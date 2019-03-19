@@ -12,7 +12,7 @@ public class SecTransactionBean implements Serializable {
     /**
      * jsonrpc : 2.0
      * id : 1
-     * result : {"status":"1","message":"OK","resultInChain":[{"Version":"0.1","TimeStamp":1543458300736,"TxFrom":"53a801c4da2cc72cf6be348369678b6f86c5edc1","TxTo":"fa9461cc20fbb1b0937aa07ec6afc5e660fe2afd","Value":"100000000","GasLimit":"0","GasUsedByTxn":"0","GasPrice":"0","Nonce":"955","InputData":"Mobile APP JSONRPC API Function Test","Signature":{"r":{"type":"Buffer","data":[161,156,90,130,29,179,161,185,80,54,75,144,62,106,230,131,245,94,20,42,140,35,231,174,79,124,30,84,112,54,163,60]},"s":{"type":"Buffer","data":[115,198,108,132,38,225,177,93,91,39,162,226,80,5,235,109,113,103,221,214,248,186,97,192,77,18,157,122,215,245,85,182]},"v":28},"TxHash":"88f7c87cdd87fa17a5523b8148426266a4db19bd155e735eb814870bd12262f5","TxFee":"0","TxReceiptStatus":"success","BlockNumber":1000,"BlockHash":"f0c1270b8b4b3935fe2cdb5a0878f349b3bcee3ddb1a724d3722a361582495bf","CumulativeGasUsed":4845,"TransactionIndex":8,"ContractAddress":"","Confirmations":""}],"resultInPool":[]}
+     * result : {"status":"1","message":"OK","resultInChain":[],"resultInPool":[{"TxHash":"8e7dee2e8bdd0fd2d741a4f727b50477f75af334e2e35e213b6ca9935c0d7e8c","TxReceiptStatus":"pending","Version":"0.1","TimeStamp":1547603210293,"TxFrom":"31974771bdb940515fb09d72971b5aecfd86c904","TxTo":"84711b41aee43001a2474e3633460024390de3af","Value":"1.1","ContractAddress":"","GasLimit":"0","GasUsedByTxn":"0","GasPrice":"0","TxFee":"0","Nonce":"0","InputData":"布达佩斯","Signature":{"r":"e5af1708bb9c3ee4aebfb1bac53e05675f02a798a700cfc2a5d0824389c6cb0d","s":"40b74ec5b6558dcb69792cd461dbe31358766233a7ee686eaf03d0cda3dc4bf7","v":27},"TxHeight":0}]}
      */
 
     private String jsonrpc;
@@ -47,14 +47,11 @@ public class SecTransactionBean implements Serializable {
     }
 
     public static class ResultBean implements Serializable {
-        public ResultBean() {
-        }
-
         /**
          * status : 1
          * message : OK
-         * resultInChain : [{"Version":"0.1","TimeStamp":1543458300736,"TxFrom":"53a801c4da2cc72cf6be348369678b6f86c5edc1","TxTo":"fa9461cc20fbb1b0937aa07ec6afc5e660fe2afd","Value":"100000000","GasLimit":"0","GasUsedByTxn":"0","GasPrice":"0","Nonce":"955","InputData":"Mobile APP JSONRPC API Function Test","Signature":{"r":{"type":"Buffer","data":[161,156,90,130,29,179,161,185,80,54,75,144,62,106,230,131,245,94,20,42,140,35,231,174,79,124,30,84,112,54,163,60]},"s":{"type":"Buffer","data":[115,198,108,132,38,225,177,93,91,39,162,226,80,5,235,109,113,103,221,214,248,186,97,192,77,18,157,122,215,245,85,182]},"v":28},"TxHash":"88f7c87cdd87fa17a5523b8148426266a4db19bd155e735eb814870bd12262f5","TxFee":"0","TxReceiptStatus":"success","BlockNumber":1000,"BlockHash":"f0c1270b8b4b3935fe2cdb5a0878f349b3bcee3ddb1a724d3722a361582495bf","CumulativeGasUsed":4845,"TransactionIndex":8,"ContractAddress":"","Confirmations":""}]
-         * resultInPool : []
+         * resultInChain : []
+         * resultInPool : [{"TxHash":"8e7dee2e8bdd0fd2d741a4f727b50477f75af334e2e35e213b6ca9935c0d7e8c","TxReceiptStatus":"pending","Version":"0.1","TimeStamp":1547603210293,"TxFrom":"31974771bdb940515fb09d72971b5aecfd86c904","TxTo":"84711b41aee43001a2474e3633460024390de3af","Value":"1.1","ContractAddress":"","GasLimit":"0","GasUsedByTxn":"0","GasPrice":"0","TxFee":"0","Nonce":"0","InputData":"布达佩斯","Signature":{"r":"e5af1708bb9c3ee4aebfb1bac53e05675f02a798a700cfc2a5d0824389c6cb0d","s":"40b74ec5b6558dcb69792cd461dbe31358766233a7ee686eaf03d0cda3dc4bf7","v":27},"TxHeight":0}]
          */
 
         private String status;
@@ -82,11 +79,11 @@ public class SecTransactionBean implements Serializable {
             return resultInChain;
         }
 
-        public void setResultInChain(List<ResultInChainBeanOrPool> resultInChainBeanOrPool) {
-            this.resultInChain = resultInChainBeanOrPool;
+        public void setResultInChain(List<ResultInChainBeanOrPool> resultInChain) {
+            this.resultInChain = resultInChain;
         }
 
-        public List<?> getResultInPool() {
+        public List<ResultInChainBeanOrPool> getResultInPool() {
             return resultInPool;
         }
 
@@ -95,52 +92,57 @@ public class SecTransactionBean implements Serializable {
         }
 
         public static class ResultInChainBeanOrPool implements Serializable {
-            public ResultInChainBeanOrPool() {
-            }
-
             /**
+             * TxHash : 8e7dee2e8bdd0fd2d741a4f727b50477f75af334e2e35e213b6ca9935c0d7e8c
+             * TxReceiptStatus : pending
              * Version : 0.1
-             * TimeStamp : 1543458300736
-             * TxFrom : 53a801c4da2cc72cf6be348369678b6f86c5edc1
-             * TxTo : fa9461cc20fbb1b0937aa07ec6afc5e660fe2afd
-             * Value : 100000000
+             * TimeStamp : 1547603210293
+             * TxFrom : 31974771bdb940515fb09d72971b5aecfd86c904
+             * TxTo : 84711b41aee43001a2474e3633460024390de3af
+             * Value : 1.1
+             * ContractAddress :
              * GasLimit : 0
              * GasUsedByTxn : 0
              * GasPrice : 0
-             * Nonce : 955
-             * InputData : Mobile APP JSONRPC API Function Test
-             * Signature : {"r":{"type":"Buffer","data":[161,156,90,130,29,179,161,185,80,54,75,144,62,106,230,131,245,94,20,42,140,35,231,174,79,124,30,84,112,54,163,60]},"s":{"type":"Buffer","data":[115,198,108,132,38,225,177,93,91,39,162,226,80,5,235,109,113,103,221,214,248,186,97,192,77,18,157,122,215,245,85,182]},"v":28}
-             * TxHash : 88f7c87cdd87fa17a5523b8148426266a4db19bd155e735eb814870bd12262f5
              * TxFee : 0
-             * TxReceiptStatus : success
-             * BlockNumber : 1000
-             * BlockHash : f0c1270b8b4b3935fe2cdb5a0878f349b3bcee3ddb1a724d3722a361582495bf
-             * CumulativeGasUsed : 4845
-             * TransactionIndex : 8
-             * ContractAddress :
-             * Confirmations :
+             * Nonce : 0
+             * InputData : 布达佩斯
+             * Signature : {"r":"e5af1708bb9c3ee4aebfb1bac53e05675f02a798a700cfc2a5d0824389c6cb0d","s":"40b74ec5b6558dcb69792cd461dbe31358766233a7ee686eaf03d0cda3dc4bf7","v":27}
+             * TxHeight : 0
              */
 
+            private String TxHash;
+            private String TxReceiptStatus;
             private String Version;
             private long TimeStamp;
             private String TxFrom;
             private String TxTo;
             private String Value;
+            private String ContractAddress;
             private String GasLimit;
             private String GasUsedByTxn;
             private String GasPrice;
+            private String TxFee;
             private String Nonce;
             private String InputData;
             private SignatureBean Signature;
-            private String TxHash;
-            private String TxFee;
-            private String TxReceiptStatus;
-            private int BlockNumber;
-            private String BlockHash;
-            private int CumulativeGasUsed;
-            private int TransactionIndex;
-            private String ContractAddress;
-            private String Confirmations;
+            private int TxHeight;
+
+            public String getTxHash() {
+                return TxHash;
+            }
+
+            public void setTxHash(String TxHash) {
+                this.TxHash = TxHash;
+            }
+
+            public String getTxReceiptStatus() {
+                return TxReceiptStatus;
+            }
+
+            public void setTxReceiptStatus(String TxReceiptStatus) {
+                this.TxReceiptStatus = TxReceiptStatus;
+            }
 
             public String getVersion() {
                 return Version;
@@ -182,6 +184,14 @@ public class SecTransactionBean implements Serializable {
                 this.Value = Value;
             }
 
+            public String getContractAddress() {
+                return ContractAddress;
+            }
+
+            public void setContractAddress(String ContractAddress) {
+                this.ContractAddress = ContractAddress;
+            }
+
             public String getGasLimit() {
                 return GasLimit;
             }
@@ -204,6 +214,14 @@ public class SecTransactionBean implements Serializable {
 
             public void setGasPrice(String GasPrice) {
                 this.GasPrice = GasPrice;
+            }
+
+            public String getTxFee() {
+                return TxFee;
+            }
+
+            public void setTxFee(String TxFee) {
+                this.TxFee = TxFee;
             }
 
             public String getNonce() {
@@ -230,102 +248,38 @@ public class SecTransactionBean implements Serializable {
                 this.Signature = Signature;
             }
 
-            public String getTxHash() {
-                return TxHash;
+            public int getTxHeight() {
+                return TxHeight;
             }
 
-            public void setTxHash(String TxHash) {
-                this.TxHash = TxHash;
+            public void setTxHeight(int TxHeight) {
+                this.TxHeight = TxHeight;
             }
 
-            public String getTxFee() {
-                return TxFee;
-            }
-
-            public void setTxFee(String TxFee) {
-                this.TxFee = TxFee;
-            }
-
-            public String getTxReceiptStatus() {
-                return TxReceiptStatus;
-            }
-
-            public void setTxReceiptStatus(String TxReceiptStatus) {
-                this.TxReceiptStatus = TxReceiptStatus;
-            }
-
-            public int getBlockNumber() {
-                return BlockNumber;
-            }
-
-            public void setBlockNumber(int BlockNumber) {
-                this.BlockNumber = BlockNumber;
-            }
-
-            public String getBlockHash() {
-                return BlockHash;
-            }
-
-            public void setBlockHash(String BlockHash) {
-                this.BlockHash = BlockHash;
-            }
-
-            public int getCumulativeGasUsed() {
-                return CumulativeGasUsed;
-            }
-
-            public void setCumulativeGasUsed(int CumulativeGasUsed) {
-                this.CumulativeGasUsed = CumulativeGasUsed;
-            }
-
-            public int getTransactionIndex() {
-                return TransactionIndex;
-            }
-
-            public void setTransactionIndex(int TransactionIndex) {
-                this.TransactionIndex = TransactionIndex;
-            }
-
-            public String getContractAddress() {
-                return ContractAddress;
-            }
-
-            public void setContractAddress(String ContractAddress) {
-                this.ContractAddress = ContractAddress;
-            }
-
-            public String getConfirmations() {
-                return Confirmations;
-            }
-
-            public void setConfirmations(String Confirmations) {
-                this.Confirmations = Confirmations;
-            }
-
-            public static class SignatureBean {
+            public static class SignatureBean implements Serializable {
                 /**
-                 * r : {"type":"Buffer","data":[161,156,90,130,29,179,161,185,80,54,75,144,62,106,230,131,245,94,20,42,140,35,231,174,79,124,30,84,112,54,163,60]}
-                 * s : {"type":"Buffer","data":[115,198,108,132,38,225,177,93,91,39,162,226,80,5,235,109,113,103,221,214,248,186,97,192,77,18,157,122,215,245,85,182]}
-                 * v : 28
+                 * r : e5af1708bb9c3ee4aebfb1bac53e05675f02a798a700cfc2a5d0824389c6cb0d
+                 * s : 40b74ec5b6558dcb69792cd461dbe31358766233a7ee686eaf03d0cda3dc4bf7
+                 * v : 27
                  */
 
-                private RBean r;
-                private SBean s;
+                private String r;
+                private String s;
                 private int v;
 
-                public RBean getR() {
+                public String getR() {
                     return r;
                 }
 
-                public void setR(RBean r) {
+                public void setR(String r) {
                     this.r = r;
                 }
 
-                public SBean getS() {
+                public String getS() {
                     return s;
                 }
 
-                public void setS(SBean s) {
+                public void setS(String s) {
                     this.s = s;
                 }
 
@@ -335,58 +289,6 @@ public class SecTransactionBean implements Serializable {
 
                 public void setV(int v) {
                     this.v = v;
-                }
-
-                public static class RBean {
-                    /**
-                     * type : Buffer
-                     * data : [161,156,90,130,29,179,161,185,80,54,75,144,62,106,230,131,245,94,20,42,140,35,231,174,79,124,30,84,112,54,163,60]
-                     */
-
-                    private String type;
-                    private List<Integer> data;
-
-                    public String getType() {
-                        return type;
-                    }
-
-                    public void setType(String type) {
-                        this.type = type;
-                    }
-
-                    public List<Integer> getData() {
-                        return data;
-                    }
-
-                    public void setData(List<Integer> data) {
-                        this.data = data;
-                    }
-                }
-
-                public static class SBean {
-                    /**
-                     * type : Buffer
-                     * data : [115,198,108,132,38,225,177,93,91,39,162,226,80,5,235,109,113,103,221,214,248,186,97,192,77,18,157,122,215,245,85,182]
-                     */
-
-                    private String type;
-                    private List<Integer> data;
-
-                    public String getType() {
-                        return type;
-                    }
-
-                    public void setType(String type) {
-                        this.type = type;
-                    }
-
-                    public List<Integer> getData() {
-                        return data;
-                    }
-
-                    public void setData(List<Integer> data) {
-                        this.data = data;
-                    }
                 }
             }
         }

@@ -22,7 +22,7 @@ public class TimeUtil {
             format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
         } catch (Exception e) {
             e.printStackTrace();
-            return "错误";
+            return "time error";
         } finally {
         }
         return format.format(new Date(time));
@@ -49,7 +49,7 @@ public class TimeUtil {
     }
 
     public static String getTime2(long time) {
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
         return format.format(new Date(time));
     }
 
@@ -67,6 +67,21 @@ public class TimeUtil {
         if (time != null) {
             SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
             SimpleDateFormat format2 = new SimpleDateFormat("yyyy-MM-dd");
+            Date date = null;
+            try {
+                date = format.parse(time);
+                return format2.format(date);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return null;
+    }
+
+    public static String getHourMin(String time) {
+        if (time != null) {
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+            SimpleDateFormat format2 = new SimpleDateFormat("HH:mm");
             Date date = null;
             try {
                 date = format.parse(time);

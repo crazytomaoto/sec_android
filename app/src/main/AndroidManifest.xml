@@ -31,16 +31,18 @@
         android:largeHeap="true"
         android:roundIcon="@mipmap/icon_logo"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true"
+        tools:ignore="GoogleAppIndexingWarning">
 
         <!-- 配置APP ID -->
         <meta-data
             android:name="BUGLY_APPID"
-            android:value="2ccd597b1a" />
+            android:value="4a36d819cd" />
         <!--配置APP版本号 -->
         <meta-data
             android:name="BUGLY_APP_VERSION"
-            android:value="104" />
+            android:value="100" />
 
         <!-- 配置APP渠道号 -->
         <meta-data
@@ -51,29 +53,22 @@
         <meta-data
             android:name="BUGLY_ENABLE_DEBUG"
             android:value="true" />
-
         <meta-data
             android:name="design_width"
-            android:value="720" />
+            android:value="1080"></meta-data>
         <meta-data
             android:name="design_height"
-            android:value="1280" />
+            android:value="1920"></meta-data>
 
-        <!--<activity-->
-        <!--android:name=".ui.TestActiviy"-->
-        <!--android:screenOrientation="portrait">-->
-        <!--<intent-filter>-->
-        <!--<action android:name="android.intent.action.MAIN" />-->
-        <!--<category android:name="android.intent.category.LAUNCHER" />-->
-        <!--</intent-filter>-->
-        <!--</activity>-->
         <activity
             android:name="com.hualianzb.sec.ui.activitys.GuidePage"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:theme="@style/SplashStyle">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
         <!--GuidePage-->
         <activity
@@ -84,33 +79,30 @@
         <activity
             android:name="com.hualianzb.sec.ui.activitys.CreateWalletActivity"
             android:label="CreateWalletActivity"
-            android:screenOrientation="portrait"></activity>
+            android:windowSoftInputMode="adjustPan|stateVisible"></activity>
 
         <activity
-            android:name="com.hualianzb.sec.ui.activitys.BackupMnemonicsActy1"
+            android:name="com.hualianzb.sec.ui.activitys.BackupMnemonicsOneActy"
             android:label="BackupMnemonicsActy1"
             android:screenOrientation="portrait"></activity>
 
         <activity
-            android:name="com.hualianzb.sec.ui.activitys.BackupMnemonicsActy2"
+            android:name="com.hualianzb.sec.ui.activitys.BackupMnemonicsTwoActy"
             android:label="BackupMnemonicsActy2"
             android:screenOrientation="portrait"></activity>
 
         <activity
-            android:name="com.hualianzb.sec.ui.activitys.BackupMnemonicsActy3"
+            android:name="com.hualianzb.sec.ui.activitys.BackupMnemonicsThreeActy"
             android:label="BackupMnemonicsActy3"
             android:screenOrientation="portrait"></activity>
         <activity
             android:name="com.hualianzb.sec.ui.activitys.HomePageActivity"
             android:label="HomePageActivity"
+            android:launchMode="singleTask"
             android:screenOrientation="portrait" />
         <activity
             android:name="com.hualianzb.sec.ui.activitys.ImportWalletActivity"
             android:label="ImportWalletActivity"
-            android:screenOrientation="portrait"></activity>
-        <activity
-            android:name="com.hualianzb.sec.ui.activitys.ServiceAgreementAct"
-            android:label="ServiceAgreementAct"
             android:screenOrientation="portrait"></activity>
         <activity
             android:name="com.hualianzb.sec.ui.activitys.ManagerWalletActy"
@@ -119,11 +111,6 @@
         <activity
             android:name="com.hualianzb.sec.ui.activitys.MakeMoneyActicity"
             android:label="MakeMoneyActicity"
-            android:screenOrientation="portrait"></activity>
-
-        <activity
-            android:name="com.hualianzb.sec.ui.activitys.OutKeyStoreAcy"
-            android:label="OutKeyStoreAcy"
             android:screenOrientation="portrait"></activity>
 
         <activity
@@ -136,7 +123,7 @@
             android:label="TransactionRecordActy"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.hualianzb.sec.ui.activitys.ChangeWalletRecordActy"
+            android:name="com.hualianzb.sec.ui.activitys.ChangeWalletActivity"
             android:label="ChangeWalletRecordActy"
             android:screenOrientation="portrait" />
         <activity
@@ -144,20 +131,8 @@
             android:label="TransferActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.hualianzb.sec.ui.activitys.TransactionRecordActivity"
-            android:label="TransactionRecordActivity"
-            android:screenOrientation="portrait" />
-        <activity
             android:name="com.hualianzb.sec.ui.activitys.MakeCodeActivity"
             android:label="MakeCodeActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name="com.hualianzb.sec.ui.activitys.GasActivity"
-            android:label="GasActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name="com.hualianzb.sec.ui.activitys.AddPropertyActivity"
-            android:label="AddPropertyActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name="com.hualianzb.sec.ui.activitys.IntroduceMnActy"
@@ -174,37 +149,33 @@
             android:screenOrientation="portrait" />
 
         <activity
-            android:name="com.hualianzb.sec.ui.activitys.TransactionRecordEthActivity"
-            android:label="TransactionRecordEthActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name="com.hualianzb.sec.ui.activitys.TransactionRecordDetailEthActivity"
-            android:label="TransactionRecordDetailEthActivity"
-            android:screenOrientation="portrait" />
-        <activity
             android:name="com.hualianzb.sec.ui.activitys.TransactionRecordDetailAllActivity"
             android:label="TransactionRecordDetailAllActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name="com.hualianzb.sec.ui.activitys.AddressBookActivity"
             android:label="AddressBookActivity"
-            android:screenOrientation="behind" />
+            android:screenOrientation="portrait" />
         <activity
             android:name="com.hualianzb.sec.ui.activitys.AddAddressActivity"
             android:label="AddAddressActivity"
-            android:screenOrientation="behind" />
+            android:screenOrientation="portrait" />
         <activity
             android:name="com.hualianzb.sec.ui.activitys.ChangeAddressActivity"
             android:label="ChangeAddressActivity"
-            android:screenOrientation="behind" />
+            android:screenOrientation="portrait" />
         <activity
             android:name="com.hualianzb.sec.ui.activitys.WebActivity"
             android:label="WebActivity"
             android:screenOrientation="portrait" />
         <activity android:name=".ui.activitys.TransactionRecordSecActivity" />
+        <activity
+            android:name=".ui.activitys.CheckPassActivity"
+            android:label="CheckPassActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan"></activity>
 
-        <service android:name="com.hualianzb.sec.ui.Myservice" />
-        <receiver android:name="com.hualianzb.sec.ui.NetBroadcastReceiver">
+        <receiver android:name="com.hualianzb.sec.utils.NetBroadcastReceiver">
             <intent-filter>
                 <action android:name="android.NET.conn.CONNECTIVITY_CHANGE" />
                 <action android:name="android.Net.wifi.WIFI_STATE_CHANGED" />

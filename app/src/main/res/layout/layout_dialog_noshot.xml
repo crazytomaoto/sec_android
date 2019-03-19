@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:alpha="0.9528"
+        android:background="@drawable/shadow_to_bothside"
+        android:paddingLeft="@dimen/dimen_50px"
+        android:paddingRight="@dimen/dimen_50px"></FrameLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center"
+            android:text="No Screenshot Please!"
+            android:textColor="@color/text_blue"
+            android:textSize="@dimen/dimen_55px"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/dimen_55px"
+            android:gravity="center"
+            android:lineSpacingMultiplier="1.3"
+            android:text="@string/no_shot_tips"
+            android:textColor="@color/text_gray02"
+            android:textSize="@dimen/dimen_32px" />
+
+
+        <TextView
+            android:id="@+id/tv_ok"
+            android:layout_width="460px"
+            android:layout_height="@dimen/dimen_130px"
+            android:layout_marginLeft="@dimen/dimen_40px"
+            android:layout_marginTop="200px"
+            android:layout_marginRight="@dimen/dimen_40px"
+            android:layout_marginBottom="@dimen/px20"
+            android:background="@drawable/bg_btn"
+            android:clickable="false"
+            android:gravity="center"
+            android:text="Go It"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:textSize="@dimen/dimen_34px" />
+    </LinearLayout>
+</RelativeLayout>

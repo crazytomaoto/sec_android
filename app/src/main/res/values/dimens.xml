@@ -19,6 +19,7 @@
     <dimen name="px3">3px</dimen>
     <dimen name="px5">5px</dimen>
     <dimen name="px10">10px</dimen>
+    <dimen name="px15">15px</dimen>
     <dimen name="px20">20px</dimen>
     <dimen name="px30">30px</dimen>
     <dimen name="px40">40px</dimen>
@@ -27,6 +28,7 @@
     <dimen name="px120">120px</dimen>
     <dimen name="px160">160px</dimen>
     <!-- 通用文字尺寸 -->
+    <dimen name="sp26">26px</dimen>
     <dimen name="sp18">18px</dimen>
     <dimen name="sp16">16px</dimen>
     <dimen name="sp14">14px</dimen>
@@ -121,17 +123,26 @@
     <dimen name="dimen_10px">10px</dimen>
     <dimen name="dimen_20px">20px</dimen>
     <dimen name="dimen_24px">24px</dimen>
+    <dimen name="dimen_25px">25px</dimen>
     <dimen name="dimen_26px">26px</dimen>
+    <dimen name="dimen_28px">28px</dimen>
     <dimen name="dimen_30px">30px</dimen>
+    <dimen name="dimen_32px">32px</dimen>
+    <dimen name="dimen_34px">34px</dimen>
+    <dimen name="dimen_35px">35px</dimen>
     <dimen name="dimen_36px">36px</dimen>
     <dimen name="dimen_40px">40px</dimen>
     <dimen name="dimen_48px">48px</dimen>
+    <dimen name="dimen_50px">50px</dimen>
+    <dimen name="dimen_55px">55px</dimen>
     <dimen name="dimen_60px">60px</dimen>
     <dimen name="dimen_70px">70px</dimen>
     <dimen name="dimen_80px">80px</dimen>
     <dimen name="dimen_90px">90px</dimen>
     <dimen name="dimen_100px">100px</dimen>
+    <dimen name="dimen_104px">104px</dimen>
     <dimen name="dimen_120px">120px</dimen>
+    <dimen name="dimen_130px">130px</dimen>
     <dimen name="dimen_150px">150px</dimen>
     <dimen name="dimen_18px">18px</dimen>
 

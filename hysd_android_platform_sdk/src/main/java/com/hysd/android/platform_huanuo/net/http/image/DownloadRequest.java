@@ -10,9 +10,9 @@ import com.hysd.android.platform_huanuo.net.http.ResponseDataType.HttpMethod;
  * Description : 下载的统一请求
  * @Copyright  : hysdpower. All Rights Reserved
  * @Company    :  
- * @author     : 刘剑
+ * @author     : wangtianyun
  * @version    : 1.0
- * Create Date : 2014-4-24 上午10:41:21
+ * Create Date : 2015-12-24 上午10:41:21
  **/
 public class DownloadRequest {
 	

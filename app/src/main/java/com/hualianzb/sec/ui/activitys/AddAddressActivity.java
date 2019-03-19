@@ -7,18 +7,20 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.zxing.activity.CaptureActivity;
+import com.gyf.barlibrary.ImmersionBar;
 import com.hualianzb.sec.R;
 import com.hualianzb.sec.application.SECApplication;
 import com.hualianzb.sec.commons.constants.Constant;
 import com.hualianzb.sec.models.AddressBookBean;
 import com.hualianzb.sec.ui.basic.BasicActivity;
-import com.hualianzb.sec.utils.StateBarUtil;
 import com.hualianzb.sec.utils.StringUtils;
 import com.hualianzb.sec.utils.TimeUtil;
 import com.hualianzb.sec.utils.ToastUtil;
@@ -32,7 +34,6 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 import static com.hualianzb.sec.commons.constants.Constant.SpConstant.SWEEP;
-import static com.hualianzb.sec.utils.DialogUtil.showToastDialog;
 
 /**
  * Date:2018/10/17
@@ -40,8 +41,6 @@ import static com.hualianzb.sec.utils.DialogUtil.showToastDialog;
  * describe:新增地址
  */
 public class AddAddressActivity extends BasicActivity {
-    @BindView(R.id.tv_title)
-    TextView tvTitle;
     @BindView(R.id.iv_back_top)
     ImageView ivBackTop;
     @BindView(R.id.ed_name)
@@ -58,8 +57,17 @@ public class AddAddressActivity extends BasicActivity {
     EditText edRemark;
     @BindView(R.id.tv_save)
     TextView tvSave;
+    @BindView(R.id.tv_right)
+    TextView tvRight;
+    @BindView(R.id.tv_name_error)
+    TextView tvNameError;
+    @BindView(R.id.tv_address_error)
+    TextView tvAddressError;
+    @BindView(R.id.tv_theme)
+    TextView tvTheme;
     private List<AddressBookBean> list;
-    private StateBarUtil stateBarUtil;
+    private String address, name;
+    private boolean isAddressOk, isNameOk;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -67,23 +75,54 @@ public class AddAddressActivity extends BasicActivity {
         setContentView(R.layout.activity_add_address);
         ButterKnife.bind(this);
         SECApplication.getInstance().addActivity(this);
-        stateBarUtil = new StateBarUtil(this);
-        stateBarUtil.changeStatusBarTextColor(true);
         initView();
     }
 
     private void initView() {
+        tvTheme.setText("Address Contact");
+        ImmersionBar.with(this).statusBarColor(R.color.white).init();
         list = PlatformConfig.getList(this, Constant.SpConstant.ADDRESSBOOK);
-        tvTitle.setText("新增地址");
-        tvSave.setBackgroundResource(R.drawable.btn_sure_add);
+        tvRight.setVisibility(View.GONE);
+        ivBackTop.setImageDrawable(getResources().getDrawable(R.drawable.icon_close_black));
     }
 
     private void setData() {
-        edName.setHint(getString(R.string.insert_man_name));
-        edAddress.setHint(getString(R.string.insert_man_address));
-        edPhone.setHint(getString(R.string.insert_man_phone));
-        edEmail.setHint(getString(R.string.insert_man_email));
-        edRemark.setHint("选填");
+        edName.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                name = s.toString().trim();
+                checkName(name);
+                setBtnClickable();
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+        edAddress.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                address = s.toString().trim();
+                checkAddress(address);
+                setBtnClickable();
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
     }
 
     @Override
@@ -92,37 +131,64 @@ public class AddAddressActivity extends BasicActivity {
         setData();
     }
 
+    private void setBtnClickable() {
+        if (isNameOk && isAddressOk) {
+            tvSave.setEnabled(true);
+            tvSave.setBackground(getResources().getDrawable(R.drawable.bg_btn));
+        }
+    }
+
+    //检验地址
+    private void checkName(String name) {
+        if (StringUtils.isEmpty(name)) {
+            isNameOk = false;
+            tvNameError.setText("Contact Name Error");
+            tvNameError.setVisibility(View.VISIBLE);
+            return;
+        } else {
+            isNameOk = true;
+            tvNameError.setVisibility(View.GONE);
+        }
+    }
+
+    //检验地址
+    private void checkAddress(String address) {
+        if (StringUtils.isEmpty(address)) {
+            isAddressOk = false;
+            tvAddressError.setText("Address Error");
+            tvAddressError.setVisibility(View.VISIBLE);
+            return;
+        } else if (address.length() != 42 || !address.substring(0, 2).equals("0x")) {
+            isAddressOk = false;
+            tvAddressError.setText("Address Error");
+            tvAddressError.setVisibility(View.VISIBLE);
+            return;
+        } else {
+            isAddressOk = true;
+            tvAddressError.setVisibility(View.GONE);
+        }
+    }
+
     @OnClick({R.id.tv_save, R.id.iv_scan})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.tv_save:
-                String name = edName.getText().toString().trim();
-                String address = edAddress.getText().toString().trim();
                 String phone = edPhone.getText().toString().trim();
                 String mail = edEmail.getText().toString().trim();
                 String remark = edRemark.getText().toString().trim();
-                if (StringUtils.isEmpty(name)) {
-                    showToastDialog(this, "姓名不能为空");
-                    return;
-                }
-                if (StringUtils.isEmpty(address)) {
-                    showToastDialog(this, "钱包地址不正确或格式有误");
-                    return;
-                } else if ((address.length() != 42 || !address.substring(0, 2).equals("0x"))) {
-                    showToastDialog(this, "钱包地址不正确或格式有误");
-                    return;
-                }
                 if (null != list && list.size() > 0) {
                     boolean isExit = false;
                     for (AddressBookBean nowBean : list) {
                         if (nowBean.getAddress().equals(address) && nowBean.getName().equals(name)) {
                             if (StringUtils.isEmpty(phone) && StringUtils.isEmpty(nowBean.getPhone())) {
-                                showToastDialog(this, "该地址已存在");
+                                tvAddressError.setText("Address Exists");
+                                tvAddressError.setVisibility(View.VISIBLE);
                                 isExit = true;
                                 return;
                             }
                             if ((!StringUtils.isEmpty(phone) && !StringUtils.isEmpty(nowBean.getPhone())) && (phone.equals(nowBean.getPhone()))) {
-                                showToastDialog(this, "该地址已存在");
+                                tvAddressError.setText("Address Exists");
+                                tvAddressError.setVisibility(View.VISIBLE);
                                 isExit = true;
                                 return;
                             }
@@ -198,15 +264,12 @@ public class AddAddressActivity extends BasicActivity {
                 if (resultArray != null && resultArray.length > 0) {
                     String myGetAdress = resultArray[0];
                     edAddress.setText(myGetAdress);
+                    checkAddress(myGetAdress);
+                    setBtnClickable();
                 }
             } else {
-                ToastUtil.show(this, "扫描失败");
+                ToastUtil.show(this, "please retry");
             }
         }
-    }
-
-    @Override
-    protected void doSomeUI(boolean netMobile) {
-        super.doSomeUI(netMobile);
     }
 }

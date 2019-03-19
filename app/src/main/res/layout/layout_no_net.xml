@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_dialog_white"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:paddingTop="@dimen/dimen_80px"
+    android:paddingBottom="@dimen/dimen_80px">
+
+    <ImageView
+        android:id="@+id/iv_img"
+        android:layout_width="122px"
+        android:layout_height="122px"
+        android:layout_gravity="center_horizontal" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/px50"
+        android:gravity="center"
+        android:text="Connection Error"
+        android:textColor="#EE1C38"
+        android:textSize="@dimen/dimen_30px" />
+
+    <TextView
+        android:id="@+id/tv_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/dimen_20px"
+        android:gravity="center"
+        android:text="No Network Connection"
+        android:textColor="#91A2AA"
+        android:textSize="@dimen/dimen_30px" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal"
+        android:paddingTop="@dimen/dimen_130px">
+
+        <TextView
+            android:id="@+id/tv_cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginRight="@dimen/dimen_80px"
+            android:padding="@dimen/dimen_10px"
+            android:text="Cancel"
+            android:textColor="#91A2AA"
+            android:textSize="@dimen/dimen_35px"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv_retry"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:padding="@dimen/dimen_10px"
+            android:text="Retry"
+            android:textColor="@color/text_selected_green"
+            android:textSize="@dimen/dimen_35px"
+            android:textStyle="bold" />
+    </LinearLayout>
+</LinearLayout>

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_dialog_white"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:paddingTop="@dimen/dimen_80px"
+    android:paddingBottom="@dimen/dimen_80px">
+
+    <ImageView
+        android:id="@+id/iv_img"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:scaleType="centerCrop" />
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="match_parent"
+        android:layout_height="39px"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/px50"
+        android:gravity="center"
+        android:textColor="#388ED8"
+        android:textSize="32px" />
+
+    <TextView
+        android:id="@+id/tv_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="45px"
+        android:gravity="center"
+        android:text="No Network Connection"
+        android:textColor="@color/text_gray02"
+        android:textSize="@dimen/dimen_34px" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal"
+        android:paddingTop="@dimen/dimen_100px"
+        android:paddingBottom="@dimen/px10">
+
+        <TextView
+            android:id="@+id/tv_cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginRight="@dimen/dimen_80px"
+            android:background="@drawable/bg_normal_white_gray_10"
+            android:padding="@dimen/px15"
+            android:text="Cancel"
+            android:textColor="#91A2AA"
+            android:textSize="38px"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv_sure"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/bg_normal_white_gray_10"
+            android:padding="@dimen/px15"
+            android:text="Sure"
+            android:textColor="@color/text_selected_green"
+            android:textSize="38px"
+            android:textStyle="bold" />
+    </LinearLayout>
+</LinearLayout>

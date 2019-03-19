@@ -57,7 +57,7 @@ public class SecBalanceResultBean implements Serializable {
 
         private String status;
         private String info;
-        private double value;
+        private String value;
 
         public String getStatus() {
             return status;
@@ -75,11 +75,11 @@ public class SecBalanceResultBean implements Serializable {
             this.info = info;
         }
 
-        public double getValue() {
+        public String getValue() {
             return value;
         }
 
-        public void setValue(double value) {
+        public void setValue(String value) {
             this.value = value;
         }
     }

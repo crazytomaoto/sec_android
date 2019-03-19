@@ -17,7 +17,7 @@
 
             <shape>
                 <!--<solid android:color="#ff51495e" />-->
-                <solid android:color="@color/text_yellow" />
+                <solid android:color="@color/text_selected_green" />
 
             </shape>
 
@@ -32,7 +32,7 @@
             <shape>
 
                 <!--<solid android:color="#ff996dfe" />-->
-                <solid android:color="@color/text_yellow" />
+                <solid android:color="@color/text_selected_green" />
             </shape>
 
         </clip>

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginLeft="@dimen/dimen_40px"
+    android:background="@color/transparent"
+    android:fitsSystemWindows="true"
+    android:orientation="horizontal"
+    android:paddingLeft="@dimen/dimen_40px">
+
+    <LinearLayout
+        android:id="@+id/ll_discovery"
+        android:layout_width="wrap_content"
+        android:layout_height="80px"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_discovery"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="3dp"
+            android:text="Exchanges"
+            android:textColor="@color/home_text_color"
+            android:textSize="@dimen/dimen_35px" />
+
+        <View
+            android:id="@+id/view_one"
+            android:layout_width="match_parent"
+            android:layout_height="5px"
+            android:layout_marginLeft="@dimen/dimen_10px"
+            android:layout_marginTop="@dimen/px20"
+            android:layout_marginRight="@dimen/dimen_10px"
+            android:background="@color/text_green_increase"
+            android:visibility="gone" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_games"
+        android:layout_width="wrap_content"
+        android:layout_height="80px"
+        android:layout_marginLeft="64px"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_game"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="3dp"
+            android:text="Games"
+            android:textColor="@color/home_text_color"
+            android:textSize="@dimen/dimen_35px" />
+
+        <View
+            android:id="@+id/view_two"
+            android:layout_width="match_parent"
+            android:layout_height="5px"
+            android:layout_marginLeft="@dimen/dimen_10px"
+            android:layout_marginTop="@dimen/px20"
+            android:layout_marginRight="@dimen/dimen_10px"
+            android:background="@color/text_green_increase"
+            android:visibility="gone" />
+    </LinearLayout>
+</LinearLayout>

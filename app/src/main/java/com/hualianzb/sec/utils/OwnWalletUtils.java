@@ -36,29 +36,6 @@ public class OwnWalletUtils extends WalletUtils {
 
         return generateNewWalletFile(password, destinationDirectory, true);
     }
-//
-//    public static String generateLightNewWalletFile(String password, File destinationDirectory)
-//            throws NoSuchAlgorithmException, NoSuchProviderException,
-//            InvalidAlgorithmParameterException, CipherException, IOException {
-//        return generateNewWalletFile(password, destinationDirectory, false);
-//    }
-
-//    public static String generateNewWalletFile(
-//            String password, File destinationDirectory, boolean useFullScrypt, MyECKeyPair ecKeyPair)
-//            throws CipherException, IOException, InvalidAlgorithmParameterException,
-//            NoSuchAlgorithmException, NoSuchProviderException {
-//        return generateWalletFile(password, ecKeyPair, destinationDirectory, useFullScrypt);
-//    }
-
-//    public static MyECKeyPair geECKeyPair(String mnemonics, String passphrase) {
-//        byte[] seed = new SeedCalculator()
-//                .withWordsFromWordList(English.INSTANCE)
-//                .calculateSeed(Collections.singleton(mnemonics), passphrase);
-////        MyECKeyPair ecKeyPair = MyECKeyPair.create(seed);
-//        MyECKeyPair ecKeyPair = MyECKeyPair.create(seed);
-//
-//        return ecKeyPair;
-//    }
 
 
     public static WalletFile getKeyStore(String password, ECKeyPair ecKeyPair, boolean useFullScrypt) throws CipherException {
@@ -70,24 +47,10 @@ public class OwnWalletUtils extends WalletUtils {
         }
         return walletFile;
     }
-//
-//    public static String generateWalletFile(
-//            String password, MyECKeyPair ecKeyPair, File destinationDirectory, boolean useFullScrypt)
-//            throws CipherException, IOException {
-////        String fileName = getWalletFileName(walletFile);
-////        File destination = new File(destinationDirectory, fileName);
-////        ObjectMapper objectMapper = ObjectMapperFactory.getObjectMapper();
-////        objectMapper.writeValue(destination, walletFile);
-//        return null;
-//    }
-
-//    private static String getWalletFileName(WalletFile walletFile) {
-//        return walletFile.getAddress();
-//    }
 
     public static String generateMnemonics() {
         StringBuilder sb = new StringBuilder();
-        byte[] entropy = new byte[Words.TWELVE.byteLength()];
+        byte[] entropy = new byte[Words.TWENTY_FOUR.byteLength()];
         new SecureRandom().nextBytes(entropy);
         new MnemonicGenerator(English.INSTANCE)
                 .createMnemonic(entropy, sb::append);

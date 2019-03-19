@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/gray_background"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="500px"
+        android:background="@drawable/pic_tip_bg"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/tv_theme"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/px50"
+            android:layout_marginTop="146px"
+            android:gravity="left|center_vertical"
+            android:text="Discovery"
+            android:textColor="@color/text_color"
+            android:textSize="@dimen/dimen_55px"
+            android:textStyle="bold" />
+
+        <include
+            layout="@layout/layout_discovery_top"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_80px"
+            android:layout_marginTop="89px" />
+    </LinearLayout>
+
+    <ListView
+        android:id="@+id/listView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="@dimen/dimen_50px"
+        android:layout_marginRight="@dimen/dimen_50px"
+        android:divider="@color/gray_background"
+        android:dividerHeight="@dimen/dimen_10px"></ListView>
+</LinearLayout>

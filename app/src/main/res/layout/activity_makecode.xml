@@ -1,140 +1,76 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:rv="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/drawerLayout"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:clipToPadding="true"
+    android:background="@color/gray_background"
     android:fitsSystemWindows="true"
     android:focusable="true"
-    android:focusableInTouchMode="true">
+    android:focusableInTouchMode="true"
+    android:orientation="vertical">
 
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="1px"
-        android:fitsSystemWindows="true"
-        android:background="@drawable/bg_code"></FrameLayout>
+    <ImageView
+        android:id="@+id/iv_back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dimen_50px"
+        android:layout_marginTop="@dimen/dimen_30px"
+        android:background="@drawable/icon_close_black"
+        android:clickable="true"
+        android:onClick="back" />
 
-    <FrameLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/white"
+        android:layout_marginLeft="@dimen/dimen_150px"
+        android:layout_marginTop="110px"
+        android:layout_marginRight="@dimen/dimen_150px"
+        android:gravity="center_horizontal"
         android:orientation="vertical">
 
-        <RelativeLayout
+        <TextView
             android:layout_width="wrap_content"
-            android:layout_height="260px"
-            android:background="@drawable/bg_code">
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/px50"
+            android:text="SEC Receipt"
+            android:textColor="@color/text_blue"
+            android:textSize="@dimen/dimen_55px"
+            android:textStyle="bold" />
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="88px"
-                android:padding="24px">
-
-                <ImageView
-                    android:id="@+id/iv_back"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/icon_clse_w" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:text="收款码"
-                    android:textColor="@color/white"
-                    android:textSize="32px" />
-            </RelativeLayout>
-
-        </RelativeLayout>
+        <TextView
+            android:id="@+id/tv_address"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="225px"
+            android:gravity="center"
+            android:lineSpacingMultiplier="1.2"
+            android:textColor="@color/text_gray02"
+            android:textSize="@dimen/dimen_34px" />
 
         <RelativeLayout
-            android:layout_width="130px"
-            android:layout_height="130px"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="200px">
-
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:layout_width="130px"
-                android:layout_height="130px"
-                android:src="@color/white" />
-
-            <ImageView
-                android:id="@+id/iv_avater"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:scaleType="centerCrop"
-                android:src="@drawable/wallet2" />
-        </RelativeLayout>
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="320px"
-            android:gravity="center_horizontal"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/tv_address"
-                android:layout_width="480px"
-                android:layout_height="@dimen/dimen_60px"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="@dimen/dimen_30px"
-                android:text=""
-                android:textColor="#FFBBBABA"
-                android:textSize="@dimen/dimen_24px" />
-
-            <EditText
-                android:id="@+id/ed_money"
-                android:layout_width="480px"
-                android:layout_height="@dimen/dimen_60px"
-                android:layout_gravity="center_horizontal"
-                android:background="@color/white"
-                android:hint="0"
-                android:inputType="numberDecimal"
-                android:textColor="@color/text_black"
-                android:textColorHint="#FFBBBABA"
-                android:textSize="@dimen/dimen_24px" />
-
-            <View
-                android:layout_width="480px"
-                android:layout_height="2px"
-                android:layout_gravity="center_horizontal"
-                android:background="@color/line_color" />
+            android:layout_width="524px"
+            android:layout_height="524px"
+            android:layout_marginTop="@dimen/dimen_40px"
+            android:background="@color/white">
 
             <ImageView
                 android:id="@+id/iv_code_pic"
-                android:layout_width="380px"
-                android:layout_height="380px"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="@dimen/px10" />
+                android:layout_width="460px"
+                android:layout_height="460px"
+                android:layout_centerInParent="true" />
+        </RelativeLayout>
 
-
-            <com.flyco.roundview.RoundTextView
-                android:layout_width="480px"
-                android:layout_height="@dimen/dimen_80px"
-                android:layout_marginTop="@dimen/dimen_30px"
-                android:gravity="center"
-                android:text="复制收款地址"
-                android:textColor="#B8B8B8"
-                android:textSize="@dimen/px20"
-                android:visibility="gone"
-                rv:rv_backgroundColor="#FFE3E3E3"
-                rv:rv_cornerRadius="12px" />
-
-            <TextView
-                android:id="@+id/tv_copy"
-                android:layout_width="480px"
-                android:layout_height="@dimen/dimen_80px"
-                android:layout_marginTop="@dimen/px60"
-                android:background="@drawable/btn_golden_12"
-                android:gravity="center"
-                android:text="复制收款地址"
-                android:textSize="@dimen/dimen_24px"
-                android:textColor="@color/white" />
-        </LinearLayout>
-
-    </FrameLayout>
-</android.support.v4.widget.DrawerLayout>
+        <TextView
+            android:id="@+id/tv_copy"
+            android:layout_width="590px"
+            android:layout_height="@dimen/dimen_130px"
+            android:layout_gravity="center"
+            android:layout_marginTop="152px"
+            android:background="@drawable/bg_btn"
+            android:gravity="center"
+            android:text="Copy Payment Address"
+            android:textColor="@color/white"
+            android:textSize="34px" />
+    </LinearLayout>
+</LinearLayout>

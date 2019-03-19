@@ -12,9 +12,9 @@ import com.hysd.android.platform_huanuo.base.manager.MessageCenter;
  * Description : 所有Logic的基类
  * @Copyright  : hysdpower. All Rights Reserved
  * @Company    :  
- * @author     : 刘剑
+ * @author     : wangtianyun
  * @version    : 1.0
- * Create Date : 2014-4-8 上午10:51:46
+ * Create Date : 2015-12-8 上午10:51:46
  **/
 public class BaseLogic implements ILogic {
 

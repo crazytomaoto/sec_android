@@ -3,28 +3,27 @@
     android:id="@+id/drawerLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/gray_background"
     android:clipToPadding="true"
     android:fitsSystemWindows="true">
 
-    <RelativeLayout
-        android:id="@+id/rl_all"
+    <LinearLayout
+        android:id="@+id/ll_all"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/shape_white__10"
-        android:fitsSystemWindows="true"
         android:orientation="vertical">
+
 
         <com.hualianzb.sec.views.StillViewPager
             android:id="@+id/viewPager"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
             android:background="@color/white" />
 
         <include
-            android:id="@+id/bnv"
             layout="@layout/layout_main_bottom"
             android:layout_width="match_parent"
-            android:layout_height="110px"
-            android:layout_alignParentBottom="true" />
-    </RelativeLayout>
+            android:layout_height="170px" />
+    </LinearLayout>
 </android.support.v4.widget.DrawerLayout>

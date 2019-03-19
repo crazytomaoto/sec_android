@@ -1,123 +1,77 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
+    android:layout_height="@dimen/px160"
+    android:background="@color/white"
     android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="250px"
-        android:layout_marginLeft="@dimen/dimen_24px"
-        android:layout_marginRight="@dimen/dimen_24px"
-        android:layout_marginTop="@dimen/dimen_24px"
-        android:background="@drawable/bg_white_radius12"
-        android:orientation="vertical"
-        android:padding="@dimen/dimen_30px">
+        android:layout_height="@dimen/px160"
+        android:background="@drawable/bg_normal_gray_white_20"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingLeft="42px"
+        android:paddingRight="42px">
 
-        <LinearLayout
-            android:layout_width="match_parent"
+        <ImageView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:paddingLeft="@dimen/px20"
-            android:paddingRight="@dimen/px20">
-
-            <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_gravity="center_vertical">
-
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:layout_width="100px"
-                    android:layout_height="100px"
-                    android:layout_centerInParent="true"
-                    android:src="@color/white"
-                    app:civ_border_color="@color/line_color"
-                    app:civ_border_width="1px" />
-
-                <ImageView
-                    android:id="@+id/iv_avater"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:scaleType="centerCrop" />
-            </RelativeLayout>
-
-            <LinearLayout
-                android:layout_width="0px"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/px10"
-                android:layout_weight="1"
-                android:gravity="center_vertical"
-                android:orientation="vertical">
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:id="@+id/tv_name"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="钱包名称"
-                        android:textColor="#FF575757"
-                        android:textSize="32px" />
-
-                    <ImageView
-                        android:id="@+id/iv_backup"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/px20"
-                        android:background="@drawable/icon_backuos2" />
-                </LinearLayout>
-
-                <TextView
-                    android:id="@+id/tv_address"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/px10"
-                    android:text="钱包地址钱包地址钱包地址"
-                    android:textColor="#FFBEBDBD"
-                    android:textSize="28px" />
-            </LinearLayout>
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/icon_arrow_right" />
-        </LinearLayout>
+            android:layout_marginRight="45px"
+            android:background="@drawable/icon_wallet_gray" />
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="right|center_vertical"
-            android:orientation="vertical"
-            android:paddingRight="@dimen/dimen_20px">
+            android:layout_width="0px"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_name"
+                android:layout_width="wrap_content"
+                android:layout_height="44px"
+                android:gravity="center_vertical"
+                android:textColor="@color/text_blue"
+                android:textSize="@dimen/dimen_36px"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/tv_money"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="0"
-                android:textColor="@color/text_black"
-                android:textSize="@dimen/px30" />
+                android:gravity="center_vertical"
+                android:textColor="@color/text_green_increase"
+                android:textSize="24px" />
 
             <TextView
-                android:id="@+id/tv_cn_property"
+                android:id="@+id/tv_address"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/px10"
-                android:text="≈12.33CNY"
-                android:textColor="@color/text_gray"
-                android:textSize="@dimen/dimen_24px"
-                android:visibility="gone" />
+                android:gravity="center_vertical"
+                android:textSize="24px" />
+
         </LinearLayout>
 
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_backup"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Backup"
+                android:textColor="@color/text_green_increase"
+                android:textSize="@dimen/dimen_30px" />
+
+            <ImageView
+                android:layout_width="16px"
+                android:layout_height="@dimen/px30"
+                android:layout_marginLeft="@dimen/dimen_50px"
+                android:src="@drawable/icon_arrow_right" />
+        </LinearLayout>
     </LinearLayout>
 
 </LinearLayout>

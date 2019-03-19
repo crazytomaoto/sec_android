@@ -1,5 +1,10 @@
 package com.hualianzb.sec.utils;
 
+import android.content.Context;
+import android.content.res.Resources;
+
+import com.hualianzb.sec.R;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -9,6 +14,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Locale;
 import java.util.TimeZone;
 import java.util.regex.Matcher;
@@ -583,6 +589,30 @@ public class StringUtils {
     /*
      * 特殊字符过滤
      * */
+    public static int getPassLevale(String str) {
+        int level = 0;
+        // 只允许字母和数字
+        // String   regEx  =  "[^a-zA-Z0-9]";
+        // 清除掉所有特殊字符
+        String regEx = "[`~!@$%^&*()+=|{}':;',\\[\\].<>/?~！@￥%……&*（）——+|{}【】‘；：”“’。，、？]";
+        Pattern p1 = Pattern.compile("[a-zA-z]");
+        Pattern p2 = Pattern.compile("[0-9]");
+        Pattern p3 = Pattern.compile(regEx);
+        if (p1.matcher(str).find()) {
+            level++;
+        }
+        if (p2.matcher(str).find()) {
+            level++;
+        }
+        if (p3.matcher(str).find()) {
+            level++;
+        }
+        return level;
+    }
+
+    /*
+     * 特殊字符过滤
+     * */
     public static String getNewString(String str) {
         // 只允许字母和数字
         // String   regEx  =  "[^a-zA-Z0-9]";
@@ -737,6 +767,21 @@ public class StringUtils {
 
         return true;
 
+    }
+
+    /*
+     * 判断数组中是否有重复的字符串对象
+     */
+    public static boolean cheakIsRepeat(String[] array) {
+        HashSet<String> hashSet = new HashSet<String>();
+        for (int i = 0; i < array.length; i++) {
+            hashSet.add(array[i]);
+        }
+        if (hashSet.size() == array.length) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
 }

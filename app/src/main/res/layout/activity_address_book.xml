@@ -1,82 +1,81 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/drawerLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     android:clipToPadding="true"
-    android:fitsSystemWindows="true">
+    android:fitsSystemWindows="true"
+    android:orientation="vertical">
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1px"
-        android:background="@color/white"
-        android:fitsSystemWindows="true"
-        android:visibility="gone" />
+    <include layout="@layout/include_head_pic_right" />
 
     <LinearLayout
+        android:id="@+id/ll_empty"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/white"
-        android:fitsSystemWindows="true"
-        android:orientation="vertical">
+        android:gravity="center"
+        android:orientation="vertical"
+        android:visibility="gone">
 
-        <include layout="@layout/include_head_right_pic" />
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scaleType="centerInside"
+            android:src="@drawable/icon_nobody" />
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="8px"
-            android:background="@color/view_color" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/dimen_50px"
+            android:layout_marginTop="@dimen/dimen_50px"
+            android:text="No Contact Yet"
+            android:textColor="@color/text_black_home"
+            android:textSize="38px"
+            android:textStyle="bold" />
 
-        <LinearLayout
-            android:id="@+id/ll_empty"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+        <TextView
+            android:id="@+id/tv_add_man"
+            android:layout_width="590px"
+            android:layout_height="@dimen/dimen_130px"
+            android:layout_marginTop="300px"
+            android:layout_marginBottom="@dimen/px20"
+            android:background="@drawable/bg_btn"
+            android:clickable="false"
             android:gravity="center"
-            android:orientation="vertical"
-            android:visibility="gone">
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/icon_no_man" />
-
-            <TextView
-                android:layout_width="168px"
-                android:layout_height="@dimen/px40"
-                android:layout_marginTop="80px"
-                android:text="暂无联系人哦"
-                android:textColor="#FF4F4F4F"
-                android:textSize="28px" />
-
-            <TextView
-                android:id="@+id/tv_add_man"
-                android:layout_width="wrap_content"
-                android:layout_height="@dimen/dimen_40px"
-                android:layout_marginTop="@dimen/sp14"
-                android:text="点此添加"
-                android:textColor="@color/text_yellow" />
-        </LinearLayout>
-
-        <RelativeLayout
-            android:id="@+id/rl_data"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:visibility="visible">
-
-            <ListView
-                android:id="@+id/lv_man"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/dimen_80px"
-                android:background="@color/white"></ListView>
-
-            <TextView
-                android:id="@+id/tv_add"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:background="@drawable/btn_all"
-                android:gravity="center"></TextView>
-        </RelativeLayout>
+            android:text="Click to Add"
+            android:textColor="@color/white"
+            android:textSize="@dimen/dimen_34px"
+            android:textStyle="bold" />
     </LinearLayout>
-</android.support.v4.widget.DrawerLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_data"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="visible">
+
+        <ListView
+            android:id="@+id/lv_man"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dimen_50px"
+            android:layout_marginTop="@dimen/dimen_130px"
+            android:layout_marginRight="@dimen/dimen_50px"
+            android:layout_marginBottom="200px"
+            android:background="@color/white"
+            android:divider="@color/white"
+            android:dividerHeight="2px"></ListView>
+
+        <TextView
+            android:id="@+id/tv_add"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_130px"
+            android:layout_alignParentBottom="true"
+            android:layout_margin="@dimen/dimen_50px"
+            android:background="@drawable/bg_btn"
+            android:gravity="center"
+            android:text="Click to Add"
+            android:textColor="@color/white"
+            android:textSize="@dimen/dimen_34px"></TextView>
+    </RelativeLayout>
+</LinearLayout>

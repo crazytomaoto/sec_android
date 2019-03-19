@@ -1,29 +1,17 @@
 package com.hualianzb.sec.ui.activitys;
 
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.gyf.barlibrary.ImmersionBar;
 import com.hualianzb.sec.R;
 import com.hualianzb.sec.application.SECApplication;
-import com.hualianzb.sec.commons.constants.Constant;
-import com.hualianzb.sec.models.RememberEth;
 import com.hualianzb.sec.ui.basic.BasicActivity;
-import com.hualianzb.sec.utils.DeviceUtil;
-import com.hualianzb.sec.utils.ImageUtils;
 import com.hualianzb.sec.utils.QRUtils;
-import com.hualianzb.sec.utils.StateBarUtil;
-import com.hualianzb.sec.utils.StringUtils;
-import com.hualianzb.sec.utils.ToastUtil;
-import com.hysd.android.platform_huanuo.base.config.PlatformConfig;
-
-import java.util.Map;
+import com.hualianzb.sec.utils.Util;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -39,18 +27,12 @@ public class MakeCodeActivity extends BasicActivity {
     ImageView ivBack;
     @BindView(R.id.tv_address)
     TextView tvAddress;
-    @BindView(R.id.ed_money)
-    EditText edMoney;
     @BindView(R.id.iv_code_pic)
     ImageView ivCodePic;
     @BindView(R.id.tv_copy)
     TextView tvCopy;
     Bitmap bitmap = null;
-    @BindView(R.id.iv_avater)
-    ImageView ivAvater;
     private String address;
-    private StateBarUtil stateBarUtil;
-    private RememberEth bean;
 
     @Override
     protected void getIntentForBundle() {
@@ -75,38 +57,13 @@ public class MakeCodeActivity extends BasicActivity {
         setContentView(R.layout.activity_makecode);
         ButterKnife.bind(this);
         SECApplication.getInstance().addActivity(this);
-        stateBarUtil = new StateBarUtil(this);
-        stateBarUtil.setStatusBarFullTransparent();
         initView();
     }
 
     private void initView() {
+        ImmersionBar.with(this).statusBarColor(R.color.gray_background).init();
         tvAddress.setText(address);
-        Map<String, RememberEth> map = PlatformConfig.getMap(Constant.SpConstant.WALLET);
-        for (RememberEth rememberEth : map.values()) {
-            if (address.equals(rememberEth.getAddress())) {
-                bean = rememberEth;
-                break;
-            }
-        }
-        getAllTextMoney(edMoney.getText().toString().trim());
-
-        edMoney.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                getAllTextMoney(s.toString().trim());
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });
+        setBitmap();
     }
 
     @OnClick({R.id.iv_back, R.id.tv_copy})
@@ -116,19 +73,14 @@ public class MakeCodeActivity extends BasicActivity {
                 finish();
                 break;
             case R.id.tv_copy:
-                DeviceUtil.copy(this, address);
-                ToastUtil.show(this, "已复制到剪切板");
+                Util.copy(this, address);
+                finish();
                 break;
         }
     }
 
-    private void getAllTextMoney(String money) {
-        String nowMoney = money;
-        if (StringUtils.isEmpty(money)) {
-            nowMoney = "0.00";
-        }
-        bitmap = QRUtils.createQRCode(address.toString().trim() + "###" + nowMoney, 380, 380, BitmapFactory.decodeResource(getResources(), -1));
-        ivAvater.setImageResource(ImageUtils.getWalletImage(bean.getWalletincon()));
+    private void setBitmap() {
+        bitmap = QRUtils.createQRCode(address.trim() + "###" + "0", 460, 460, null);
         ivCodePic.setImageBitmap(bitmap);
     }
 }

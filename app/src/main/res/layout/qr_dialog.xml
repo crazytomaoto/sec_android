@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:paddingTop="@dimen/px50">
+
+    <TextView
+        android:id="@+id/tv_close"
+        style="@style/rightButtonStyle"
+        android:layout_alignParentRight="true"
+        android:layout_gravity="right"
+        android:layout_marginTop="@dimen/px50"
+        android:layout_marginRight="@dimen/dimen_50px"
+        android:text="Close" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/dimen_20px">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="QR CODE"
+            android:textColor="@color/text_blue"
+            android:textSize="@dimen/dimen_40px"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/iv_code_pic"
+            android:layout_width="200px"
+            android:layout_height="200px"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/dimen_100px" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dimen_40px"
+            android:layout_marginTop="@dimen/px50"
+            android:text="Wallet Address"
+            android:textColor="@color/text_black"
+            android:textSize="32px" />
+
+        <TextView
+            android:id="@+id/tv_address"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/px160"
+            android:layout_marginLeft="@dimen/dimen_40px"
+            android:layout_marginTop="@dimen/dimen_40px"
+            android:layout_marginRight="@dimen/dimen_40px"
+            android:background="@drawable/bg_gray_radius20"
+            android:gravity="center_vertical|left"
+            android:lineSpacingMultiplier="1.1"
+            android:paddingLeft="@dimen/dimen_20px"
+            android:paddingTop="@dimen/dimen_10px"
+            android:paddingRight="@dimen/dimen_20px"
+            android:paddingBottom="@dimen/dimen_10px"
+            android:textColor="@color/text_black"
+            android:textSize="32px"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv_copy"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_130px"
+            android:layout_marginLeft="@dimen/dimen_40px"
+            android:layout_marginTop="68px"
+            android:layout_marginRight="@dimen/dimen_40px"
+            android:background="@drawable/bg_btn"
+            android:gravity="center"
+            android:text="Copy"
+            android:textColor="@color/white"
+            android:textSize="@dimen/dimen_34px"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+</RelativeLayout>

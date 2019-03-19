@@ -11,6 +11,15 @@
         <!-- Customize your theme here. -->
     </style>
 
+    <style name="SplashStyle" parent="AppThemeBase">
+        <!--<item name="android:windowDisablePreview">true</item>-->
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="windowActionBar">false</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowBackground">@drawable/start_pic</item>
+    </style>
+
     <style name="dialog_waiting" parent="@android:style/Theme.Dialog">
         <item name="android:backgroundDimEnabled">false</item>
         <item name="android:windowBackground">@drawable/shape_dialog_background</item>
@@ -56,16 +65,30 @@
         <item name="android:textSize">@dimen/textSize_title</item>
         <item name="android:textColor">@color/text_black</item>
     </style>
+    <!--自定义Dialog样式-->
+    <style name="MyDialog" parent="AlertDialog.AppCompat">
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:backgroundDimEnabled">true</item>
+    </style>
+
+    <style name="rightButtonStyle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">68px</item>
+        <item name="android:paddingRight">@dimen/dimen_40px</item>
+        <item name="android:paddingLeft">@dimen/dimen_40px</item>
+        <item name="android:background">@drawable/bg_btn_right_top</item>
+        <item name="android:textSize">@dimen/dimen_28px</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/rightTopColor</item>
+    </style>
     <!-- 返回键的样式  -->
     <style name="back_btn">
-        <item name="android:layout_width">90px</item>
-        <item name="android:layout_height">90px</item>
-        <item name="android:paddingTop">20px</item>
-        <item name="android:paddingBottom">20px</item>
-        <item name="android:paddingRight">40px</item>
-        <item name="android:paddingLeft">24px</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">@dimen/dimen_60px</item>
         <item name="android:layout_centerVertical">true</item>
         <item name="android:layout_alignParentLeft">true</item>
+        <item name="android:paddingRight">@dimen/dimen_30px</item>
     </style>
     <!--自定义弹出框所有-->
     <style name="dialog" parent="@android:style/Theme.Dialog">
@@ -73,7 +96,27 @@
         <item name="android:windowIsFloating">true</item>
         <item name="android:windowIsTranslucent">false</item>
         <item name="android:windowNoTitle">true</item>
-        <item name="android:background">@drawable/btn_bg_white</item>
+        <item name="android:background">@drawable/btn_bg_white15</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:backgroundDimEnabled">true</item>
+    </style>
+    <!--自定义弹出框所有-->
+    <style name="dialogLoading" parent="@android:style/Theme.Dialog">
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowIsTranslucent">false</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:backgroundDimEnabled">false</item>
+    </style>
+    <!--自定义弹出框所有-->
+    <style name="dialog_tips" parent="@android:style/Theme.Dialog">
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowIsTranslucent">false</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:background">@android:color/transparent</item>
         <item name="android:windowBackground">@android:color/transparent</item>
         <item name="android:backgroundDimEnabled">true</item>
     </style>
@@ -83,19 +126,13 @@
     </style>
 
     <style name="ActionSheetDialogStyle" parent="@android:style/Theme.Dialog">
-        <!-- 背景透明 -->
-        <item name="android:windowBackground">@android:color/transparent</item>
-        <item name="android:windowContentOverlay">@null</item>
-        <!-- 浮于Activity之上 -->
-        <item name="android:windowIsFloating">true</item>
-        <!-- 边框 -->
         <item name="android:windowFrame">@null</item>
-        <!-- Dialog以外的区域模糊效果 -->
-        <item name="android:backgroundDimEnabled">true</item>
-        <!-- 无标题 -->
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowIsTranslucent">false</item>
         <item name="android:windowNoTitle">true</item>
-        <!-- 半透明 -->
-        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:backgroundDimEnabled">true</item>
         <!-- Dialog进入及退出动画 -->
         <item name="android:windowAnimationStyle">@style/ActionSheetDialogAnimation</item>
     </style>
@@ -126,5 +163,16 @@
     <style name="ActionTopDialogAnimation" parent="@android:style/Animation.Dialog">
         <item name="android:windowEnterAnimation">@anim/actiontop_dialog_in</item>
         <item name="android:windowExitAnimation">@anim/actiontop_dialog_out</item>
+    </style>
+    <!--左边弹出Dialog动画-->
+    <style name="LeftDialog" parent="android:Animation">
+        <item name="@android:windowEnterAnimation">@anim/dialog_left_in</item>
+        <item name="@android:windowExitAnimation">@anim/dialog_left_out</item>
+    </style>
+
+    <!--右边弹出Dialog动画-->
+    <style name="RightDialog" parent="android:Animation">
+        <item name="@android:windowEnterAnimation">@anim/dialog_right_in</item>
+        <item name="@android:windowExitAnimation">@anim/dialog_right_out</item>
     </style>
 </resources>

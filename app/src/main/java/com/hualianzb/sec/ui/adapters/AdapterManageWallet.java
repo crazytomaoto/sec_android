@@ -5,30 +5,26 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.hualianzb.sec.R;
-import com.hualianzb.sec.models.RememberEth;
-import com.hualianzb.sec.utils.ImageUtils;
+import com.hualianzb.sec.models.ManageWalletBean;
+import com.hualianzb.sec.models.RememberSEC;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class AdapterManageWallet extends BaseAdapter {
     private Context context;
-    private List<RememberEth> list;
-    private List<String> listBalance;
+    private List<ManageWalletBean> list;
 
     public AdapterManageWallet(Context context) {
         this.context = context;
         list = new ArrayList<>();
-        listBalance = new ArrayList<>();
     }
 
-    public void setList(List<RememberEth> list, List<String> listBalance) {
+    public void setList(List<ManageWalletBean> list) {
         this.list = list;
-        this.listBalance = listBalance;
         notifyDataSetChanged();
     }
 
@@ -53,45 +49,52 @@ public class AdapterManageWallet extends BaseAdapter {
         if (convertView == null) {
             holder = new ViewHolder();
             convertView = LayoutInflater.from(context).inflate(R.layout.item_manage_wallet, parent, false);
-            holder.iv_avater = convertView.findViewById(R.id.iv_avater);
             holder.tv_name = convertView.findViewById(R.id.tv_name);
             holder.tv_address = convertView.findViewById(R.id.tv_address);
             holder.tv_money = convertView.findViewById(R.id.tv_money);
-            holder.tv_cn_property = convertView.findViewById(R.id.tv_cn_property);
-            holder.iv_backup = convertView.findViewById(R.id.iv_backup);
+            holder.tv_backup = convertView.findViewById(R.id.tv_backup);
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
-        RememberEth rememberEth = list.get(position);
-        String money = listBalance.get(position);
-        if (null != rememberEth) {
-            holder.iv_avater.setImageResource(ImageUtils.getWalletImage(rememberEth.getWalletincon()));
-            holder.tv_name.setText(rememberEth.getWalletName());
-            holder.tv_address.setText(rememberEth.getAddress().substring(0, 10) + "…" + rememberEth.getAddress().substring(32, 42));
-            holder.tv_money.setText(money + "ETH");
-            if (rememberEth.getHowToCreate() == 1) {//创建的
-                if (rememberEth.isBackup()) {//已经保存了
-                    holder.iv_backup.setVisibility(View.GONE);
+        ManageWalletBean rememberSec = list.get(position);
+        if (null != rememberSec) {
+            holder.tv_name.setText(rememberSec.getWalletName());
+            holder.tv_address.setText(rememberSec.getAddress().substring(0, 10) + "…" + rememberSec.getAddress().substring(32, 42));
+            double myMoney = Double.parseDouble(rememberSec.getMoney());
+            if (myMoney == 0) {
+                holder.tv_money.setText("0 SEC");
+            } else if (myMoney > 0) {
+                if ((myMoney + "").length() > 10) {
+                    holder.tv_money.setText((myMoney + "").substring(0,10) + " SEC");
                 } else {
-                    holder.iv_backup.setVisibility(View.VISIBLE);
+                    holder.tv_money.setText((myMoney + " SEC"));
                 }
             } else {
-                holder.iv_backup.setVisibility(View.GONE);
+                holder.tv_money.setText((myMoney + " SEC"));
+            }
+
+            if (rememberSec.getHowToCreate() == 1) {//创建的
+                if (rememberSec.isBackup()) {//已经保存了
+                    holder.tv_backup.setVisibility(View.GONE);
+                } else {
+                    holder.tv_backup.setVisibility(View.VISIBLE);
+                }
+            } else {
+                holder.tv_backup.setVisibility(View.GONE);
             }
         }
-//        holder.iv_backup.setOnClickListener(new View.OnClickListener() {
+//        holder.tv_backup.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View v) {
-//                UiHelper.startMakeMoneyActicity(context, rememberEth.getAddress());
+//                UiHelper.startMakeMoneyActicity(context, rememberSec.getAddress());
 //            }
 //        });
         return convertView;
     }
 
     class ViewHolder {
-        ImageView iv_avater, iv_backup;
-        TextView tv_name, tv_address, tv_money, tv_cn_property;
+        TextView tv_name, tv_address, tv_money, tv_backup;
     }
 }
 

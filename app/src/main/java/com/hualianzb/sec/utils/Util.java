@@ -1,5 +1,8 @@
 package com.hualianzb.sec.utils;
 
+import android.app.Activity;
+import android.content.ClipData;
+import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
@@ -11,7 +14,8 @@ import android.util.TypedValue;
 import com.hualianzb.sec.commons.constants.Constant;
 import com.hualianzb.sec.models.AddressBookBean;
 import com.hualianzb.sec.models.AllTransBean;
-import com.hualianzb.sec.models.RememberEth;
+import com.hualianzb.sec.models.RememberSEC;
+import com.hualianzb.sec.models.SecTransactionBean;
 import com.hysd.android.platform_huanuo.base.config.PlatformConfig;
 
 import java.io.BufferedInputStream;
@@ -52,47 +56,33 @@ public class Util {
         return date;
     }
 
-    public static List<AllTransBean.ResultBean> ListSortRecord(List<AllTransBean.ResultBean> list) {
-        Collections.sort(list, new Comparator<AllTransBean.ResultBean>() {
-            @Override
+    public static List<SecTransactionBean.ResultBean.ResultInChainBeanOrPool> listSortRecord(List<SecTransactionBean.ResultBean.ResultInChainBeanOrPool> list) {
+        Collections.sort(list, (o1, o2) -> {
+            SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+            try {
 
-            public int compare(AllTransBean.ResultBean o1, AllTransBean.ResultBean o2) {
-                SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                try {
+                long t1 = o1.getTimeStamp();
+                long t2 = o2.getTimeStamp();
 
-                    String t1 = o1.getTimeStamp();
-                    String t2 = o2.getTimeStamp();
-                    if (t1.contains("0x")) {
-                        t1 = get10Time(t1);
-                        t1 = TimeUtil.getTimeall(Long.parseLong(t1));
-                    } else {
-                        t1 = TimeUtil.getTimeall(Long.parseLong(t1));
-                    }
+                String t11 = TimeUtil.getTime1(t1);
+                String t22 = TimeUtil.getTime1(t2);
 
-                    if (t2.contains("0x")) {
-                        t2 = get10Time(t2);
-                        t2 = TimeUtil.getTimeall(Long.parseLong(t2));
-                    } else {
-                        t2 = TimeUtil.getTimeall(Long.parseLong(t2));
-                    }
-
-                    Date dt1 = format.parse(t1);
-                    Date dt2 = format.parse(t2);
-                    if (dt1.getTime() < dt2.getTime()) {
-                        return 1;
-                    } else if (dt1.getTime() > dt2.getTime()) {
-                        return -1;
-                    } else {
-                        return 0;
-                    }
-
-                } catch (Exception e) {
-                    e.printStackTrace();
-
+                Date dt1 = format.parse(t11);
+                Date dt2 = format.parse(t22);
+                if (dt1.getTime() < dt2.getTime()) {
+                    return 1;
+                } else if (dt1.getTime() > dt2.getTime()) {
+                    return -1;
+                } else {
+                    return 0;
                 }
-                return 0;
+
+            } catch (Exception e) {
+                e.printStackTrace();
 
             }
+            return 0;
+
         });
         return list;
     }
@@ -108,8 +98,9 @@ public class Util {
             mapTokens = new HashMap<>();
         }
         ArrayList<String> listNames = new ArrayList<>();
-        listNames.add("ETH");
-        listNames.add("CEC");
+//        listNames.add("ETH");
+//        listNames.add("CEC");
+        listNames.add("SEC");
         mapTokens.put(myAddr, listNames);
         PlatformConfig.putMap(Constant.SpConstant.ALLKINDTOKEN, mapTokens);
     }
@@ -163,10 +154,10 @@ public class Util {
         return true;
     }
 
-    public static List<RememberEth> ListSort(List<RememberEth> list) {
-        Collections.sort(list, new Comparator<RememberEth>() {
+    public static List<RememberSEC> ListSort(List<RememberSEC> list) {
+        Collections.sort(list, new Comparator<RememberSEC>() {
             @Override
-            public int compare(RememberEth o1, RememberEth o2) {
+            public int compare(RememberSEC o1, RememberSEC o2) {
                 SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                 try {
                     Date dt1 = format.parse(o1.getCreatTime());
@@ -203,166 +194,6 @@ public class Util {
 
         return (int) scale;
     }
-
-//    public static String getSubject(Context context, String subjectCode) {
-//        String str = "未知科目";
-//        if (StringUtils.isNotEmpty(subjectCode) && !"null".equals(subjectCode)) {
-//            String subject = "00" + String.valueOf(subjectCode);
-//            str = ConstantUtils.getSubjectByCode(subject);
-//        }
-//        return str;
-//
-//    }
-
-
-//    public static String getGradeId(String gradeName) {
-//        String[] grade = {"一年级", "二年级", "三年级", "四年级", "五年级", "六年级", "七年级", "八年级", "九年级", "高一", "高二", "高三"};
-//        String[] gradeId = {"101", "102", "103", "104", "105", "106", "201", "202", "203", "301", "302", "303"};
-//        for (int i = 0; i < grade.length; i++) {
-//            if (grade[i].equals(gradeName)) {
-//                return gradeId[i];
-//            }
-//        }
-//        return gradeId[0];
-//    }
-
-//    public static String getGradeName(String code) {
-//        String[] grade = {"一年级", "二年级", "三年级", "四年级", "五年级", "六年级", "七年级", "八年级", "九年级", "高一", "高二", "高三"};
-//        String[] gradeId = {"101", "102", "103", "104", "105", "106", "201", "202", "203", "301", "302", "303"};
-//        for (int i = 0; i < gradeId.length; i++) {
-//            if (gradeId[i].equals(code)) {
-//                return grade[i];
-//            }
-//        }
-//        return gradeId[0];
-//    }
-//
-//
-//    public static boolean isMyFriend(Context context, String hnno) {
-//        Dao dao = new Dao(context);
-//        List<FriendHnno> list = dao.cccGetFriendData();
-//        for (int i = 0; i < list.size(); i++) {
-//            if (hnno.equals(list.get(i).getHnno())) {
-//                return true;
-//            }
-//        }
-//        return false;
-//    }
-
-//    public static String getMyHnno(Context context) {
-//        SharedPreferences sp = context.getSharedPreferences("phone", 1);
-//        String hnno = sp.getString("login_hnno", null);
-//        return hnno;
-//    }
-//
-//    public static String getMyRole(Context context) {
-//        SharedPreferences sp = context.getSharedPreferences("phone", 1);
-//        String hnno = sp.getString("selective_Id", null);
-//        return hnno;
-//    }
-
-//    public static void saveApplyJoinClass(Context context, String str) {
-//        SharedPreferences sp = context.getSharedPreferences("phone", 1);
-//        SharedPreferences.Editor editor = sp.edit();
-//        editor.putBoolean(str, true);
-//        editor.commit();
-//    }
-
-//    public static boolean getApplyJoinClassState(Context context, String str) {
-//        SharedPreferences sp = context.getSharedPreferences("phone", 1);
-//        boolean hnno = sp.getBoolean(str, false);
-//        return hnno;
-//    }
-
-
-//    public static boolean getSumittedWorkstate(Context context, String str) {
-//        SharedPreferences sp = context.getSharedPreferences("phone", 1);
-//        boolean hnno = sp.getBoolean(str, false);
-//        return hnno;
-//    }
-//
-//    public static void saveSumittedWorkstate(Context context, String str, Boolean b) {
-//        SharedPreferences sp = context.getSharedPreferences("phone", 1);
-//        SharedPreferences.Editor editor = sp.edit();
-//        editor.putBoolean(str, b);
-//        editor.commit();
-//    }
-//
-//    public static String getSuject(String[] str) {
-//        String subject = "";
-//        if (str != null && str.length > 0) {
-//            for (int i = 0; i < str.length; i++) {
-//                subject += ConstantUtils.getSubjectByCode(str[i]) + ",";
-//            }
-//            if (subject.length() > 0) {
-//                subject = subject.substring(0, subject.length() - 1);
-//            }
-//        }
-//        return subject;
-//    }
-//
-//    public static String getType(String type) {
-//        String str = "";
-//        try {
-//            switch (type) {
-//                case "1":
-//                    str = "[单选]";
-//                    break;
-//                case "2":
-//                    str = "[多选]";
-//                    break;
-//                case "3":
-//                    str = "[判断]";
-//                    break;
-//            }
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//        return str;
-//    }
-
-//    /**
-//     * 打开图片查看器
-//     *
-//     * @param position
-//     * @param urls2
-//     */
-//    public static void imageBrower(int position, ArrayList<String> urls2, Context mContext) {
-//        Intent intent = new Intent(mContext, ImagePagerActivity.class);
-//        // 图片url,为了演示这里使用常量，一般从数据库中或网络中获取
-//        intent.putExtra(ImagePagerActivity.EXTRA_IMAGE_URLS, urls2);
-//        intent.putExtra(ImagePagerActivity.EXTRA_IMAGE_INDEX, position);
-//        mContext.startActivity(intent);
-//    }
-
-//    /**
-//     * @param singInfo
-//     * @return
-//     */
-//    public static JSONObject toJSONObject(String singInfo) {
-//        String str1 = singInfo.replaceAll("\\{|\\}", "");//singInfo是一个map  toString后的字符串。
-//        String str2 = str1.replaceAll(" ", "");
-//        String str3 = str2.replaceAll(",", "&");
-//
-//
-//        Map<String, String> map = null;
-//        if ((null != str3) && (!"".equals(str3.trim()))) {
-//            String[] resArray = str3.split("&");
-//            if (0 != resArray.length) {
-//                map = new HashMap(resArray.length);
-//                for (String arrayStr : resArray) {
-//                    if ((null != arrayStr) && (!"".equals(arrayStr.trim()))) {
-//                        int index = arrayStr.indexOf("=");
-//                        if (-1 != index) {
-//                            map.put(arrayStr.substring(0, index), arrayStr.substring(index + 1));
-//                        }
-//                    }
-//                }
-//            }
-//        }
-//        JSONObject jsonObject = JSONObject.fromMap(map);
-//        return jsonObject;
-//    }
 
 
     /**
@@ -423,5 +254,13 @@ public class Util {
         return false;
     }
 
+    public static void copy(Activity activity, String content) {
+        //获取剪贴板管理器：
+        ClipboardManager cm = (ClipboardManager) activity.getSystemService(Context.CLIPBOARD_SERVICE);
+// 创建普通字符型ClipData
+        ClipData mClipData = ClipData.newPlainText("content", content);
+// 将ClipData内容放到系统剪贴板里。
+        cm.setPrimaryClip(mClipData);
+    }
 
 }

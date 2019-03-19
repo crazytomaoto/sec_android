@@ -10,9 +10,9 @@ import com.hysd.android.platform_huanuo.base.logic.ILogic;
  * Description : Logic工厂类
  * @Copyright  : hysdpower. All Rights Reserved
  * @Company    :  
- * @author     : 刘剑
+ * @author     : wangtianyun
  * @version    : 1.0
- * Create Date : 2014-4-9 上午11:19:35
+ * Create Date : 2015-12-9 上午11:19:35
  **/
 public class LogicFactory {
 

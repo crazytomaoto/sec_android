@@ -21,9 +21,9 @@ import com.hysd.android.platform_huanuo.utils.DateUtils;
  * Description : http的请求单元
  * @Copyright  : hysdpower. All Rights Reserved
  * @Company    :  
- * @author     : 刘剑
+ * @author     : wangtianyun
  * @version    : 1.0
- * Create Date : 2014-4-8 下午2:24:41
+ * Create Date : 2015-12-8 下午2:24:41
  **/
 public class HttpRequest extends BaseRequestItem {
 

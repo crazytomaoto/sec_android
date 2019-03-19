@@ -2,22 +2,40 @@
 <resources>
     <color name="colorPrimary">#FFFFFFFF</color>
     <color name="colorPrimaryDark">#FFFFFF</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorAccent">#43535B</color>
 
     <color name="white">#FFFFFF</color>
     <!-- 灰色背景 -->
-    <color name="gray_background">#f5f5f5</color>
+    <color name="gray_background_home">#F7FBFA</color>
+    <color name="gray_background">#F5F5F5</color>
     <color name="text_gray">#999999</color>
+    <color name="text_gray02">#91A2AA</color>
     <color name="main_color">#0190ff</color>
+    <color name="selected_blue">#388ED9</color>
+    <color name="bg_detail">#F7FBFA</color>
     <color name="text_black">#333333</color>
-    <color name="line_color">#DBDBDB</color>
+    <color name="text_color">#596266</color>
+    <color name="text_blue">#43535B</color>
+    <color name="line_color">#E1E1E1</color>
+    <color name="stroke_color_gray">#D2D2D2</color>
     <color name="btn_gray">#E3E3E3</color>
     <color name="mn_default">#B5C6D8</color>
     <color name="view_color">#E6E6E6</color>
-    <color name="text_yellow">#FFAF8444</color>
-    <color name="text_black_home">#FF575757</color>
-    <color name="text_red_reduce">#DE3939</color>
+    <color name="text_yellow02">#F4AB35</color>
+    <color name="text_black_home">#B0B0B0</color>
+
+    <color name="bg_red">#EE1C38</color>
+    <color name="text_error">#EE1C38</color>
     <color name="text_green_increase">#21A348</color>
+    <color name="rightTopColor">#0DC5B7</color>
+    <color name="text_selected_green">#28D893</color>
+    <color name="green_border">#0DC5B7</color>
     <color name="text_noChose">#B8B8B8</color>
     <color name="trans">#00000000</color>
+    <color name="scrollbar_bg">#F8F8F8</color>
+    <color name="edit_bg">#F7F7F7</color>
+    <color name="edit_error">#FCDCE1</color>
+    <color name="loading_color">#42535B</color>
+    <color name="bg_text_gray">#BBBBBB</color>
+    <color name="bg_dialog_showing">#ECECEC</color>
 </resources>

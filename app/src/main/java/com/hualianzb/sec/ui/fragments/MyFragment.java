@@ -12,6 +12,9 @@ import android.widget.TextView;
 import com.hualianzb.sec.R;
 import com.hualianzb.sec.ui.activitys.HomePageActivity;
 import com.hualianzb.sec.ui.basic.BasicFragment;
+import com.hualianzb.sec.utils.ClickUtil;
+import com.hualianzb.sec.utils.DialogUtil;
+import com.hualianzb.sec.utils.NetUtil;
 import com.hualianzb.sec.utils.UiHelper;
 import com.hysd.android.platform_huanuo.utils.ActivityUtil;
 
@@ -28,20 +31,32 @@ public class MyFragment extends BasicFragment {
     LinearLayout llManage;
     @BindView(R.id.ll_transaction_record)
     LinearLayout llTransactionRecord;
-    @BindView(R.id.tv_addressbook)
-    TextView tvAddressbook;
+    @BindView(R.id.ll_addressbook)
+    LinearLayout llAddressbook;
+    @BindView(R.id.ll_check_update)
+    LinearLayout llCheck;
     Unbinder unbinder;
-    TextView tvVersion;
+    TextView tvVersion, tvUpdate;
     private MyFragment instance;
     private View view;
     //    private AdapterWallet adapterWallet;
     private List<Object> list;
     private String address;
+    private CheckUpdateLinster listener;
 
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
         address = ((HomePageActivity) activity).getAddress();
+        if (activity instanceof MyFragment.CheckUpdateLinster) {
+            listener = (CheckUpdateLinster) activity; // 2.2 获取到宿主activity并赋值
+        } else {
+            throw new IllegalArgumentException("activity must implements CheckUpdateLinster");
+        }
+    }
+
+    public interface CheckUpdateLinster {
+        void check();
     }
 
     @Override
@@ -63,13 +78,17 @@ public class MyFragment extends BasicFragment {
     private void initView() {
         list = new ArrayList<>();
         tvVersion = view.findViewById(R.id.tv_version);
-//        adapterWallet = new AdapterWallet(getActivity());
+        tvUpdate = view.findViewById(R.id.tv_update);
     }
 
     private void initData() {
-//        adapterWallet.setList(list);
         String versionName = ActivityUtil.getVersionName(getActivity());
         tvVersion.setText(versionName);
+        if (((HomePageActivity) getActivity()).getUpdateStatusInt() > 1) {
+            tvUpdate.setVisibility(View.VISIBLE);
+        } else {
+            tvUpdate.setVisibility(View.GONE);
+        }
     }
 
     @Override
@@ -83,17 +102,23 @@ public class MyFragment extends BasicFragment {
         unbinder.unbind();
     }
 
-    @OnClick({R.id.ll_manage, R.id.ll_transaction_record, R.id.tv_addressbook})
+    @OnClick({R.id.ll_manage, R.id.ll_transaction_record, R.id.ll_addressbook, R.id.ll_check_update})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.ll_manage:
+                ClickUtil.checkFisrtAndNet(getActivity());
                 UiHelper.startManagerWalletActy(getActivity());
                 break;
             case R.id.ll_transaction_record:
+                ClickUtil.checkFisrtAndNet(getActivity());
                 UiHelper.startTransactionRecordActy(getActivity(), address);
                 break;
-            case R.id.tv_addressbook:
+            case R.id.ll_addressbook:
                 UiHelper.startAddressBookActy(getActivity(), true);
+                break;
+            case R.id.ll_check_update:
+                ClickUtil.checkFisrtAndNet(getActivity());
+                listener.check();
                 break;
         }
     }

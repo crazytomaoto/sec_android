@@ -1,278 +1,272 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/drawerLayout"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:clipToPadding="true"
-    android:fitsSystemWindows="true"
-    android:focusable="true"
-    android:focusableInTouchMode="true">
+    android:background="@color/white"
+    android:focusableInTouchMode="true"
+    android:orientation="vertical">
 
-    <FrameLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="1px"
-        android:background="@drawable/bg_code"
-        android:fitsSystemWindows="true"></FrameLayout>
+        android:layout_height="800px"
+        android:background="@color/bg_detail"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/iv_back_top"
+            android:layout_width="wrap_content"
+            android:layout_height="68px"
+            android:layout_marginLeft="@dimen/dimen_50px"
+            android:clickable="true"
+            android:layout_marginTop="@dimen/dimen_50px"
+            android:onClick="back"
+            android:paddingRight="@dimen/dimen_50px"
+            android:src="@drawable/back_selector" />
+
+        <TextView
+            android:id="@+id/tv_theme"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/iv_back_top"
+            android:layout_marginLeft="@dimen/px50"
+            android:layout_marginTop="91px"
+            android:gravity="left|center_vertical"
+            android:text="Transaction Record"
+            android:textColor="@color/text_blue"
+            android:textSize="@dimen/dimen_55px"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/iv_avater"
+            android:layout_width="166px"
+            android:layout_height="172px"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="100px"
+            android:scaleType="centerInside" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/dimen_60px"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_money"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="bottom"
+                android:lineSpacingMultiplier="1.5"
+                android:textSize="42px"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tv_state"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="bottom"
+                android:text="transfer Pending"
+                android:textSize="@dimen/dimen_28px" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="vertical"
+        android:paddingLeft="@dimen/dimen_50px"
+        android:paddingRight="@dimen/dimen_50px"
+        android:paddingBottom="@dimen/dimen_50px">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="41px"
+            android:layout_marginTop="@dimen/dimen_50px"
+            android:text="Sent"
+            android:textColor="@color/text_blue"
+            android:textSize="@dimen/dimen_34px"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv_send_address"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5px"
+            android:text="ebosdsdwr02938sfjksfu9khwe23423423"
+            android:textColor="#B0B0B0"
+            android:textSize="@dimen/dimen_28px" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="41px"
+            android:layout_marginTop="@dimen/dimen_25px"
+            android:text="Receive"
+            android:textColor="@color/text_blue"
+            android:textSize="@dimen/dimen_34px"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv_get_address"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5px"
+            android:text="ebosdsdwr02938sfjksfu9khwe23423423"
+            android:textColor="#B0B0B0"
+            android:textSize="@dimen/dimen_28px" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="41px"
+            android:layout_marginTop="@dimen/dimen_24px"
+            android:text="Miner cost"
+            android:textColor="@color/text_blue"
+            android:textSize="@dimen/dimen_34px"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv_gas"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5px"
+            android:text="0SEC"
+            android:textColor="#B0B0B0"
+            android:textSize="@dimen/dimen_28px" />
+
+        <LinearLayout
+            android:id="@+id/ll_remark"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimen_24px"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Remarks"
+                android:textColor="@color/text_blue"
+                android:textSize="@dimen/dimen_34px"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tv_remarks"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5px"
+                android:textColor="#B0B0B0"
+                android:textSize="@dimen/dimen_28px" />
+        </LinearLayout>
+
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/white"
-        android:orientation="vertical">
+        android:background="#F5F5F5"
+        android:orientation="vertical"
+        android:paddingLeft="@dimen/dimen_50px"
+        android:paddingTop="58px"
+        android:paddingRight="@dimen/dimen_50px">
 
-        <ScrollView
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scrollbars="none">
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
 
-            <LinearLayout
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Transaction number"
+                android:textColor="@color/text_blue"
+                android:textSize="@dimen/dimen_34px"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tv_trade_num"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:textColor="#91A2AA"
+                android:textSize="@dimen/dimen_34px" />
+        </LinearLayout>
 
-                <FrameLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimen_50px"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
 
-                    <RelativeLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="260px"
-                        android:background="@drawable/bg_code">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Block"
+                android:textColor="@color/text_blue"
+                android:textSize="@dimen/dimen_34px"
+                android:textStyle="bold" />
 
-                        <RelativeLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="88px"
-                            android:padding="24px">
+            <TextView
+                android:id="@+id/tv_block"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:text="333444555"
+                android:textColor="#91A2AA"
+                android:textSize="@dimen/dimen_34px" />
+        </LinearLayout>
 
-                            <ImageView
-                                android:id="@+id/iv_back"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:src="@drawable/icon_back_white" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimen_50px"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
 
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_centerInParent="true"
-                                android:text="交易记录"
-                                android:textColor="@color/white"
-                                android:textSize="32px" />
-                        </RelativeLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Transaction Time"
+                android:textColor="@color/text_blue"
+                android:textSize="@dimen/dimen_34px"
+                android:textStyle="bold" />
 
-                    </RelativeLayout>
+            <TextView
+                android:id="@+id/tv_date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:textColor="#91A2AA"
+                android:textSize="@dimen/dimen_34px" />
 
-                    <de.hdodenhof.circleimageview.CircleImageView
-                        android:id="@+id/iv_avater"
-                        android:layout_width="@dimen/dimen_120px"
-                        android:layout_height="@dimen/dimen_120px"
-                        android:layout_alignParentBottom="true"
-                        android:layout_alignParentStart="true"
-                        android:layout_gravity="center_horizontal"
-                        android:layout_marginTop="200px"
-                        android:src="@drawable/icon_trade_sucesss"
-                        app:civ_border_color="@color/white"
-                        app:civ_border_width="10px" />
+        </LinearLayout>
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginTop="330px"
-                        android:orientation="vertical">
+        <LinearLayout
+            android:id="@+id/ll_toWeb"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/dimen_60px"
+            android:layout_marginBottom="@dimen/dimen_50px"
+            android:background="@drawable/bg_normal_gray_white_10"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:padding="@dimen/dimen_20px">
 
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="@dimen/px50"
-                            android:layout_gravity="center_horizontal"
-                            android:layout_marginBottom="@dimen/px10"
-                            android:orientation="horizontal">
+            <ImageView
+                android:layout_width="@dimen/dimen_36px"
+                android:layout_height="@dimen/dimen_36px"
+                android:scaleType="centerInside"
+                android:src="@drawable/icon_sec" />
 
-                            <TextView
-                                android:id="@+id/tv_money"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:gravity="bottom"
-                                android:text="+0.005"
-                                android:textColor="#FF575757"
-                                android:textSize="@dimen/dimen_36px" />
-
-                            <TextView
-                                android:id="@+id/tv_kind"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginLeft="@dimen/px5"
-                                android:gravity="bottom"
-                                android:text="ether"
-                                android:textColor="#FF9F9F9F"
-                                android:textSize="@dimen/dimen_24px" />
-                        </LinearLayout>
-
-                        <View
-                            android:layout_width="match_parent"
-                            android:layout_height="2px"
-                            android:layout_marginLeft="@dimen/dimen_24px"
-                            android:layout_marginRight="@dimen/dimen_24px"
-                            android:background="@color/line_color" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="@dimen/dimen_24px"
-                            android:layout_marginTop="@dimen/dimen_20px"
-                            android:text="发款方"
-                            android:textColor="#FFB0AFAF"
-                            android:textSize="32px" />
-
-                        <TextView
-                            android:id="@+id/tv_send_address"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="@dimen/dimen_24px"
-                            android:layout_marginRight="@dimen/dimen_24px"
-                            android:layout_marginTop="@dimen/dimen_10px"
-                            android:text="0xebosdsdwr02938sfjksfu9khwe23423423"
-                            android:textColor="#FFBBBABA"
-                            android:textSize="@dimen/dimen_24px" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="@dimen/dimen_24px"
-                            android:layout_marginTop="@dimen/dimen_20px"
-                            android:text="收款方"
-                            android:textColor="#FFB0AFAF"
-                            android:textSize="32px" />
-
-                        <TextView
-                            android:id="@+id/tv_get_address"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="@dimen/dimen_24px"
-                            android:layout_marginRight="@dimen/dimen_24px"
-                            android:layout_marginTop="@dimen/dimen_10px"
-                            android:text="0xebosdsdwr02938sfjksfu9khwe23423423"
-                            android:textColor="#FFBBBABA"
-                            android:textSize="@dimen/dimen_24px" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="@dimen/dimen_24px"
-                            android:layout_marginTop="@dimen/dimen_20px"
-                            android:text="矿工费用"
-                            android:textColor="#FFB0AFAF"
-                            android:textSize="32px" />
-
-                        <TextView
-                            android:id="@+id/tv_gas"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="@dimen/dimen_24px"
-                            android:layout_marginRight="@dimen/dimen_24px"
-                            android:layout_marginTop="@dimen/dimen_10px"
-                            android:text="0"
-                            android:textColor="#FFBBBABA"
-                            android:textSize="@dimen/dimen_24px" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="@dimen/dimen_24px"
-                            android:layout_marginTop="@dimen/dimen_20px"
-                            android:text="备注"
-                            android:textColor="#FFB0AFAF"
-                            android:textSize="32px" />
-
-                        <TextView
-                            android:id="@+id/tv_remarks"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="@dimen/dimen_24px"
-                            android:layout_marginRight="@dimen/dimen_24px"
-                            android:layout_marginTop="@dimen/px20"
-                            android:textColor="#FFBBBABA"
-                            android:textSize="@dimen/dimen_24px" />
-
-                        <View
-                            android:layout_width="match_parent"
-                            android:layout_height="2px"
-                            android:layout_marginLeft="@dimen/dimen_24px"
-                            android:layout_marginRight="@dimen/dimen_24px"
-                            android:layout_marginTop="@dimen/dimen_20px"
-                            android:background="@color/line_color" />
-
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="@dimen/dimen_24px"
-                            android:layout_marginTop="@dimen/dimen_30px"
-                            android:text="交易号"
-                            android:textColor="#FFB0AFAF"
-                            android:textSize="32px" />
-
-                        <TextView
-                            android:id="@+id/tv_trade_num"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="@dimen/dimen_24px"
-                            android:layout_marginRight="@dimen/dimen_24px"
-                            android:layout_marginTop="@dimen/dimen_10px"
-                            android:text="0xebosdsdwr02938sfjksfu9khwe23423423"
-                            android:textColor="#57BA74"
-                            android:textSize="@dimen/dimen_24px" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="@dimen/dimen_24px"
-                            android:layout_marginTop="@dimen/dimen_20px"
-                            android:text="区块号:"
-                            android:textColor="#FFB0AFAF"
-                            android:textSize="32px" />
-
-                        <TextView
-                            android:id="@+id/tv_block"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="@dimen/dimen_24px"
-                            android:layout_marginRight="@dimen/dimen_24px"
-                            android:layout_marginTop="@dimen/dimen_10px"
-                            android:textColor="#FFBBBABA"
-                            android:textSize="@dimen/dimen_24px" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="@dimen/dimen_24px"
-                            android:layout_marginTop="@dimen/dimen_20px"
-                            android:text="交易时间"
-                            android:textColor="#FFB0AFAF"
-                            android:textSize="32px" />
-
-                        <TextView
-                            android:id="@+id/tv_date"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="@dimen/dimen_24px"
-                            android:layout_marginRight="@dimen/dimen_24px"
-                            android:layout_marginTop="@dimen/dimen_10px"
-                            android:text="0xebosdsdwr02938sfjksfu9khwe23423423"
-                            android:textColor="#FFBBBABA"
-                            android:textSize="@dimen/dimen_24px" />
-
-                        <LinearLayout
-                            android:id="@+id/ll_toWeb"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/btn_lay_weight"
-                            android:background="@drawable/icon_checkmore"
-                            android:gravity="center"
-                            android:orientation="horizontal"></LinearLayout>
-                    </LinearLayout>
-                </FrameLayout>
-            </LinearLayout>
-        </ScrollView>
-
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dimen_28px"
+                android:text="Enter SECBlock for more details"
+                android:textColor="#ff388ed8"
+                android:textSize="@dimen/dimen_26px" />
+        </LinearLayout>
     </LinearLayout>
-</android.support.v4.widget.DrawerLayout>
+</LinearLayout>

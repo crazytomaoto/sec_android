@@ -1,135 +1,87 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_width="980px"
+    android:layout_height="552px"
+    android:background="@drawable/vp_black"
     android:orientation="vertical">
 
-    <RelativeLayout
-        android:id="@+id/rl_bg"
+    <LinearLayout
+        android:id="@+id/ll_base"
         android:layout_width="match_parent"
-        android:layout_height="370px"
-        android:background="@drawable/vp_golden">
-
-        <LinearLayout
-            android:id="@+id/ll_top"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:gravity="center_horizontal"
-            android:orientation="vertical">
-
-            <RelativeLayout
-                android:layout_width="102px"
-                android:layout_height="102px"
-                android:layout_centerHorizontal="true"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="@dimen/px20">
-
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:layout_width="102px"
-                    android:layout_height="102px"
-                    android:layout_centerInParent="true"
-                    android:src="@color/white" />
-
-                <ImageView
-                    android:id="@+id/iv_avater"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/wallet2" />
-            </RelativeLayout>
-
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="10px"
-                android:gravity="center"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/tv_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:text="我的钱包试试"
-                    android:textColor="@color/white"
-                    android:textSize="28px" />
-
-                <ImageView
-                    android:id="@+id/ivBack"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginLeft="@dimen/dimen_20px"
-                    android:background="@drawable/icon_backuos1" />
-            </LinearLayout>
-        </LinearLayout>
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingLeft="69px">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/ll_top"
-            android:layout_marginTop="11px"
-            android:gravity="center"
+            android:layout_marginTop="@dimen/dimen_100px"
+            android:gravity="center_vertical"
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/tv_address"
-                android:layout_width="292px"
-                android:layout_height="wrap_content"
-                android:ellipsize="middle"
-                android:gravity="center"
-                android:maxLines="1"
-                android:singleLine="true"
+                android:id="@+id/tv_name"
+                android:layout_width="0px"
+                android:layout_height="75px"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:text="My Wallet"
                 android:textColor="@color/white"
-                android:textSize="@dimen/dimen_24px"
-                tools:ignore="EllipsizeMaxLines" />
+                android:textSize="@dimen/dimen_50px"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="75px"
+                android:scaleType="centerInside"
+                android:src="@drawable/icon_home_logo" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_property"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="141px"
+            android:layout_marginRight="@dimen/dimen_48px"
+            android:gravity="center_vertical"
+            android:textColor="@color/white"
+            android:textSize="44px" />
+
+        <TextView
+            android:id="@+id/tv_address"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/dimen_34px"
+            android:gravity="center_vertical"
+            android:textColor="@color/white"
+            android:textSize="@dimen/dimen_28px" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
 
             <ImageView
                 android:id="@+id/iv_code"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/px10"
+                android:layout_width="70px"
+                android:layout_height="82px"
+                android:layout_centerVertical="true"
+                android:scaleType="centerInside"
                 android:src="@drawable/icon_qr" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_marginBottom="70px"
-            android:layout_marginLeft="@dimen/dimen_24px"
-            android:orientation="vertical"
-            android:visibility="visible">
 
             <TextView
-                android:id="@+id/tv_property"
+                android:id="@+id/tvBack"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="≈ 0"
-                android:textColor="@color/white"
-                android:textSize="52px" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="总资产（￥）"
-                android:textColor="@color/white"
-                android:textSize="28px" />
-        </LinearLayout>
-
-        <ImageView
-            android:id="@+id/iv_add"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentRight="true"
-            android:layout_marginBottom="80px"
-            android:layout_marginRight="@dimen/dimen_24px"
-            android:background="@drawable/icon_add" />
-    </RelativeLayout>
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_gravity="right"
+                android:layout_marginLeft="@dimen/dimen_100px"
+                android:layout_marginRight="63px"
+                android:gravity="right"
+                android:text="Backup"
+                android:textColor="@color/text_green_increase"
+                android:textSize="@dimen/dimen_40px" />
+        </RelativeLayout>
+    </LinearLayout>
 </LinearLayout>

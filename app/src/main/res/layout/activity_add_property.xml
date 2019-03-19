@@ -43,7 +43,7 @@
                         android:layout_height="84px"
                         android:layout_marginRight="@dimen/dimen_20px"
                         android:layout_weight="1"
-                        android:background="@drawable/btn_gray_56" />
+                        android:background="@drawable/bg_edit_gray" />
 
                     <TextView
                         android:id="@+id/tv_search"

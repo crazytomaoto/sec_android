@@ -3,16 +3,19 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="@color/gray_background"
     android:fitsSystemWindows="true"
     android:orientation="vertical">
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dimen_60px"
-        android:background="@color/white" />
-
-    <include layout="@layout/include_head_right_pic" />
+    <ImageView
+        android:id="@+id/iv_rig_top"
+        android:layout_width="@dimen/dimen_60px"
+        android:layout_height="45px"
+        android:layout_gravity="right"
+        android:layout_marginTop="@dimen/dimen_60px"
+        android:layout_marginRight="@dimen/dimen_50px"
+        android:src="@drawable/icon_more_black"
+        android:visibility="visible" />
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -22,37 +25,32 @@
             android:id="@+id/vp_ad"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="34px"
+            android:layout_marginTop="45px"
             android:clipToPadding="false"
-            android:paddingLeft="36px"
-            android:paddingRight="41px"
+            android:paddingLeft="@dimen/dimen_50px"
+            android:paddingRight="@dimen/dimen_50px"
             app:rvp_singlePageFling="true"
-            app:rvp_triggerOffset="0.1" />
+            app:rvp_triggerOffset="0.2" />
 
         <LinearLayout
             android:id="@+id/custom_space"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/vp_ad"
-            android:layout_marginBottom="20px"
+            android:layout_marginTop="@dimen/dimen_60px"
+            android:layout_marginBottom="54px"
             android:gravity="center"
             android:orientation="horizontal"></LinearLayout>
-
-        <ImageView
-            android:id="@+id/iv_no_net"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/icon_no_net"
-            android:visibility="gone" />
     </RelativeLayout>
 
-    <com.yydcdut.sdlv.SlideAndDragListView
+    <ListView
         android:id="@+id/lv_property"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginLeft="@dimen/dimen_50px"
+        android:layout_marginRight="@dimen/dimen_50px"
         android:background="@color/gray_background"
         android:divider="@null"
-        android:listSelector="@drawable/list_selector"
         android:paddingBottom="@dimen/dimen_150px"
-        android:scrollbars="none"></com.yydcdut.sdlv.SlideAndDragListView>
+        android:scrollbars="none"></ListView>
 </LinearLayout>

@@ -1,5 +1,6 @@
 package com.hualianzb.sec.ui.activitys;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -19,26 +20,22 @@ import com.hualianzb.sec.R;
 import com.hualianzb.sec.application.SECApplication;
 import com.hualianzb.sec.commons.constants.Constant;
 import com.hualianzb.sec.commons.interfaces.GlobalMessageType;
-import com.hualianzb.sec.models.RememberEth;
-import com.hualianzb.sec.models.TokenBean;
+import com.hualianzb.sec.models.RememberSEC;
 import com.hualianzb.sec.ui.basic.BasicActivity;
 import com.hualianzb.sec.utils.ClickUtil;
+import com.hualianzb.sec.utils.DialogUtil;
 import com.hualianzb.sec.utils.OwnWalletUtils;
-import com.hualianzb.sec.utils.StateBarUtil;
 import com.hualianzb.sec.utils.StringUtils;
 import com.hualianzb.sec.utils.TimeUtil;
-import com.hualianzb.sec.utils.ToastUtil;
 import com.hualianzb.sec.utils.UiHelper;
 import com.hualianzb.sec.utils.Util;
 import com.hysd.android.platform_huanuo.base.config.PlatformConfig;
-import com.kaopiz.kprogresshud.KProgressHUD;
 
 import org.web3j.crypto.CipherException;
 import org.web3j.crypto.ECKeyPair;
 import org.web3j.crypto.Wallet;
 import org.web3j.crypto.WalletFile;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Timer;
@@ -49,14 +46,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class CreateWalletActivity extends BasicActivity {
-    @BindView(R.id.tv_title)
-    TextView tvTitle;
-    @BindView(R.id.iv_layout_work_top)
-    ImageView ivLayoutWorkTop;
-    @BindView(R.id.rl_title)
-    RelativeLayout rlTitle;
-    @BindView(R.id.ll_title)
-    LinearLayout llTitle;
+
     @BindView(R.id.ed_wname)
     EditText edWname;
     @BindView(R.id.ed_pass)
@@ -67,35 +57,66 @@ public class CreateWalletActivity extends BasicActivity {
     EditText edPassReminder;
     @BindView(R.id.cb_agree)
     ImageView cbAgree;
-    @BindView(R.id.tv_agreement)
-    TextView tvAgreement;
-    @BindView(R.id.btn_create)
-    TextView btnCreate;
-    @BindView(R.id.tv_import)
-    TextView tvImport;
     @BindView(R.id.iv_clear1)
     ImageView ivClear1;
     @BindView(R.id.iv_clear2)
     ImageView ivClear2;
-    private KProgressHUD hud;
-    private StateBarUtil stateBarUtil;
-    private boolean iChecked = false;
+    @BindView(R.id.btn_create_new)
+    TextView btnCreate;
+    @BindView(R.id.tv_name)
+    TextView tvName;
+    @BindView(R.id.tv_name_star)
+    TextView tvNameStar;
+    @BindView(R.id.tv_name_error)
+    TextView tvNameError;
+    @BindView(R.id.tv_pass)
+    TextView tvPass;
+    @BindView(R.id.tv_pass_star)
+    TextView tvPassStar;
+    @BindView(R.id.tv_pass_error)
+    TextView tvPassError;
+    @BindView(R.id.tv_re_pass)
+    TextView tvRePass;
+    @BindView(R.id.ll_edPass)
+    LinearLayout llEdPass;
+    @BindView(R.id.ll_rePass)
+    LinearLayout llRePass;
+    @BindView(R.id.tv_mumber_error)
+    TextView tvMumbErroe;
+    @BindView(R.id.tv_re_pass_star)
+    TextView tvRePassStar;
+    @BindView(R.id.tv_re_pass_error)
+    TextView tvRePassError;
+    @BindView(R.id.tv_agreement)
+    TextView tvAgreement;
+    @BindView(R.id.tv_right)
+    TextView tvRight;
+    @BindView(R.id.tv_theme)
+    TextView tvTheme;
+    @BindView(R.id.iv_red)
+    ImageView ivRed;
+    @BindView(R.id.iv_yellow)
+    ImageView ivYellow;
+    @BindView(R.id.iv_blue)
+    ImageView ivBlue;
+    @BindView(R.id.rl_level)
+    RelativeLayout rlLevel;
+    private boolean iChecked = true;//功能暂时去掉，默认改成true，不影响功能
+    private boolean isWallteNumberOk = true;//钱包数量限制10个
     private String walletName, pass, rePass, remind;
+    private boolean isWallteNameOk, isPassOk, isRePassOk;
     //钱包地址
     private String walletAddress = null;
     private int imgIcon;//0-5之间的随机整数
-    private RememberEth rememberEth, oldReme;
+    private RememberSEC rememberEth, oldReme;
     private String mnemonics;
     private ECKeyPair ecKeyPair;
     private WalletFile walletFile = null;
     private String tips;
-    private Map<String, RememberEth> map;
-    private Map<String, ArrayList<TokenBean>> mapTokenBean;
-    private Map<String, ArrayList<String>> mapName;
-    private String initWalletName;
-    private int walletNowSize = 0;
+    private Map<String, RememberSEC> map;
     private boolean canSend = true;
-    boolean boolLast = false;//密码三种规则满足其中之二才可以
+    private Dialog dialogLoading, TipsDialog;
+    private int passLevel = 0;
     Timer timer = new Timer();
     TimerTask task = null;
     Handler handler = new Handler() {
@@ -139,8 +160,8 @@ public class CreateWalletActivity extends BasicActivity {
                         PlatformConfig.putMap(Constant.SpConstant.WALLET, map);//本地保存钱包的信息
                         PlatformConfig.setValue(Constant.SpConstant.NOWADDRESS, rememberEth.getAddress());//记住当前选中钱包的地址
                         Util.saveTokenKindsForEacthWallet(rememberEth.getAddress());
-                        hud.dismiss();
-                        UiHelper.startBackupMnemonicsActy1(CreateWalletActivity.this, rememberEth);
+                        dialogLoading.dismiss();
+                        TipsDialog.show();
                     }
                     break;
             }
@@ -150,10 +171,6 @@ public class CreateWalletActivity extends BasicActivity {
     @Override
     protected void initLogics() {
         super.initLogics();
-        hud = KProgressHUD.create(this)
-                .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
-                .setLabel("  创建中  ")
-                .setCancellable(false);
     }
 
     @Override
@@ -162,24 +179,52 @@ public class CreateWalletActivity extends BasicActivity {
         setContentView(R.layout.activity_create_wallet);
         ButterKnife.bind(this);
         SECApplication.getInstance().addActivity(this);
-        stateBarUtil = new StateBarUtil(this);
-        stateBarUtil.changeStatusBarTextColor(true);
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        tvTitle.setText("创建钱包");
-        rememberEth = new RememberEth();
+        tvRight.setText("Import Wallet");
+        tvTheme.setText("Create Wallet");
+        dialogLoading = DialogUtil.showLoadingDialog(this, getString(R.string.creating));
+        TipsDialog = DialogUtil.TipsDialog(this, R.drawable.icon_success_green, "Create Wallet",
+                1, "Wallet create successfully", (v, d) -> {
+                    UiHelper.startBackupMnemonicsActy1(CreateWalletActivity.this, rememberEth);
+                    d.dismiss();
+                    finish();
+                });
+        rememberEth = new RememberSEC();
         map = new HashMap<>();
         map = PlatformConfig.getMap(Constant.SpConstant.WALLET);
         if (map == null || map.isEmpty() || map.values().size() == 0) {
             map = new HashMap<>();
-            initWalletName = "wallet01";
         } else {
-            walletNowSize = map.values().size();
-            initWalletName(walletNowSize);
+            if (map.values().size() == 10) {
+                isWallteNumberOk = false;
+                tvMumbErroe.setVisibility(View.VISIBLE);
+            } else {
+                isWallteNumberOk = true;
+                tvMumbErroe.setVisibility(View.GONE);
+            }
         }
+        edWname.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                walletName = s.toString().trim();
+                checkWalletName(walletName);
+                setBtnClickable();
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
         edPass.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -194,6 +239,9 @@ public class CreateWalletActivity extends BasicActivity {
                 } else {
                     ivClear1.setVisibility(View.GONE);
                 }
+                checkPassword(pass);
+                checkPassStrength(pass);
+                setBtnClickable();
             }
 
             @Override
@@ -215,6 +263,8 @@ public class CreateWalletActivity extends BasicActivity {
                 } else {
                     ivClear2.setVisibility(View.GONE);
                 }
+                checkRePassword(rePass);
+                setBtnClickable();
             }
 
             @Override
@@ -222,94 +272,176 @@ public class CreateWalletActivity extends BasicActivity {
 
             }
         });
-        edWname.setHint(initWalletName);
-        setEnable(iChecked);
-
     }
 
-    private void initWalletName(int walletNowSize) {
-        if (walletNowSize == 9) {
-            initWalletName = "wallet10";
-        }
-        if (walletNowSize > 9) {
-            initWalletName = "wallet" + (walletNowSize + 1);
-        }
-        if (walletNowSize < 9) {
-            initWalletName = "wallet0" + (walletNowSize + 1);
-        }
-        for (RememberEth rememberEth : map.values()) {
-            if (initWalletName.equals(rememberEth.getWalletName())) {
-                walletNowSize++;
-                initWalletName(walletNowSize);
-                break;
+    //检测钱包名称的合法性
+    private void checkWalletName(String walletName) {
+        if (map == null || map.isEmpty() || map.values().size() == 0) {
+            if (StringUtils.isEmpty(walletName)) {//名称为空
+                isWallteNameOk = false;
+                edWname.setBackgroundResource(R.drawable.bg_edit_error);
+                tvNameStar.setTextColor(getResources().getColor(R.color.text_error));
+                tvNameError.setVisibility(View.VISIBLE);
+                tvNameError.setText(getString(R.string.wallet_name_null));
+                return;
+            } else {
+                isWallteNameOk = true;
+                edWname.setBackgroundResource(R.drawable.bg_edit_gray);
+                tvNameStar.setTextColor(getResources().getColor(R.color.text_blue));
+                tvNameError.setVisibility(View.GONE);
+                return;
+            }
+        } else {
+            if (StringUtils.isEmpty(walletName)) {//名称为空
+                isWallteNameOk = false;
+                edWname.setBackgroundResource(R.drawable.bg_edit_error);
+                tvNameStar.setTextColor(getResources().getColor(R.color.text_error));
+                tvNameError.setText(getString(R.string.wallet_name_null));
+                tvNameError.setVisibility(View.VISIBLE);
+                return;
+            } else {
+                boolean hasRe = false;//是否有重名的
+                for (RememberSEC rememberEth : map.values()) {
+                    if (walletName.equals(rememberEth.getWalletName())) {
+                        hasRe = true;
+                        break;
+                    }
+                }
+                if (hasRe) {//有重名的
+                    isWallteNameOk = false;
+                    edWname.setBackgroundResource(R.drawable.bg_edit_error);
+                    tvNameStar.setTextColor(getResources().getColor(R.color.text_error));
+                    tvNameError.setText(getString(R.string.wallet_exists));
+                    tvNameError.setVisibility(View.VISIBLE);
+                    return;
+                } else {
+                    isWallteNameOk = true;
+                    edWname.setBackgroundResource(R.drawable.bg_edit_gray);
+                    tvNameStar.setTextColor(getResources().getColor(R.color.text_blue));
+                    tvNameError.setVisibility(View.GONE);
+                    return;
+                }
             }
         }
     }
 
-    @OnClick({R.id.btn_create, R.id.tv_import, R.id.tv_agreement, R.id.iv_clear1, R.id.iv_clear2, R.id.cb_agree})
+    //检测密码强度
+    private void checkPassStrength(String password) {
+        if (StringUtils.isEmpty(password)) {
+            rlLevel.setVisibility(View.GONE);
+        } else {
+            passLevel = StringUtils.getPassLevale(password);
+            if (passLevel == 0 && password.length() < 8) {
+                rlLevel.setVisibility(View.GONE);
+                return;
+            }
+            if (passLevel == 2 && password.length() >= 8) {
+                rlLevel.setVisibility(View.VISIBLE);
+                ivBlue.setVisibility(View.GONE);
+                ivYellow.setVisibility(View.GONE);
+                return;
+            }
+            if (passLevel == 3 && password.length() >= 8 && password.length() <= 12) {
+                rlLevel.setVisibility(View.VISIBLE);
+                ivYellow.setVisibility(View.VISIBLE);
+                ivBlue.setVisibility(View.GONE);
+                return;
+            }
+            if (passLevel == 3 && password.length() >= 12) {
+                rlLevel.setVisibility(View.VISIBLE);
+                ivYellow.setVisibility(View.VISIBLE);
+                ivBlue.setVisibility(View.VISIBLE);
+                return;
+            }
+        }
+    }
+
+    //检查密码的合法性
+    private void checkPassword(String password) {
+        if (StringUtils.isEmpty(password)) {
+            isPassOk = false;
+            llEdPass.setBackgroundResource(R.drawable.bg_edit_error);
+            tvPassStar.setTextColor(getResources().getColor(R.color.text_error));
+            tvPassError.setText(getString(R.string.input_password));
+            tvPassError.setVisibility(View.VISIBLE);
+            return;
+        } else if (password.length() < 8) {
+            isPassOk = false;
+            llEdPass.setBackgroundResource(R.drawable.bg_edit_error);
+            tvPassStar.setTextColor(getResources().getColor(R.color.text_error));
+            tvPassError.setText(getString(R.string.format_error));
+            tvPassError.setVisibility(View.VISIBLE);
+            return;
+        } else {
+            String regEx4 = getString(R.string.patters_all);
+            isPassOk = password.matches(regEx4);
+            if (isPassOk) {
+                llEdPass.setBackgroundResource(R.drawable.bg_edit_gray);
+                tvPassStar.setTextColor(getResources().getColor(R.color.text_blue));
+                tvPassError.setVisibility(View.GONE);
+            } else {
+                llEdPass.setBackgroundResource(R.drawable.bg_edit_error);
+                tvPassStar.setTextColor(getResources().getColor(R.color.text_error));
+                tvPassError.setText(getString(R.string.format_error));
+                tvPassError.setVisibility(View.VISIBLE);
+                return;
+            }
+        }
+    }
+
+    //检查重复密码的合法性
+    private void checkRePassword(String repassword) {
+
+        if (StringUtils.isEmpty(repassword)) {
+            isRePassOk = false;
+            tvRePassError.setText("Repeat The Password");
+            tvRePassError.setVisibility(View.VISIBLE);
+            llRePass.setBackgroundResource(R.drawable.bg_edit_error);
+            tvRePassStar.setTextColor(getResources().getColor(R.color.text_error));
+        } else {
+            if (!repassword.equals(pass)) {
+                isRePassOk = false;
+                tvPassError.setText("Two passwords are inconsistent");
+                tvPassError.setVisibility(View.VISIBLE);
+                llRePass.setBackgroundResource(R.drawable.bg_edit_error);
+                tvRePassStar.setTextColor(getResources().getColor(R.color.text_error));
+                return;
+            } else {
+                isRePassOk = true;
+                llRePass.setBackgroundResource(R.drawable.bg_edit_gray);
+                tvRePassStar.setTextColor(getResources().getColor(R.color.text_blue));
+                tvRePassError.setVisibility(View.GONE);
+                tvPassError.setVisibility(View.GONE);
+            }
+        }
+    }
+
+    private void setBtnClickable() {
+        if (isWallteNumberOk == false) {
+            btnCreate.setEnabled(false);
+            btnCreate.setBackground(getResources().getDrawable(R.drawable.bg_btn_cannot));
+        } else {
+            if (isWallteNameOk && isPassOk && isRePassOk) {
+                btnCreate.setEnabled(true);
+                btnCreate.setBackground(getResources().getDrawable(R.drawable.bg_btn));
+            }
+        }
+    }
+
+    @OnClick({R.id.btn_create_new, R.id.tv_right, R.id.cb_agree, R.id.tv_agreement, R.id.iv_clear1, R.id.iv_clear2,})
     public void onViewClicked(View view) {
         switch (view.getId()) {
-            case R.id.btn_create:
+            case R.id.btn_create_new:
                 //避免连续点击
                 if (ClickUtil.isNotFirstClick()) {
                     return;
                 }
-                if (iChecked == false) {
-                    ToastUtil.show(this, "请仔细阅读并同意 服务条款");
-                    return;
-                }
-                walletName = edWname.getText().toString().trim();
-                pass = edPass.getText().toString().trim();
-                rePass = edRepass.getText().toString().trim();
                 remind = edPassReminder.getText().toString().trim();
+                dialogLoading.show();
 
-                if (StringUtils.isEmpty(walletName)) {
-                    walletName = initWalletName;
-                }
-
-                if (map != null && map.values().size() > 0) {
-                    boolean isRe = false;
-                    for (RememberEth reme : map.values()) {
-                        if (reme.getWalletName().equals(walletName)) {
-                            isRe = true;
-                            break;
-                        }
-                    }
-                    if (isRe) {
-                        ToastUtil.show(this, "钱包名称重复");
-                        return;
-                    }
-                }
-
-
-                if (StringUtils.isEmpty(pass)) {
-                    ToastUtil.show(this, "密码为空");
-                    return;
-                }
-
-                String regEx4 = getString(R.string.patters_all);
-
-                boolLast = pass.matches(regEx4);
-
-                if (boolLast == false) {
-                    ToastUtil.show(this, "密码格式不正确");
-                    return;
-                }
-                if (StringUtils.isEmpty(rePass) || !rePass.equals(pass)) {
-                    ToastUtil.show(this, "两次密码不一致");
-                    return;
-                }
-
-                hud.show();
-//                runOnUiThread(new Runnable() {
-//                    @Override
-//                    public void run() {
-//                        hud.show();
-//                    }
-//                });
                 imgIcon = (int) (Math.random() * 5);
-                //助记词
-                mnemonics = OwnWalletUtils.generateMnemonics();
+                //产生助记词
+                getMnes();
                 //私钥  公钥
 //                    ECKeyPair ecKeyPair = OwnWalletUtils.geECKeyPair(mnemonics, "123456789");
                 ecKeyPair = OwnWalletUtils.generateKeyPair(mnemonics);
@@ -329,8 +461,6 @@ public class CreateWalletActivity extends BasicActivity {
                         if (StringUtils.isEmpty(walletAddress)) {
                             if (walletFile.getAddress().length() > 0) {
                                 walletAddress = Constant.PREFIX_16 + walletFile.getAddress();
-
-//                    SECApplication.getInstance().setMap(rememberEth);
                                 Log.d("web3", "地址+++" + walletAddress);
                                 Message message1 = new Message();
                                 message1.what = 1;
@@ -346,27 +476,31 @@ public class CreateWalletActivity extends BasicActivity {
                     timer.schedule(task, 0, 1000);
                 }
                 break;
-            case R.id.tv_import:
+            case R.id.tv_right:
                 UiHelper.startActyImportWalletActivity(this);
-                break;
-            case R.id.tv_agreement:
-                UiHelper.startServiceAgreementAct(this, false, GlobalMessageType.RequestCode.FromCreate);
-                break;
-            case R.id.iv_clear1:
-                pass = "";
-                edPass.setText(pass);
-                break;
-            case R.id.iv_clear2:
-                rePass = "";
-                edRepass.setText(rePass);
                 break;
             case R.id.cb_agree:
                 if (iChecked) {
                     iChecked = false;
+                    cbAgree.setBackground(getResources().getDrawable(R.drawable.cb_agree_no));
                 } else {
                     iChecked = true;
+                    cbAgree.setBackground(getResources().getDrawable(R.drawable.cb_agree_yes));
                 }
-                setEnable(iChecked);
+                setBtnClickable();
+                break;
+            case R.id.tv_agreement:
+                break;
+            case R.id.iv_clear1:
+                edPass.setText("");
+                tvPassError.setText("Input Password");
+                tvPassError.setVisibility(View.VISIBLE);
+                rlLevel.setVisibility(View.GONE);
+                break;
+            case R.id.iv_clear2:
+                edRepass.setText("");
+                tvRePassError.setText("Repeat The Password");
+                tvRePassError.setVisibility(View.VISIBLE);
                 break;
         }
     }
@@ -382,6 +516,17 @@ public class CreateWalletActivity extends BasicActivity {
             timer.cancel();
             timer = null;
         }
+    }
+
+    //产生没有重复单词的助记词
+    private String getMnes() {
+        boolean hasRepeat = false;
+        while (hasRepeat == false) {
+            mnemonics = OwnWalletUtils.generateMnemonics();
+            String[] strings = mnemonics.split("\\s+");
+            hasRepeat = StringUtils.cheakIsRepeat(strings);
+        }
+        return mnemonics;
     }
 
     @Override
@@ -400,16 +545,8 @@ public class CreateWalletActivity extends BasicActivity {
     private void setEnable(boolean isOK) {
         if (isOK) {
             cbAgree.setBackground(getResources().getDrawable(R.drawable.cb_agree_yes));
-
-            btnCreate.setClickable(true);
-            btnCreate.setBackground(getResources().getDrawable(R.drawable.bg_shadow_my));
-            btnCreate.setTextColor((getResources().getColor(R.color.white)));
         } else {
             cbAgree.setBackground(getResources().getDrawable(R.drawable.cb_agree_no));
-
-            btnCreate.setClickable(false);
-            btnCreate.setBackgroundColor(getResources().getColor(R.color.line_color));
-            btnCreate.setTextColor((getResources().getColor(R.color.text_noChose)));
         }
     }
 
@@ -421,7 +558,7 @@ public class CreateWalletActivity extends BasicActivity {
 
     private void setOtherWalletFalse() {
         if (null != map && !map.isEmpty() || map.values().size() > 0) {
-            for (RememberEth reme : map.values()) {
+            for (RememberSEC reme : map.values()) {
                 if (reme.isNow() == true) {
                     reme.setNow(false);
                     map.put(reme.getAddress(), reme);
