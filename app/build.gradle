@@ -1,6 +1,20 @@
 apply plugin: 'com.android.application'
 
 android {
+    signingConfigs {
+        release {
+            keyAlias 'secblock'
+            keyPassword 'wty123456'
+            storeFile file('D://sec.jks')
+            storePassword 'wty123456'
+        }
+        debug {
+            keyAlias 'secblock'
+            keyPassword 'wty123456'
+            storeFile file('D://sec.jks')
+            storePassword 'wty123456'
+        }
+    }
 
     compileSdkVersion 28
     buildToolsVersion '28.0.3'
